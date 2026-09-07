@@ -44,8 +44,7 @@ export default function Cart() {
 
   const handleCheckout = () => {
     if (selectedIds.length === 0) return;
-    // Tạm thời giả lập chuyển hướng, sẽ gọi API đặt hàng sau
-    navigate("/checkout");
+    navigate("/checkout", { state: { selectedIds } });
   };
 
   if (items.length === 0) {
