@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@layer base {
+  body {
+    background-color: #FFFCEB;
+    background-image: radial-gradient(#d1c7a7 12%, transparent 12%);
+    background-size: 16px 16px;
+    font-family: 'Patrick Hand', cursive, sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-comic {
+    font-family: 'Bangers', cursive, impact, sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .comic-border-sm {
+    border: 2px solid #101010;
+  }
+  .comic-border {
+    border: 3px solid #101010;
+  }
+  .comic-border-thick {
+    border: 4px solid #101010;
+  }
+
+  /* Comic halftone patterns */
+  .halftone-yellow {
+    background-color: #FFE01B;
+    background-image: radial-gradient(#F59E0B 20%, transparent 20%);
+    background-size: 10px 10px;
+  }
+
+  .halftone-dark {
+    background-color: #1a1615;
+    background-image: radial-gradient(#3a3230 25%, transparent 25%);
+    background-size: 8px 8px;
+  }
+
+  .halftone-orange {
+    background-color: #FF6B00;
+    background-image: radial-gradient(#E05300 20%, transparent 20%);
+    background-size: 10px 10px;
+  }
+
+  .halftone-cyan {
+    background-color: #00B4D8;
+    background-image: radial-gradient(#0077B6 20%, transparent 20%);
+    background-size: 8px 8px;
+  }
+
+  .comic-btn-hover {
+    transition: all 0.1s ease-in-out;
+  }
+  .comic-btn-hover:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #101010 !important;
+  }
+  .comic-btn-hover:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px #101010 !important;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
