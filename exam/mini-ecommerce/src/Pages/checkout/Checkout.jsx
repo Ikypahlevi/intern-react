@@ -102,9 +102,8 @@ export default function Checkout() {
       // Xóa các sản phẩm đã thanh toán khỏi giỏ hàng
       selectedIds.forEach(id => removeItem(id));
 
-      // Hiển thị thông báo và chuyển hướng
-      alert(`⚡ ĐƠN HÀNG ĐÃ ĐƯỢC TIẾP NHẬN THÀNH CÔNG!\nMã đơn: ${newOrder.id}`);
-      navigate("/"); // Tạm thời chuyển về trang chủ (Sau này có thể chuyển về trang Profile > Đơn hàng)
+      // Hiển thị thông báo và chuyển hướng sang trang Success
+      navigate("/checkout-success", { state: { orderId: newOrder.id } });
 
     } catch (error) {
       console.error("Lỗi khi đặt hàng:", error);

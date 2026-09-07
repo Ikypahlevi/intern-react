@@ -5,7 +5,7 @@ import Select from "../../../Components/Select/Select";
 export default function CheckoutForm({ formData, setFormData }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -13,11 +13,13 @@ export default function CheckoutForm({ formData, setFormData }) {
       {/* Section Title Header */}
       <div className="border-b-4 border-black pb-4 mb-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="bg-comic-yellow comic-border px-3 py-1 font-comic text-2xl rotate-[-2deg] inline-block shadow-comic-sm">
+          {/* <span className="bg-comic-yellow comic-border px-3 py-1 font-comic text-2xl rotate-[-2deg] inline-block shadow-comic-sm">
             BƯỚC 1
-          </span>
+          </span> */}
           <div>
-            <h1 className="font-comic text-2xl text-black tracking-wide">THÔNG TIN GIAO HÀNG</h1>
+            <h1 className="font-comic text-2xl text-black tracking-wide">
+              THÔNG TIN GIAO HÀNG
+            </h1>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-wider font-bubble">
               Billing & Shipping Details
             </p>
@@ -36,11 +38,11 @@ export default function CheckoutForm({ formData, setFormData }) {
             <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
               Họ & Đệm (First Name) <span className="text-comic-red">*</span>
             </label>
-            <Input 
+            <Input
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              required 
+              required
               placeholder="Nhập họ và đệm"
             />
           </div>
@@ -48,11 +50,11 @@ export default function CheckoutForm({ formData, setFormData }) {
             <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
               Tên (Last Name) <span className="text-comic-red">*</span>
             </label>
-            <Input 
+            <Input
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              required 
+              required
               placeholder="Nhập tên"
             />
           </div>
@@ -61,15 +63,16 @@ export default function CheckoutForm({ formData, setFormData }) {
         {/* Country / Region Dropdown */}
         <div>
           <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
-            Quốc Gia / Khu Vực (Country / Region) <span className="text-comic-red">*</span>
+            Quốc Gia / Khu Vực (Country / Region){" "}
+            <span className="text-comic-red">*</span>
           </label>
-          <Select 
+          <Select
             name="country"
             value={formData.country}
             onChange={handleChange}
             options={[
               { value: "VN", label: "Vietnam (Việt Nam)" },
-              { value: "JP", label: "Japan (Nhật Bản)" }
+              { value: "JP", label: "Japan (Nhật Bản)" },
             ]}
           />
         </div>
@@ -77,13 +80,14 @@ export default function CheckoutForm({ formData, setFormData }) {
         {/* Street Address */}
         <div className="space-y-2">
           <label className="block text-xs font-black uppercase tracking-wider text-gray-800">
-            Địa Chỉ Nhận Hàng (Street Address) <span className="text-comic-red">*</span>
+            Địa Chỉ Nhận Hàng (Street Address){" "}
+            <span className="text-comic-red">*</span>
           </label>
-          <Input 
+          <Input
             name="street"
             value={formData.street}
             onChange={handleChange}
-            required 
+            required
             placeholder="Số nhà, tên đường phố cụ thể..."
           />
         </div>
@@ -92,16 +96,17 @@ export default function CheckoutForm({ formData, setFormData }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
-              Tỉnh / Thành Phố (Town / City) <span className="text-comic-red">*</span>
+              Tỉnh / Thành Phố (Town / City){" "}
+              <span className="text-comic-red">*</span>
             </label>
-            <Select 
+            <Select
               name="city"
               value={formData.city}
               onChange={handleChange}
               options={[
                 { value: "HCM", label: "Hồ Chí Minh" },
                 { value: "HN", label: "Hà Nội" },
-                { value: "DN", label: "Đà Nẵng" }
+                { value: "DN", label: "Đà Nẵng" },
               ]}
             />
           </div>
@@ -109,11 +114,11 @@ export default function CheckoutForm({ formData, setFormData }) {
             <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
               Quận / Huyện (District) <span className="text-comic-red">*</span>
             </label>
-            <Input 
+            <Input
               name="district"
               value={formData.district}
               onChange={handleChange}
-              required 
+              required
               placeholder="Nhập Quận/Huyện"
             />
           </div>
@@ -125,12 +130,12 @@ export default function CheckoutForm({ formData, setFormData }) {
             <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
               Số Điện Thoại (Phone) <span className="text-comic-red">*</span>
             </label>
-            <Input 
+            <Input
               name="phone"
               type="tel"
               value={formData.phone}
               onChange={handleChange}
-              required 
+              required
               placeholder="Ví dụ: 0901234567"
             />
           </div>
@@ -138,12 +143,12 @@ export default function CheckoutForm({ formData, setFormData }) {
             <label className="block text-xs font-black uppercase tracking-wider text-gray-800 mb-1">
               Địa Chỉ Email <span className="text-comic-red">*</span>
             </label>
-            <Input 
+            <Input
               name="email"
               type="email"
               value={formData.email}
               onChange={handleChange}
-              required 
+              required
               placeholder="hero@swoo-manga.vn"
             />
           </div>
@@ -157,12 +162,12 @@ export default function CheckoutForm({ formData, setFormData }) {
               Ghi chú đơn hàng (Ghi chú giao hàng, yêu cầu bọc màng co, v.v...)
             </label>
           </div>
-          <textarea 
+          <textarea
             name="notes"
             value={formData.notes}
             onChange={handleChange}
-            className="w-full px-4 py-3 text-sm border-[2.5px] border-black rounded-lg shadow-comic-sm focus:shadow-comic focus:bg-yellow-50 focus:outline-none transition-all font-bold" 
-            placeholder="Ghi chú đơn hàng cho shipper hoặc yêu cầu đặc biệt..." 
+            className="w-full px-4 py-3 text-sm border-[2.5px] border-black rounded-lg shadow-comic-sm focus:shadow-comic focus:bg-yellow-50 focus:outline-none transition-all font-bold"
+            placeholder="Ghi chú đơn hàng cho shipper hoặc yêu cầu đặc biệt..."
             rows="3"
           ></textarea>
         </div>
