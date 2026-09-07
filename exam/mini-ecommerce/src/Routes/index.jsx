@@ -14,6 +14,7 @@ import ProductDetail from "../Pages/productDetail/ProductDetail";
 import Cart from "../Pages/cart/Cart";
 import Checkout from "../Pages/checkout/Checkout";
 import CheckoutSuccess from "../Pages/checkout/CheckoutSuccess";
+import Profile from "../Pages/profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -66,7 +67,10 @@ const router = createBrowserRouter([
         path: "profile",
         element: <ProtectedRoute />,
         children: [
-          // TODO: Thêm trang cá nhân
+          {
+            path: "",
+            element: <Profile />,
+          }
         ]
       }
     ],
