@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Khởi tạo instance của Axios
 const api = axios.create({
-  // URL của MockAPI.io thực tế
-  baseURL: "https://6a9a91509a7ec1b817d25de8.mockapi.io",
+  // Chuyển sang dùng JSON-Server local
+  baseURL: "http://localhost:8000",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

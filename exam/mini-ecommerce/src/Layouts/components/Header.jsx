@@ -17,9 +17,11 @@ export default function Header() {
 
   // Lấy dữ liệu sản phẩm để trích xuất danh mục
   const { data: products = [] } = useGetProducts();
-  
+
   // Trích xuất các category duy nhất
-  const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean)));
+  const categories = Array.from(
+    new Set(products.map((p) => p.category).filter(Boolean)),
+  );
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -80,7 +82,10 @@ export default function Header() {
 
           {/* Search Bar */}
           <div className="hidden lg:flex flex-1 max-w-2xl mx-4">
-            <form onSubmit={handleSearch} className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden">
+            <form
+              onSubmit={handleSearch}
+              className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden"
+            >
               <input
                 name="search"
                 className="flex-1 px-4 py-2 font-bubble text-sm text-stone-900 placeholder-stone-400 focus:outline-none border-none font-bold"
@@ -192,7 +197,11 @@ export default function Header() {
                         </li>
                       ))
                     ) : (
-                      <li><span className="block px-4 py-2 font-bubble text-sm text-stone-500">Đang tải...</span></li>
+                      <li>
+                        <span className="block px-4 py-2 font-bubble text-sm text-stone-500">
+                          Đang tải...
+                        </span>
+                      </li>
                     )}
                   </ul>
                 </div>
@@ -230,11 +239,11 @@ export default function Header() {
                     LIÊN HỆ
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link className="hover:text-comic-red transition" to="#">
                     MANGA BLOG
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     className="bg-comic-red text-white comic-border-sm px-2 py-0.5 rounded shadow-comic-sm hover:bg-black transition animate-bounce inline-block"
