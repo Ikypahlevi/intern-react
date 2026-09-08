@@ -1,0 +1,1185 @@
+{
+  "users": [
+    {
+      "createdAt": "2026-09-06T18:44:05.513Z",
+      "name": "Admin System",
+      "avatar": "https://i.pravatar.cc/150?u=admin",
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "password123",
+      "role": "admin",
+      "status": "active",
+      "orders": [],
+      "wishlist": []
+    },
+    {
+      "createdAt": "2026-09-06T13:59:48.760Z",
+      "name": "Duong Customer",
+      "avatar": "https://i.pravatar.cc/150?u=duong",
+      "id": "2",
+      "email": "duongss123@gmail.com",
+      "password": "123456",
+      "role": "customer",
+      "status": "active",
+      "orders": [],
+      "wishlist": []
+    },
+    {
+      "createdAt": "2026-09-06T14:24:26.290Z",
+      "name": "Nguyễn Văn A",
+      "avatar": "https://i.pravatar.cc/150?u=a",
+      "id": "3",
+      "email": "nva@gmail.com",
+      "password": "password123",
+      "role": "customer",
+      "status": "active",
+      "orders": [],
+      "wishlist": []
+    },
+    {
+      "createdAt": "2026-09-06T17:09:07.096Z",
+      "name": "Trần Thị B",
+      "avatar": "https://i.pravatar.cc/150?u=b",
+      "id": "4",
+      "email": "ttb@gmail.com",
+      "password": "password123",
+      "role": "customer",
+      "status": "active",
+      "orders": [],
+      "wishlist": []
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "One piece - Đảo hải tặc",
+      "price": 25000,
+      "stock": 7,
+      "category": "Hành động",
+      "image": "/img/onepiece.jpg",
+      "description": "One Piece là bộ manga dành cho lứa tuổi thiếu niên của tác giả Oda Eiichiro. Câu chuyện kể về Monkey D. Luffy, một chàng trai trẻ tuổi, lấy cảm hứng từ thần tượng thuở nhỏ của mình là vị thuyền trưởng hải tặc khét tiếng Shanks \"Tóc Đỏ\", bắt đầu cuộc hành trình từ Biển Đông đi tìm kho báu huyền thoại One Piece để trở thành Vua Hải Tặc.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 124
+    },
+    {
+      "id": "2",
+      "name": "Kimetsu no yaiba - Thanh gươm diệt quỷ ",
+      "price": 20000,
+      "stock": 3,
+      "category": "Hành động",
+      "image": "/img/kimetsunoyaiba.jpg",
+      "description": "Câu chuyện kể về hành trình đầy gian khổ của Kamado Tanjirou sau khi gia đình bị quỷ tàn sát dã man và em gái Nezuko bị hóa thành quỷ. Nhằm tìm cách chữa trị cho em gái và trả thù cho gia đình, Tanjirou gia nhập Sát Quỷ Đoàn, cùng đồng đội vượt qua vô vàn trận chiến ác liệt để tiêu diệt chúa quỷ Muzan.",
+      "publisher": "Amak Books",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 129
+    },
+    {
+      "id": "3",
+      "name": "Sololeveling",
+      "price": 20000,
+      "stock": 12,
+      "category": "Hành động",
+      "image": "/img/sololeveling.png",
+      "description": "Ở một thế giới xuất hiện các \"Cổng\" kết nối với hầm ngục đầy quái vật, Sung Jin-Woo là một thợ săn hạng E cực kỳ yếu ớt. Sau khi suýt chết trong một hầm ngục kép bí ẩn, anh nhận được một hệ thống thăng cấp độc nhất vô nhị. Từ thợ săn yếu nhất nhân loại, Jin-Woo bắt đầu hành trình vượt qua giới hạn để trở thành thợ săn mạnh nhất thế giới.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 504
+    },
+    {
+      "id": "4",
+      "name": "Frieren - Pháp sư tiễn táng",
+      "price": 20000,
+      "stock": 30,
+      "category": "Kỳ ảo",
+      "image": "/img/frieren.jpg",
+      "description": "Câu chuyện diễn ra sau khi tổ đội anh hùng tiêu diệt Ma Vương và mang lại hòa bình cho thế giới. Pháp sư yêu tinh Frieren, người có tuổi thọ hàng ngàn năm, bắt đầu một cuộc hành trình mới để tìm hiểu về trái tim con người và trân trọng những khoảnh khắc ngắn ngủi bên những người bạn đồng hành mới sau sự ra đi của anh hùng Himmel.",
+      "publisher": "Wings Books",
+      "rating": 4,
+      "status": "Có sẵn (In stock)",
+      "sold": 277
+    },
+    {
+      "id": "5",
+      "name": "Doraemon - Chú mèo máy đến từ tương lai",
+      "price": 20000,
+      "stock": 22,
+      "category": "Hài hước",
+      "image": "/img/doraemon.jfif",
+      "description": "Tác phẩm kể về cuộc đời của cậu bé Nobita hậu đậu, yếu ớt và chú mèo máy Doraemon đến từ thế kỷ 22 với chiếc túi thần kỳ chứa vô vàn bảo bối tương lai. Những câu chuyện thường ngày xoay quanh tình bạn, trường học và những cuộc phiêu lưu giả tưởng đầy ý nghĩa của nhóm bạn Nobita, Shizuka, Gian, Suneo.",
+      "publisher": "Hikari Light Novel",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 153
+    },
+    {
+      "id": "6",
+      "name": "Arifutera - Từ tầm thường đến bất khả chiến bại",
+      "price": 25000,
+      "stock": 12,
+      "category": "Hành động",
+      "image": "/img/arifutera.jpg",
+      "description": "Hajime Nagumo cùng lớp học của mình bị triệu hồi đến một thế giới khác làm anh hùng cứu thế. Trong khi các bạn cùng lớp sở hữu những chỉ số sức mạnh phi thường, Hajime chỉ có nghề nghiệp \"Biến đổi sư\" vô dụng. Sau khi bị phản bội và rơi xuống vực sâu ngục tối, anh phải tự lực cánh sinh để sinh tồn và vươn lên đỉnh cao sức mạnh.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 435
+    },
+    {
+      "id": "7",
+      "name": "Thám tử lừng danh Conan",
+      "price": 25000,
+      "stock": 15,
+      "category": "Khác",
+      "image": "/img/conan.jpg",
+      "description": "Kudo Shinichi - thám tử học sinh tài ba - bị Tổ chức Áo đen bí ẩn ép uống thuốc độc APTX 4869 khiến cơ thể bị teo nhỏ thành một đứa trẻ tiểu học. Dưới thân phận mới là Edogawa Conan, cậu chuyển đến sống cùng ông bố của bạn gái Ran - thám tử khờ khạo Mori Kogoro - âm thầm phá giải các vụ án hóc búa để truy tìm manh mối về tổ chức hắc ám.",
+      "publisher": "Wings Books",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 87
+    },
+    {
+      "id": "8",
+      "name": "Attack On Titan - Đại chiến Titan",
+      "price": 25000,
+      "stock": 30,
+      "category": "Hành động",
+      "image": "/img/attackontitan.webp",
+      "description": "Eren Yeager cùng nhân loại sống yên bình sau những bức tường khổng lồ để bảo vệ mình khỏi các Titan ăn thịt người khát máu. Sau khi bức tường ngoài cùng sụp đổ và mẹ bị Titan sát hại dã man, Eren thề sẽ hủy diệt toàn bộ Titan trên thế giới, gia nhập Trinh sát binh đoàn để tìm kiếm sự thật đen tối đằng sau thế giới này.",
+      "publisher": "NXB Trẻ",
+      "rating": 4,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 215
+    },
+    {
+      "id": "9",
+      "name": "Vô hạn Gacha",
+      "price": 30000,
+      "stock": 10,
+      "category": "Khác",
+      "image": "/img/gacha.png",
+      "description": "Bị trục xuất khỏi Hội đồng Bộ lạc và phản bội bởi chính đồng đội, Light rơi xuống tầng sâu nhất của Vực Thẳm - ngục tối chết chóc chỉ có quái vật ngự trị. Để tồn tại, anh kích hoạt kỹ năng duy nhất của mình: Gacha Vô hạn. Tưởng chừng vô dụng, Gacha lần này lại triệu hồi Mei, một chiến binh cấp 9999 tuyệt sắc trong bộ dạng hầu gái. Ba năm trôi qua, Light đã xây dựng một vương quốc hùng mạnh nơi vực tối, với đội quân mỹ nhân cấp 9999 trung thành tuyệt đối. Giờ đây, với sức mạnh của một chúa tể tối thượng, anh bắt đầu hành trình trả thù, trừng phạt từng kẻ đã phản bội mình.",
+      "publisher": "IPM",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 460
+    },
+    {
+      "id": "10",
+      "name": "Jujutsu Kaisen - Chú thuật đại chiến",
+      "price": 25000,
+      "stock": 20,
+      "category": "Hành động",
+      "image": "/img/jujutsukaisen.webp",
+      "description": "Itadori Yuji là một học sinh trung học bình thường nhưng có thể chất phi thường. Để cứu bạn bè khỏi các nguyền hồn độc ác, cậu đã nuốt ngón tay của Vua Nguyền Hồn Ryomen Sukuna và bị dính lời nguyền. Yuji gia nhập Trường Chuyên chú thuật Tokyo dưới sự dẫn dắt của chú thuật sư mạnh nhất Gojo Satoru để truy tìm và thanh tẩy toàn bộ ngón tay của Sukuna.",
+      "publisher": "Wings Books",
+      "rating": 3,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 194
+    },
+    {
+      "id": "11",
+      "name": "Kaiju no 8 - Quái vật số 8",
+      "price": 30000,
+      "stock": 21,
+      "category": "Khác",
+      "image": "/img/kaijuno8.jpg",
+      "description": "Ở Nhật Bản, quốc gia có tỷ lệ quái vật Kaiju xuất hiện cao nhất thế giới, Kafka Hibino luôn ước mơ gia nhập Lực lượng Phòng vệ để chiến đấu bảo vệ t�� quốc. Sau một tai nạn bất ngờ khiến cơ thể bị biến đổi thành một Kaiju dạng người có sức mạnh hủy diệt, Kafka phải che giấu thân phận dưới mật danh Kaiju Số 8 để tiếp tục theo đuổi ước mơ.",
+      "publisher": "IPM",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 431
+    },
+    {
+      "id": "12",
+      "name": "Chào mừng đến với lớp học đề cao thực lực",
+      "price": 25000,
+      "stock": 20,
+      "category": "Khác",
+      "image": "/img/school.jpg",
+      "description": "Kiyotaka Ayanokoji nhập học vào Trường Trung học Cấp cao Tokyo Metropolitan Advanced Nurturing - nơi nổi tiếng với tỷ lệ đỗ đại học và có việc làm 100%. Trường chia học sinh thành các lớp từ A đến D dựa trên thực lực. Ayanokoji cố tình giấu kín năng lực thiên tài của mình ở lớp D, cùng những người bạn vượt qua những bài thi sinh tồn đầy mưu mẹo của nhà trường.",
+      "publisher": "NXB Trẻ",
+      "rating": 3,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 538
+    },
+    {
+      "id": "13",
+      "name": "Sword At Online - Đao kiếm thần vực",
+      "price": 25000,
+      "stock": 5,
+      "category": "Khác",
+      "image": "/img/sao.png",
+      "description": "Năm 2022, game thực tế ảo MMORPG Sword Art Online ra mắt. 10.000 người chơi bị mắc kẹt trong game, không thể đăng xuất, và nếu chết trong game sẽ chết ngoài đời thật. Kirito, một game thủ solo cô độc, phải chiến đấu xuyên qua 100 tầng của tòa tháp Aincrad để giải phóng tất cả người chơi.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 3,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 209
+    },
+    {
+      "id": "14",
+      "name": "Lúc đó tôi chuyển sinh thành Slime",
+      "price": 30000,
+      "stock": 30,
+      "category": "Khác",
+      "image": "/img/slime.png",
+      "description": "Rimuru Tempest nguyên là một nhân viên văn phòng 37 tuổi bị sát hại dã man trên đường phố và được chuyển sinh sang thế giới ma thuật giả tưởng dưới hình dạng một chú Slime siêu cấp dễ thương. Nhờ sở hữu hai kỹ năng bá đạo là Đại Hiền Triết và Kẻ Săn Mồi, Rimuru nhanh chóng kết bạn với rồng bão tố Veldora, thành lập quốc gia liên minh ma thú Jura Tempest hùng mạnh.",
+      "publisher": "Hikari Light Novel",
+      "rating": 4,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 275
+    },
+    {
+      "id": "15",
+      "name": "Cuộc sống nông dân ở thế giới khác",
+      "price": 25000,
+      "stock": 20,
+      "category": "Khác",
+      "image": "/img/farmer.avif",
+      "description": "Machio Hiraku qua đời vì bạo bệnh ở tuổi 39. Cậu được Thượng Đế ban cho cơ hội hồi sinh ở một thế giới khác với cơ thể khỏe mạnh và một \"Nông cụ vạn năng\". Hiraku quyết định chọn một cuộc sống nông dân thanh bình sâu trong khu rừng tử thần, khai hoang ruộng đất, chăn nuôi gia súc và dần xây dựng nên một ngôi làng thịnh vượng đầy ắp tiếng cười.",
+      "publisher": "IPM",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 391
+    },
+    {
+      "id": "16",
+      "name": "Thế giới otome game thật khắc nghiệt với nhân vật quần chúng",
+      "price": 20000,
+      "stock": 12,
+      "category": "Khác",
+      "image": "/img/otemegame.webp",
+      "description": "Leon là một nhân viên văn phòng Nhật Bản đột tử và được chuyển sinh vào thế giới của một trò chơi Otome game giả tưởng khắc nghiệt, nơi phụ nữ nắm quyền lực tối cao và đàn ông chỉ là công cụ. Bằng cách sử dụng những kiến thức từ kiếp trước của mình, Leon quyết định sống một cuộc sống yên bình làm nhân vật quần chúng, nhưng vô tình bị cuốn vào những biến cố vĩ đại của vương quốc.",
+      "publisher": "NXB Trẻ",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 317
+    },
+    {
+      "id": "17",
+      "name": "Nhật ký thường ngày của Tiên vương",
+      "price": 30000,
+      "stock": 30,
+      "category": "Khác",
+      "image": "/img/tienvuong.webp",
+      "description": "Vương Lệnh là một thiên tài tu chân tu luyện đến cảnh giới tối cao Tiên Vương từ khi còn nhỏ. Nhằm sống một cuộc sống học đường yên bình như bao học sinh cấp ba bình thường khác, cậu phải sử dụng những lá bùa phong ấn để kìm hãm luồng sức mạnh hủy thiên diệt địa của mình. Thế nhưng, những rắc rối học đường liên tục kéo đến buộc cậu phải âm thầm ra tay giải cứu thế giới.",
+      "publisher": "Hikari Light Novel",
+      "rating": 5,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 526
+    },
+    {
+      "id": "18",
+      "name": "Ma vương đi làm",
+      "price": 25000,
+      "stock": 20,
+      "category": "Khác",
+      "image": "/img/mavuong.jpg",
+      "description": "Câu chuyện kể về cuộc sống tàn tạ, làm việc 24/7 của lão Quỷ Vương gian ác và thuộc hạ của lão sau khi bị các dũng sĩ đá đít tới một thế giới khác - Trái Đất Ừ thì đọc đến đó thôi là hết muốn coi chứ gì, còn nữa Được sống một cuộc sống ăn mày yên bình thì không nói gì, nhưng cái lũ từ bên thế giới cũ cứ lần lượt đến phá Trái đất, thế là biệt đội Quỷ Vương - Osin của Quỷ Vương - Tsundere Dũng Sĩ phải ngăn chúng lại.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 208
+    },
+    {
+      "id": "38",
+      "name": "Naruto (Huyền thoại Nhẫn giả)",
+      "price": 25000,
+      "stock": 50,
+      "category": "Hành động",
+      "image": "/img/anime_38.jpg",
+      "description": "Hành trình trưởng thành của Uzumaki Naruto, một cậu bé mang trong mình Cửu Vĩ Hồ Ly bị mọi người xa lánh nhưng không bao giờ từ bỏ ước mơ trở thành Hokage vĩ đại nhất để được công nhận. Một tượng đài Shounen về ý chí, tình bạn và sự nỗ lực không ngừng nghỉ.",
+      "publisher": "Amak Books",
+      "rating": 3,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 148
+    },
+    {
+      "id": "39",
+      "name": "Dragon Ball (Bảy viên ngọc rồng)",
+      "price": 25000,
+      "stock": 40,
+      "category": "Hành động",
+      "image": "/img/anime_39.jpg",
+      "description": "Siêu phẩm hành động huyền thoại gắn liền với tuổi thơ của vô số độc giả. Hành trình phiêu lưu tìm kiếm 7 viên ngọc rồng, vượt qua giới hạn sức mạnh, bảo vệ Trái Đất và vũ trụ khỏi tay những ác nhân tàn bạo của Son Goku và đồng đội.",
+      "publisher": "IPM",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 522
+    },
+    {
+      "id": "40",
+      "name": "Bleach (Sứ mạng thần chết)",
+      "price": 25000,
+      "stock": 30,
+      "category": "Hành động",
+      "image": "/img/anime_40.jpg",
+      "description": "Ichigo Kurosaki, một học sinh trung học có khả năng nhìn thấy linh hồn, bất ngờ nhận được sức mạnh từ một Shinigami (Tử thần) tên Rukia. Anh dấn thân vào cuộc chiến vô tận để bảo vệ thế giới loài người và Linh giới khỏi các thế lực tà ác.",
+      "publisher": "IPM",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 53
+    },
+    {
+      "id": "41",
+      "name": "Chainsaw Man (Người Cưa)",
+      "price": 25000,
+      "stock": 100,
+      "category": "Hành động",
+      "image": "/img/anime_41.jpg",
+      "description": "Câu chuyện đầy máu me, bạo lực nhưng vô cùng cuốn hút về Denji - một thiếu niên nghèo khổ vô tình sáp nhập với ác quỷ cưa máy Pochita. Cậu gia nhập tổ chức thợ săn quỷ cộng đồng để tìm kiếm cuộc sống bình dị với ba bữa ăn mỗi ngày và một mái ấm.",
+      "publisher": "IPM",
+      "rating": 3,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 528
+    },
+    {
+      "id": "42",
+      "name": "Tokyo Revengers (Băng Đảng Học Đường)",
+      "price": 25000,
+      "stock": 60,
+      "category": "Võ thuật",
+      "image": "/img/anime_42.jpg",
+      "description": "Takemichi Hanagaki, một chàng trai thất bại ở độ tuổi 26, vô tình sở hữu năng lực du hành thời gian trở về thời cấp 2. Cậu quyết tâm thâm nhập vào băng đảng Tokyo Manji tàn bạo để cứu lấy mối tình đầu của mình khỏi cái chết bi thảm ở tương lai.",
+      "publisher": "NXB Trẻ",
+      "rating": 5,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 163
+    },
+    {
+      "id": "43",
+      "name": "My Hero Academia (Học Viện Siêu Anh Hùng)",
+      "price": 25000,
+      "stock": 80,
+      "category": "Hành động",
+      "image": "/img/anime_43.jpg",
+      "description": "Trong một thế giới nơi 80% dân số đều sở hữu siêu năng lực (Kosei), Izuku Midoriya sinh ra lại là kẻ vô năng. Dù vậy, cậu chưa bao giờ từ bỏ ước mơ trở thành siêu anh hùng số 1. Cuộc đời cậu bước sang trang mới khi gặp gỡ thần tượng All Might.",
+      "publisher": "Wings Books",
+      "rating": 3,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 499
+    },
+    {
+      "id": "44",
+      "name": "Hunter x Hunter (Thợ Săn Tí Hon)",
+      "price": 25000,
+      "stock": 45,
+      "category": "Hành động",
+      "image": "/img/anime_44.jpg",
+      "description": "Cuộc phiêu lưu kỳ thú của Gon Freecss trong hành trình thi tuyển Hunter để tìm người cha mất tích. Hệ thống sức mạnh Niệm (Nen) đỉnh cao, những trận chiến hack não và thế giới vô cùng tàn nhẫn, sâu sắc tạo nên sức hút khó cưỡng của siêu phẩm này.",
+      "publisher": "Wings Books",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 195
+    },
+    {
+      "id": "45",
+      "name": "Dandadan (Quái Đản)",
+      "price": 25000,
+      "stock": 70,
+      "category": "Hài hước",
+      "image": "/img/anime_45.jpg",
+      "description": "Momo Ayase (tin vào ma quỷ) và Okarun (tin vào người ngoài hành tinh) vô tình kích hoạt cả hai thế lực siêu nhiên này. Một tác phẩm cực kỳ điên rồ, hành động mãn nhãn với nét vẽ sáng tạo không giới hạn, phá vỡ mọi quy chuẩn của manga truyền thống.",
+      "publisher": "IPM",
+      "rating": 4,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 540
+    },
+    {
+      "id": "46",
+      "name": "Fullmetal Alchemist (Giả Kim Thuật Sư)",
+      "price": 25000,
+      "stock": 90,
+      "category": "Hành động",
+      "image": "/img/anime_46.jpg",
+      "description": "Hai anh em Edward và Alphonse Elric phải trả giá đắt sau khi sử dụng thuật giả kim cấm kỵ để hồi sinh người mẹ quá cố. Cuộc phiêu lưu tìm kiếm Hòn Đá Triết Gia để khôi phục cơ thể dần lôi kéo họ vào một âm mưu diệt vong đen tối cấp quốc gia.",
+      "publisher": "Hikari Light Novel",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 261
+    },
+    {
+      "id": "47",
+      "name": "Gintama (Linh Hồn Bạc)",
+      "price": 25000,
+      "stock": 20,
+      "category": "Hài hước",
+      "image": "/img/anime_47.jpg",
+      "description": "Bối cảnh Edo bị người ngoài hành tinh (Amanto) xâm lược. Samurai Sakata Gintoki cùng hai nhân viên lập ra Tiệm Vạn Năng chuyên nhận làm mọi việc. Một bộ phim tấu hài cực lầy lội, phá vỡ bức tường thứ 4, nhưng khi vào mạch truyện chính lại vô cùng bi tráng và đẫm máu.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 5,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 257
+    },
+    {
+      "id": "48",
+      "name": "Mushoku Tensei (Thất Nghiệp Chuyển Sinh)",
+      "price": 25000,
+      "stock": 85,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_48.jpg",
+      "description": "Một gã NEET thất bại 34 tuổi chết trong vụ tai nạn giao thông và chuyển sinh thành Rudeus Greyrat ở thế giới phép thuật. Cậu quyết tâm làm lại cuộc đời, học hỏi pháp thuật, chu du thế giới và sống một cuộc đời không hối tiếc. Tác phẩm tiên phong của thể loại Isekai.",
+      "publisher": "Wings Books",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 260
+    },
+    {
+      "id": "49",
+      "name": "Re:Zero (Bắt Đầu Lại Ở Thế Giới Khác)",
+      "price": 25000,
+      "stock": 65,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_49.jpg",
+      "description": "Natsuki Subaru vô tình bị triệu hồi đến thế giới kỳ ảo. Cậu không có sức mạnh bá đạo nào ngoại trừ năng lực 'Trở về từ cõi chết' (Return by Death). Subaru phải trải qua vô vàn cái chết đau đớn, tuyệt vọng để bảo vệ Emilia và những người cậu yêu thương.",
+      "publisher": "Amak Books",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 406
+    },
+    {
+      "id": "50",
+      "name": "Overlord (Chúa Tể Dị Giới)",
+      "price": 25000,
+      "stock": 75,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_50.jpg",
+      "description": "Momonga, một game thủ kỳ cựu bị kẹt lại trong trò chơi thực tế ảo với hình dáng của một Undead Đại Pháp Sư tên Ainz Ooal Gown. Với sức mạnh vô song cùng sự trung thành tuyệt đối của các thuộc hạ tại Lăng mộ Nazarick, anh bắt đầu hành trình chinh phục thế giới mới.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 4,
+      "status": "Có sẵn (In stock)",
+      "sold": 128
+    },
+    {
+      "id": "51",
+      "name": "KonoSuba (Mở Ra Thế Giới Tuyệt Vời)",
+      "price": 25000,
+      "stock": 90,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_51.jpg",
+      "description": "Kazuma chết lãng xẹt sau khi cố cứu một cô gái. Cậu được nữ thần Aqua trao cơ hội chuyển sinh và quyết định kéo theo cô nàng phế vật này làm bạn đồng hành. Một câu chuyện Isekai tấu hài đỉnh cao với tổ đội gồm những thành viên lập dị, vô tri nhất từng có.",
+      "publisher": "NXB Trẻ",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 196
+    },
+    {
+      "id": "52",
+      "name": "The Eminence in Shadow (Chúa Tể Bóng Tối)",
+      "price": 25000,
+      "stock": 100,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_52.jpg",
+      "description": "Cid Kagenou có ước mơ trở thành 'kẻ giật dây trong bóng tối'. Chuyển sinh sang dị giới, cậu lập ra tổ chức Shadow Garden để chống lại Giáo phái Diabolos (vốn do cậu tự bịa ra). Oái oăm thay, mọi thứ cậu bịa ra đều là sự thật! Câu chuyện tấu hài nhưng hành động bao ngầu.",
+      "publisher": "NXB Trẻ",
+      "rating": 4,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 348
+    },
+    {
+      "id": "53",
+      "name": "No Game No Life (Trò Chơi Sinh Tử)",
+      "price": 25000,
+      "stock": 40,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_53.jpg",
+      "description": "Hai anh em Sora và Shiro, những game thủ huyền thoại mang tên [Blank], bị triệu hồi đến thế giới Disboard - nơi mọi xung đột đều được giải quyết bằng các trò chơi. Họ sử dụng trí tuệ vượt trội của mình để đưa nhân loại thoát khỏi bờ vực tuyệt vọng.",
+      "publisher": "Hikari Light Novel",
+      "rating": 5,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 197
+    },
+    {
+      "id": "54",
+      "name": "The Rising of the Shield Hero (Sự Trỗi Dậy Của Khiên Hiệp Sĩ)",
+      "price": 25000,
+      "stock": 55,
+      "category": "Kỳ ảo",
+      "image": "/img/anime_54.jpg",
+      "description": "Naofumi bị triệu hồi làm Khiên Hiệp Sĩ để bảo vệ dị giới. Tuy nhiên, anh lập tức bị phản bội, vu oan và bị xa lánh. Từ đáy vực thẳm của sự tuyệt vọng, Naofumi mua cô bé á nhân Raphtalia và bắt đầu hành trình rửa hận, chứng minh giá trị bản thân.",
+      "publisher": "NXB Trẻ",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 69
+    },
+    {
+      "id": "55",
+      "name": "Berserk (Kiếm Sĩ Đen)",
+      "price": 25000,
+      "stock": 30,
+      "category": "Hành động",
+      "image": "/img/anime_55.jpg",
+      "description": "Câu chuyện u tối và tàn bạo về Guts, Hắc Kiếm Sĩ mang trên mình thanh đại kiếm diệt quỷ và một dấu ấn nguyền rủa. Anh băng qua những vùng đất hoang tàn đầy quỷ dữ để trả thù người bạn cũ Griffith. Một Masterpiece tuyệt đối của Dark Fantasy.",
+      "publisher": "Wings Books",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 235
+    },
+    {
+      "id": "56",
+      "name": "Vinland Saga (Bản Anh Hùng Ca Vinland)",
+      "price": 25000,
+      "stock": 45,
+      "category": "Hành động",
+      "image": "/img/anime_56.jpg",
+      "description": "Dưới thời hoàng kim của người Viking, cậu bé Thorfinn gia nhập băng lính đánh thuê của Askeladd - kẻ đã giết cha cậu, nhằm chờ ngày báo thù. Câu chuyện phát triển thành một thiên sử thi về sự chuộc lỗi, ý nghĩa của hòa bình và vùng đất hứa Vinland.",
+      "publisher": "Hikari Light Novel",
+      "rating": 3,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 359
+    },
+    {
+      "id": "57",
+      "name": "Death Note (Cuốn sổ tử thần)",
+      "price": 25000,
+      "stock": 80,
+      "category": "Tâm lý",
+      "image": "/img/anime_57.jpg",
+      "description": "Yagami Light nhặt được cuốn sổ tử thần có khả năng giết bất cứ ai bị ghi tên vào đó. Cậu quyết định tạo ra một thế giới không có tội phạm dưới cái tên 'Kira'. Cuộc đấu trí vô tiền khoáng hậu giữa Kira và vị thám tử thiên tài L bắt đầu.",
+      "publisher": "NXB Trẻ",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 534
+    },
+    {
+      "id": "58",
+      "name": "Oshi no Ko (Đứa Con Của Thần Tượng)",
+      "price": 25000,
+      "stock": 120,
+      "category": "Tâm lý",
+      "image": "/img/anime_58.jpg",
+      "description": "Mảng tối tàn khốc của ngành công nghiệp giải trí (Showbiz) Nhật Bản được lột trần thông qua câu chuyện tái sinh của vị bác sĩ thành con trai của thần tượng mà anh hâm mộ - Hoshino Ai. Kịch tính, đen tối và mang đến những góc nhìn cực kỳ bất ngờ.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 3,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 520
+    },
+    {
+      "id": "59",
+      "name": "Monster (Quái Vật)",
+      "price": 25000,
+      "stock": 25,
+      "category": "Tâm lý",
+      "image": "/img/anime_59.jpg",
+      "description": "Bác sĩ tài năng Kenzo Tenma cứu sống một cậu bé tên Johan thay vì thị trưởng. Nhiều năm sau, cậu bé ấy trở thành một ác quỷ giết người hàng loạt máu lạnh. Tenma phải từ bỏ mọi thứ để truy lùng và chuộc lại lỗi lầm do chính bàn tay mình tạo ra.",
+      "publisher": "Wings Books",
+      "rating": 3,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 395
+    },
+    {
+      "id": "60",
+      "name": "Tokyo Ghoul (Ngạ Quỷ Tokyo)",
+      "price": 25000,
+      "stock": 50,
+      "category": "Hành động",
+      "image": "/img/anime_60.jpg",
+      "description": "Kaneki Ken, một sinh viên bình thường, vô tình bị biến thành Bán Ghoul (Ngạ Quỷ) sau một cuộc phẫu thuật cấy ghép nội tạng. Bị kẹt giữa thế giới con người và thế giới tàn khốc của Ngạ Quỷ, cậu phải chiến đấu để bảo vệ những người mình yêu thương.",
+      "publisher": "NXB Trẻ",
+      "rating": 3,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 72
+    },
+    {
+      "id": "61",
+      "name": "Vagabond (Lãng Khách)",
+      "price": 25000,
+      "stock": 20,
+      "category": "Võ thuật",
+      "image": "/img/anime_61.jpg",
+      "description": "Được chuyển thể từ tiểu thuyết Musashi, siêu phẩm này tái hiện lại cuộc đời của Miyamoto Musashi - một trong những kiếm khách vĩ đại nhất lịch sử Nhật Bản. Tác phẩm tập trung vào sự giác ngộ triết lý, nhân sinh quan và võ đạo qua những trận đấu sinh tử.",
+      "publisher": "Wings Books",
+      "rating": 5,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 142
+    },
+    {
+      "id": "62",
+      "name": "Spy x Family (Gia Đình Điệp Viên)",
+      "price": 25000,
+      "stock": 150,
+      "category": "Hài hước",
+      "image": "/img/anime_62.jpg",
+      "description": "Để hoàn thành nhiệm vụ tuyệt mật bảo vệ hòa bình thế giới, siêu điệp viên Twilight buộc phải tạo ra một gia đình giả. Anh vô tình nhận nuôi cô bé thấu thị Anya và kết hôn với Yor - một sát thủ khét tiếng. Cả gia đình che giấu thân phận và tạo ra muôn vàn tình huống dở khóc dở cười.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 3,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 365
+    },
+    {
+      "id": "63",
+      "name": "Kaguya-sama: Love is War (Cuộc Chiến Tỏ Tình)",
+      "price": 25000,
+      "stock": 110,
+      "category": "Tình cảm",
+      "image": "/img/anime_63.jpg",
+      "description": "Hội trưởng Miyuki Shirogane và Hội phó Kaguya Shinomiya đều có tình cảm với nhau nhưng lòng kiêu hãnh quá lớn khiến họ tin rằng 'Kẻ nào tỏ tình trước là kẻ thua cuộc!'. Cả hai bày mưu tính kế mỗi ngày để ép đối phương phải mở lời trước.",
+      "publisher": "Hikari Light Novel",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 241
+    },
+    {
+      "id": "64",
+      "name": "Your Lie in April (Tháng Tư Là Lời Nói Dối Của Em)",
+      "price": 25000,
+      "stock": 60,
+      "category": "Tình cảm",
+      "image": "/img/anime_64.jpg",
+      "description": "Arima Kousei, một thần đồng piano mất đi khả năng nghe thấy tiếng đàn sau cú sốc mất mẹ. Cuộc đời cậu lấy lại màu sắc khi gặp gỡ Kaori Miyazono, một nữ nhạc công violin tràn đầy sức sống với một bí mật đau lòng được cất giấu dưới nụ cười.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 4,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 71
+    },
+    {
+      "id": "65",
+      "name": "Bocchi the Rock! (Cô Bé Rocker)",
+      "price": 25000,
+      "stock": 130,
+      "category": "Hài hước",
+      "image": "/img/anime_65.jpg",
+      "description": "Hitori Goto là một cô bé mắc chứng lo âu xã hội nghiêm trọng nhưng lại có niềm đam mê mãnh liệt với guitar. Cô gia nhập Kessoku Band và bắt đầu hành trình chiến đấu với sự tự ti của bản thân để tỏa sáng trên sân khấu nhạc Rock.",
+      "publisher": "NXB Trẻ",
+      "rating": 4,
+      "status": "Có sẵn (In stock)",
+      "sold": 460
+    },
+    {
+      "id": "66",
+      "name": "Horimiya (Chuyện Tình Thanh Xuân)",
+      "price": 25000,
+      "stock": 80,
+      "category": "Tình cảm",
+      "image": "/img/anime_66.jpg",
+      "description": "Kyouko Hori, một nữ sinh nổi tiếng nhưng khi về nhà lại rất đỗi bình dị, và Izumi Miyamura, cậu bạn trầm tính nhưng mang trên mình đầy hình xăm và khuyên tai. Hai con người trái ngược tìm thấy sự đồng điệu và tạo nên một chuyện tình học đường siêu ngọt ngào.",
+      "publisher": "Wings Books",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 451
+    },
+    {
+      "id": "67",
+      "name": "The Dangers in My Heart (Kẻ Sát Nhân Trong Tôi)",
+      "price": 25000,
+      "stock": 90,
+      "category": "Tình cảm",
+      "image": "/img/anime_67.jpg",
+      "description": "Kyotaro Ichikawa mắc hội chứng tuổi teen 'ảo tưởng' rằng mình là kẻ sát nhân đáng sợ và mục tiêu là hoa khôi Anna Yamada. Nhưng cậu nhận ra cô nàng lại là một người siêu ngốc nghếch, tham ăn. Một bộ Rom-com chữa lành với sự tiến triển tình cảm cực tinh tế.",
+      "publisher": "Amak Books",
+      "rating": 3,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 218
+    },
+    {
+      "id": "68",
+      "name": "The Quintessential Quintuplets (Nhà Có 5 Nàng Dâu)",
+      "price": 25000,
+      "stock": 70,
+      "category": "Tình cảm",
+      "image": "/img/anime_68.jpg",
+      "description": "Fuutarou Uesugi, một học sinh nghèo xuất sắc, nhận công việc gia sư cho 5 chị em sinh năm nhà Nakano. Cả 5 người đều ghét học và có tính cách hoàn toàn khác biệt. Cuộc đấu trí để bắt họ học và những cảm xúc dần nảy nở tạo nên siêu phẩm Harem đỉnh cao.",
+      "publisher": "Wings Books",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 418
+    },
+    {
+      "id": "69",
+      "name": "Blue Lock (Nhà Tù Xanh)",
+      "price": 25000,
+      "stock": 140,
+      "category": "Thể thao",
+      "image": "/img/anime_69.jpg",
+      "description": "Sau thất bại tại World Cup, Nhật Bản tạo ra Blue Lock - một cơ sở đào tạo khắc nghiệt nhằm tìm kiếm một tiền đạo 'Ích Kỷ' nhất thế giới. Các cầu thủ phải loại bỏ nhau để leo lên đỉnh cao. Một bộ anime thể thao phá vỡ hoàn toàn mọi quan niệm về 'Tinh thần đồng đội'.",
+      "publisher": "Wings Books",
+      "rating": 4,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 110
+    },
+    {
+      "id": "70",
+      "name": "Haikyuu!! (Chàng Khổng Lồ Tí Hon)",
+      "price": 25000,
+      "stock": 100,
+      "category": "Thể thao",
+      "image": "/img/anime_70.jpg",
+      "description": "Hinata Shouyou, một cậu bé với thân hình nhỏ bé nhưng mang ước mơ bay cao trên sân bóng chuyền. Gia nhập trường Karasuno, cậu gặp lại đối thủ cũ Kageyama Tobio. Cả hai tạo ra sự kết hợp hoàn hảo, cùng đồng đội từng bước chinh phục giải quốc gia.",
+      "publisher": "NXB Kim Đồng",
+      "rating": 5,
+      "status": "Bản giới hạn (Limited Edition)",
+      "sold": 284
+    },
+    {
+      "id": "71",
+      "name": "Slam Dunk (Cao Thủ Bóng Rổ)",
+      "price": 25000,
+      "stock": 50,
+      "category": "Thể thao",
+      "image": "/img/anime_71.jpg",
+      "description": "Sakuragi Hanamichi, một tên côn đồ tóc đỏ tham gia đội bóng rổ trường Shohoku chỉ để gây ấn tượng với một cô gái. Nhưng dần dần, nhiệt huyết, những giọt mồ hôi và tình yêu thực sự với trái bóng cam đã biến cậu thành một tuyển thủ đáng gờm.",
+      "publisher": "Hikari Light Novel",
+      "rating": 3,
+      "status": "Có sẵn (In stock)",
+      "sold": 273
+    },
+    {
+      "id": "72",
+      "name": "Kuroko's Basketball (Tuyển Thủ Vô Hình)",
+      "price": 25000,
+      "stock": 60,
+      "category": "Thể thao",
+      "image": "/img/anime_72.jpg",
+      "description": "Kuroko Tetsuya, thành viên thứ sáu mờ nhạt của 'Thế Hệ Kỳ Tích', kết hợp cùng Kagami Taiga tại trường Seirin. Họ quyết tâm đánh bại những người đồng đội cũ - những kẻ đang sở hữu tài năng bóng rổ ở cấp độ quái vật.",
+      "publisher": "NXB Trẻ",
+      "rating": 5,
+      "status": "Đặt trước (Pre-order)",
+      "sold": 326
+    },
+    {
+      "createdAt": "2026-09-06T08:09:28.784Z",
+      "name": "Hell Mode - Yarikomi Suki no Gamer wa Hai Settei no Isekai de Musou Suru (Season 2)",
+      "avatar": "https://avatars.githubusercontent.com/u/20114644",
+      "id": "73",
+      "price": 35000,
+      "stock": 50,
+      "category": "Isekai - Chuyển sinh",
+      "image": "/img/hellmode.jpg",
+      "description": "Kenichi là một game thủ hạng nặng vô tình bị cuốn vào dị giới (Isekai) ở chế độ Địa ngục cực khó. Bắt đầu từ đáy xã hội với tư cách một Nông nô, anh phải cày cuốc không ngừng nghỉ để thăng cấp và thay đổi vận mệnh của mình. Ở Season 2 này, những thử thách mới sẽ còn kinh khủng hơn rất nhiều!",
+      "publisher": "Amak Books",
+      "rating": 5,
+      "status": "Có sẵn (In stock)",
+      "sold": 172
+    }
+  ],
+  "orders": [
+    {
+      "id": "SWO-88404",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "1",
+          "name": "One piece - Đảo hải tặc",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/onepiece.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "pending",
+      "createdAt": "2026-09-20T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88406",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "10",
+          "name": "Jujutsu Kaisen - Chú thuật đại chiến",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/jujutsukaisen.webp"
+        }
+      ],
+      "totalAmount": 55000,
+      "status": "pending",
+      "createdAt": "2026-09-20T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88415",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "66",
+          "name": "Horimiya (Chuyện Tình Thanh Xuân)",
+          "price": 25000,
+          "quantity": 2,
+          "image": "/img/anime_66.jpg"
+        }
+      ],
+      "totalAmount": 80000,
+      "status": "pending",
+      "createdAt": "2026-09-19T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88411",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "62",
+          "name": "Spy x Family (Gia Đình Điệp Viên)",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/anime_62.jpg"
+        }
+      ],
+      "totalAmount": 55000,
+      "status": "shipping",
+      "createdAt": "2026-09-05T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88403",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "54",
+          "name": "The Rising of the Shield Hero (Sự Trỗi Dậy Của Khiên Hiệp Sĩ)",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/anime_54.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "pending",
+      "createdAt": "2026-08-15T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88402",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "60",
+          "name": "Tokyo Ghoul (Ngạ Quỷ Tokyo)",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/anime_60.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "pending",
+      "createdAt": "2026-07-27T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88416",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "68",
+          "name": "The Quintessential Quintuplets (Nhà Có 5 Nàng Dâu)",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/anime_68.jpg"
+        }
+      ],
+      "totalAmount": 55000,
+      "status": "completed",
+      "createdAt": "2026-07-14T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88414",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "53",
+          "name": "No Game No Life (Trò Chơi Sinh Tử)",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/anime_53.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "completed",
+      "createdAt": "2026-07-10T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88417",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "58",
+          "name": "Oshi no Ko (Đứa Con Của Thần Tượng)",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/anime_58.jpg"
+        }
+      ],
+      "totalAmount": 55000,
+      "status": "shipping",
+      "createdAt": "2026-07-09T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88401",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "55",
+          "name": "Berserk (Kiếm Sĩ Đen)",
+          "price": 25000,
+          "quantity": 2,
+          "image": "/img/anime_55.jpg"
+        }
+      ],
+      "totalAmount": 80000,
+      "status": "pending",
+      "createdAt": "2026-07-01T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88419",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "11",
+          "name": "Kaiju no 8 - Quái vật số 8",
+          "price": 30000,
+          "quantity": 1,
+          "image": "/img/kaijuno8.jpg"
+        }
+      ],
+      "totalAmount": 60000,
+      "status": "completed",
+      "createdAt": "2026-06-14T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88408",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "64",
+          "name": "Your Lie in April (Tháng Tư Là Lời Nói Dối Của Em)",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/anime_64.jpg"
+        }
+      ],
+      "totalAmount": 55000,
+      "status": "pending",
+      "createdAt": "2026-06-13T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88412",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "69",
+          "name": "Blue Lock (Nhà Tù Xanh)",
+          "price": 25000,
+          "quantity": 2,
+          "image": "/img/anime_69.jpg"
+        }
+      ],
+      "totalAmount": 80000,
+      "status": "pending",
+      "createdAt": "2026-06-01T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88405",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "67",
+          "name": "The Dangers in My Heart (Kẻ Sát Nhân Trong Tôi)",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/anime_67.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "shipping",
+      "createdAt": "2026-05-06T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88409",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "11",
+          "name": "Kaiju no 8 - Quái vật số 8",
+          "price": 30000,
+          "quantity": 3,
+          "image": "/img/kaijuno8.jpg"
+        }
+      ],
+      "totalAmount": 120000,
+      "status": "pending",
+      "createdAt": "2026-05-04T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88410",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "6",
+          "name": "Arifutera - Từ tầm thường đến bất khả chiến bại",
+          "price": 25000,
+          "quantity": 2,
+          "image": "/img/arifutera.jpg"
+        }
+      ],
+      "totalAmount": 80000,
+      "status": "pending",
+      "createdAt": "2026-04-28T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88418",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "55",
+          "name": "Berserk (Kiếm Sĩ Đen)",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/anime_55.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "shipping",
+      "createdAt": "2026-04-25T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88400",
+      "userId": "2",
+      "customerName": "Trần Quang Minh",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "7",
+          "name": "Thám tử lừng danh Conan",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/conan.jpg"
+        }
+      ],
+      "totalAmount": 55000,
+      "status": "pending",
+      "createdAt": "2026-04-17T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88413",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "70",
+          "name": "Haikyuu!! (Chàng Khổng Lồ Tí Hon)",
+          "price": 25000,
+          "quantity": 2,
+          "image": "/img/anime_70.jpg"
+        }
+      ],
+      "totalAmount": 80000,
+      "status": "shipping",
+      "createdAt": "2026-04-14T15:45:39.475Z"
+    },
+    {
+      "id": "SWO-88407",
+      "userId": "2",
+      "customerName": "Lê Thuỳ Trang",
+      "phone": "0912345678",
+      "address": "Hà Nội",
+      "items": [
+        {
+          "productId": "6",
+          "name": "Arifutera - Từ tầm thường đến bất khả chiến bại",
+          "price": 25000,
+          "quantity": 3,
+          "image": "/img/arifutera.jpg"
+        }
+      ],
+      "totalAmount": 105000,
+      "status": "shipping",
+      "createdAt": "2026-04-05T15:45:39.475Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Hành động"
+    },
+    {
+      "id": "2",
+      "name": "Kỳ ảo"
+    },
+    {
+      "id": "3",
+      "name": "Hài hước"
+    },
+    {
+      "id": "4",
+      "name": "Khác"
+    },
+    {
+      "id": "5",
+      "name": "Võ thuật"
+    },
+    {
+      "id": "6",
+      "name": "Tâm lý"
+    },
+    {
+      "id": "7",
+      "name": "Tình cảm"
+    },
+    {
+      "id": "8",
+      "name": "Thể thao"
+    },
+    {
+      "id": "9",
+      "name": "Isekai - Chuyển sinh"
+    }
+  ],
+  "vouchers": [
+    {
+      "id": "1",
+      "code": "NEWBIE10",
+      "discount": 10
+    }
+  ]
+}

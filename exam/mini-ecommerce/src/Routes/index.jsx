@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import PublicLayout from "../Layouts/PublicLayout";
 import AuthLayout from "../Layouts/AuthLayout";
 import AdminLayout from "../Layouts/AdminLayout";
@@ -17,6 +17,7 @@ import CheckoutSuccess from "../Pages/checkout/CheckoutSuccess";
 import Profile from "../Pages/profile/Profile";
 import Contact from "../Pages/contact/Contact";
 import About from "../Pages/about/About";
+import Overview from "../Pages/admin/overview/Overview";
 
 const router = createBrowserRouter([
   {
@@ -111,7 +112,14 @@ const router = createBrowserRouter([
       {
         element: <AdminLayout />,
         children: [
-          // TODO: Thêm trang quản lý sản phẩm, tài khoản
+          {
+            path: "",
+            element: <Navigate to="overview" replace />
+          },
+          {
+            path: "overview",
+            element: <Overview />
+          }
         ]
       }
     ],

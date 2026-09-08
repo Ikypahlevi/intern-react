@@ -80,26 +80,45 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Search Bar */}
-          <div className="hidden lg:flex flex-1 max-w-2xl mx-4">
-            <form
-              onSubmit={handleSearch}
-              className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden"
-            >
+          {/* Search Bar - Realtime */}
+          <div className="hidden lg:flex flex-1 max-w-2xl mx-4 relative group/search">
+            <div className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden">
               <input
                 name="search"
                 className="flex-1 px-4 py-2 font-bubble text-sm text-stone-900 placeholder-stone-400 focus:outline-none border-none font-bold"
-                placeholder="Tìm manga, light novel, artbook, boxset, mô hình..."
+                placeholder="Tìm manga, light novel, artbook..."
                 type="text"
+                onChange={(e) => {
+                  const keyword = e.target.value;
+                  // If on products page, update URL instantly
+                  if (window.location.pathname === '/products') {
+                    navigate(`/products?search=${encodeURIComponent(keyword)}`);
+                  } else {
+                    // Show live results dropdown logic can be added here, or just redirect
+                    if (keyword.length > 2) {
+                      navigate(`/products?search=${encodeURIComponent(keyword)}`);
+                    }
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    navigate(`/products?search=${encodeURIComponent(e.target.value)}`);
+                  }
+                }}
               />
               <button
                 className="bg-comic-yellow hover:bg-comic-gold text-stone-900 px-6 font-comic text-lg flex items-center justify-center border-l-2 border-stone-900 transition-colors"
-                type="submit"
+                type="button"
+                onClick={() => {
+                  const input = document.querySelector('input[name="search"]');
+                  navigate(`/products?search=${encodeURIComponent(input.value)}`);
+                }}
               >
                 <i className="fa-solid fa-magnifying-glass mr-1 text-sm"></i>{" "}
                 TÌM KIẾM!
               </button>
-            </form>
+            </div>
           </div>
 
           {/* User & Cart Actions */}
