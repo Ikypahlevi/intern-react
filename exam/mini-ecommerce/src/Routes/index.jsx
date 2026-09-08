@@ -16,6 +16,7 @@ import Checkout from "../Pages/checkout/Checkout";
 import CheckoutSuccess from "../Pages/checkout/CheckoutSuccess";
 import Profile from "../Pages/profile/Profile";
 import Contact from "../Pages/contact/Contact";
+import About from "../Pages/about/About";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "product/:id",
         element: <ProductDetail />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
       {
         path: "contact",
