@@ -7,7 +7,8 @@ export default function AdminPopButton({
   icon,
   className = "",
   title = "",
-  type = "button"
+  type = "button",
+  form
 }) {
   const getBgColor = () => {
     switch(variant) {
@@ -25,6 +26,7 @@ export default function AdminPopButton({
   return (
     <button 
       type={type}
+      form={form}
       onClick={onClick}
       title={title}
       className={`px-4 py-2 border-[2px] border-black font-comic text-sm uppercase font-black flex items-center justify-center gap-2 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] transition-all ${getBgColor()} ${className}`}

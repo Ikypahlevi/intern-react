@@ -1,5 +1,5 @@
-import React from "react";
 import { formatCurrency } from "../../../../Utils/format";
+import AdminBadge from "../../../../Components/admin/AdminBadge";
 import { useUpdateUser, useDeleteUser } from "../../../../Services/queries/useUsers";
 import { toast } from "sonner";
 
@@ -177,13 +177,9 @@ export default function UsersTable({ users, columnFilters, setColumnFilters, onE
                 </td>
                 <td className="p-3 border-r-[2px] border-black">
                   {user.role === 'admin' ? (
-                    <span className="px-2 py-0.5 bg-black text-white border-[2px] border-black font-comic text-xs uppercase font-black shadow-[2px_2px_0px_#000] inline-block">
-                      Quản Trị Viên
-                    </span>
+                    <AdminBadge variant="dark" text="Quản Trị Viên" />
                   ) : (
-                    <span className="px-2 py-0.5 bg-gray-200 text-black border-[2px] border-black font-comic text-xs uppercase font-black shadow-[2px_2px_0px_#000] inline-block">
-                      Khách Hàng
-                    </span>
+                    <AdminBadge variant="light" text="Khách Hàng" />
                   )}
                 </td>
                 <td className="p-3 border-r-[2px] border-black text-right">
@@ -192,13 +188,9 @@ export default function UsersTable({ users, columnFilters, setColumnFilters, onE
                 </td>
                 <td className="p-3 border-r-[2px] border-black text-center">
                   {user.status === 'locked' ? (
-                    <span className="px-2 py-0.5 bg-red-600 text-white border-[2px] border-black font-comic text-[10px] uppercase font-black shadow-[2px_2px_0px_#000] inline-block">
-                      <i className="fa-solid fa-lock mr-1"></i> Bị Khóa
-                    </span>
+                    <AdminBadge variant="danger" icon="fa-solid fa-lock" text="Bị Khóa" />
                   ) : (
-                    <span className="px-2 py-0.5 bg-green-500 text-black border-[2px] border-black font-comic text-[10px] uppercase font-black shadow-[2px_2px_0px_#000] inline-block">
-                      Hoạt Động
-                    </span>
+                    <AdminBadge variant="success" text="Hoạt Động" />
                   )}
                 </td>
                 <td className="p-3 text-center">

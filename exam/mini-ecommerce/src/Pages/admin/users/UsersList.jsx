@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useGetUsers } from "../../../Services/queries/useUsers";
 import { useGetOrders } from "../../../Services/queries/useOrders";
 
-import UsersHeader from "./_components/UsersHeader";
+import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
 import UsersActionBar from "./_components/UsersActionBar";
 import UsersTable from "./_components/UsersTable";
 import UserDrawer from "./_components/UserDrawer";
@@ -83,6 +83,29 @@ export default function UsersList() {
     locked: usersWithSpend.filter(u => u.status === "locked").length,
   };
 
+  const kpiBlocks = useMemo(() => {
+    return [
+      {
+        label: "Tổng thành viên",
+        value: usersWithSpend.length,
+        trend: "up",
+        trendLabel: "+12 tuần này",
+        trendColor: "text-green-600",
+        bgColor: "bg-gray-100",
+        labelColor: "text-gray-600"
+      },
+      {
+        label: "Đang Online",
+        value: "142",
+        trend: "live",
+        trendLabel: "Trực tiếp",
+        trendColor: "text-black",
+        bgColor: "bg-comic-yellow",
+        labelColor: "text-black"
+      }
+    ];
+  }, [usersWithSpend.length]);
+
   const handleOpenDrawer = (user = null) => {
     setEditingUser(user);
     setIsDrawerOpen(true);
@@ -99,7 +122,21 @@ export default function UsersList() {
 
   return (
     <div className="flex flex-col w-full pb-12 gap-8 max-w-7xl mx-auto font-bubble">
-      <UsersHeader totalUsers={usersWithSpend.length} />
+      <AdminPageHeader 
+        title="QUẢN LÝ TÀI KHOẢN & PHÂN QUYỀN"
+        description="Quản lý tổng quan dữ liệu thành viên, cấp phép vai trò và khóa tài khoản vi phạm."
+        iconClass="fa-users"
+        versionTag="Otaku Core v2.4"
+        kpiBlocks={kpiBlocks}
+      >
+        <div className="relative bg-red-600 text-white px-6 py-2 border-[3px] border-black shadow-[3px_3px_0px_#000] flex items-center justify-between overflow-hidden mb-4">
+          <div className="flex items-center gap-2">
+            <i className="fa-solid fa-bullhorn text-comic-yellow text-xl"></i>
+            <span className="font-comic text-sm uppercase tracking-wider font-bold">Lưu ý quản trị:</span>
+            <span className="font-bold text-sm">Chỉ Admin mới có quyền truy cập và thay đổi cấu hình tài khoản.</span>
+          </div>
+        </div>
+      </AdminPageHeader>
       
       <div className="flex flex-col gap-4">
         <UsersActionBar 

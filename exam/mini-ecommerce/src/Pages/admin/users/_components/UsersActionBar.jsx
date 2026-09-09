@@ -1,5 +1,6 @@
 import React from "react";
 import { useUpdateUser } from "../../../../Services/queries/useUsers";
+import AdminPopButton from "../../../../Components/admin/AdminPopButton";
 
 export default function UsersActionBar({ 
   activeTab, 
@@ -30,21 +31,21 @@ export default function UsersActionBar({
       {/* Top Action Buttons */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-gray-50 border-[3px] border-black p-3 shadow-[3px_3px_0px_#000]">
         <div className="flex flex-wrap items-center gap-2">
-          <button 
+          <AdminPopButton 
+            variant="primary" 
+            icon="fa-solid fa-user-plus" 
             onClick={onOpenAdd}
-            className="bg-comic-yellow text-black px-4 py-2 border-[2px] border-black font-comic text-sm uppercase font-black flex items-center gap-2 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] transition-all"
           >
-            <i className="fa-solid fa-user-plus text-lg"></i>
-            <span>Thêm Tài Khoản Mới ⚡</span>
-          </button>
+            Thêm Tài Khoản Mới ⚡
+          </AdminPopButton>
           
-          <button 
+          <AdminPopButton 
+            variant="danger" 
+            icon="fa-solid fa-lock" 
             onClick={handleBulkLock}
-            className="bg-red-600 text-white px-3 py-2 border-[2px] border-black font-comic text-sm uppercase font-black flex items-center gap-2 shadow-[2px_2px_0px_#000] hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[3px_3px_0px_#000] transition-all"
           >
-            <i className="fa-solid fa-lock text-lg"></i>
-            <span>Khóa Đã Chọn</span>
-          </button>
+            Khóa Đã Chọn
+          </AdminPopButton>
         </div>
 
         {/* Quick Search Global Filter */}
