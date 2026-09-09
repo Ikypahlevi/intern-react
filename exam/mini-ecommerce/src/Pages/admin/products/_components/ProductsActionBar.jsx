@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useRef } from "react";
 import AdminPopButton from "../../../../Components/admin/AdminPopButton";
 
-export default function ProductsActionBar({ onOpenAdd, onResetFilters }) {
-  const handleImport = () => {
-    alert("Hiển thị Modal Import danh sách Excel...");
+export default function ProductsActionBar({ onOpenAdd, onResetFilters, onExport, onImport }) {
+  const fileInputRef = useRef(null);
+
+  const handleImportClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
-  const handleExport = () => {
-    alert("Đang tạo file Excel báo cáo toàn bộ SKU...");
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && onImport) {
+      onImport(file);
+    }
+    // Reset file input so the same file can be selected again
+    e.target.value = null;
   };
 
   return (
     <div className="bg-white border-[3px] border-black p-3 shadow-[5px_5px_0px_#000] flex flex-wrap items-center justify-between gap-4">
       {/* Left Action Group */}
       <div className="flex flex-wrap items-center gap-3">
+        <input 
+          type="file" 
+          accept=".xlsx, .xls, .csv" 
+          className="hidden" 
+          ref={fileInputRef}
+          onChange={handleFileChange}
+        />
         <AdminPopButton 
           variant="info" 
           icon="fa-solid fa-upload" 
-          onClick={handleImport}
+          onClick={handleImportClick}
         >
           IMPORT DANH SÁCH (EXCEL/CSV)
         </AdminPopButton>
@@ -36,7 +52,7 @@ export default function ProductsActionBar({ onOpenAdd, onResetFilters }) {
         <AdminPopButton 
           variant="secondary" 
           icon="fa-solid fa-download" 
-          onClick={handleExport}
+          onClick={onExport}
         >
           XUẤT EXCEL
         </AdminPopButton>

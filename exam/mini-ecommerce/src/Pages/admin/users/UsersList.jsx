@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useGetUsers } from "../../../Services/queries/useUsers";
+import { useGetUsers, useCreateUser } from "../../../Services/queries/useUsers";
 import { useGetOrders } from "../../../Services/queries/useOrders";
 import { ROLES, STATUS } from "../../../Constants";
 import { useDebounce } from "../../../Utils/useDebounce";
@@ -9,10 +9,13 @@ import AdminPagination from "../../../Components/admin/AdminPagination";
 import UsersActionBar from "./_components/UsersActionBar";
 import UsersTable from "./_components/UsersTable";
 import UserDrawer from "./_components/UserDrawer";
+import { exportToExcel, importFromExcel } from "../../../Utils/excel";
+import { toast } from "sonner";
 
 export default function UsersList() {
   const { data: users = [], isLoading: loadingUsers } = useGetUsers();
   const { data: orders = [], isLoading: loadingOrders } = useGetOrders();
+  const createMutation = useCreateUser();
 
   const [activeTab, setActiveTab] = useState("all"); // 'all', 'customers', 'admins', 'locked'
   const [globalSearch, setGlobalSearch] = useState("");
@@ -140,6 +143,53 @@ export default function UsersList() {
     });
   };
 
+  const handleExport = () => {
+    const exportData = filteredUsers.map(u => ({
+      "ID": u.id,
+      "Tên Đầy Đủ": u.name,
+      "Nickname": u.nickname || "",
+      "Email": u.email,
+      "Số Điện Thoại": u.phone || "",
+      "Vai Trò": u.role,
+      "Trạng Thái": u.status,
+      "Tổng Chi Tiêu (VNĐ)": u.totalSpend || 0,
+      "Số Đơn Hàng": u.orderCount || 0
+    }));
+    exportToExcel(exportData, `Danh_Sach_Tai_Khoan_${new Date().toISOString().slice(0,10)}`);
+    toast.success("Xuất file Excel thành công!");
+  };
+
+  const handleImport = async (file) => {
+    try {
+      const data = await importFromExcel(file);
+      if (!data || data.length === 0) {
+        toast.error("File Excel không có dữ liệu!");
+        return;
+      }
+      
+      const importToast = toast.loading(`Đang nhập ${data.length} tài khoản...`);
+      
+      for (const row of data) {
+        const user = {
+          name: row["Tên Đầy Đủ"] || "Thành viên mới",
+          nickname: row["Nickname"] || "",
+          email: row["Email"] || `user_${Date.now()}@example.com`,
+          phone: String(row["Số Điện Thoại"] || ""),
+          password: "password123", // Mật khẩu mặc định cho người dùng import
+          role: row["Vai Trò"] === "admin" ? "admin" : "customer",
+          status: row["Trạng Thái"] === "locked" ? "locked" : "active",
+          avatar: ""
+        };
+        await createMutation.mutateAsync(user);
+      }
+      
+      toast.dismiss(importToast);
+      toast.success(`Đã nhập thành công ${data.length} tài khoản!`);
+    } catch (error) {
+      toast.error("Lỗi khi đọc file Excel! Hãy đảm bảo format đúng.");
+    }
+  };
+
   if (loadingUsers || loadingOrders) {
     return <div className="font-comic text-2xl animate-pulse p-10">ĐANG TẢI DỮ LIỆU...</div>;
   }
@@ -172,6 +222,8 @@ export default function UsersList() {
           onOpenAdd={() => handleOpenDrawer(null)}
           onResetFilters={handleResetFilters}
           filteredUsers={filteredUsers}
+          onExport={handleExport}
+          onImport={handleImport}
         />
         
         <UsersTable 

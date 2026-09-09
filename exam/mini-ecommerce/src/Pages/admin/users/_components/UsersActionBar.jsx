@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useUpdateUser } from "../../../../Services/queries/useUsers";
 import AdminPopButton from "../../../../Components/admin/AdminPopButton";
 
@@ -9,14 +9,33 @@ export default function UsersActionBar({
   globalSearch,
   setGlobalSearch,
   onOpenAdd,
-  filteredUsers
+  filteredUsers,
+  onResetFilters,
+  onExport,
+  onImport
 }) {
   const updateUserMutation = useUpdateUser();
+  const fileInputRef = useRef(null);
 
   const handleBulkLock = () => {
     // In a real app, we'd have a selected IDs array state.
     // For this mockup, we'll just alert that bulk lock is available via checkboxes.
     alert("Tính năng khóa hàng loạt sẽ kích hoạt khi chọn các checkbox dưới bảng.");
+  };
+
+  const handleImportClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && onImport) {
+      onImport(file);
+    }
+    // Reset file input so the same file can be selected again
+    e.target.value = null;
   };
 
   const tabs = [
@@ -31,6 +50,20 @@ export default function UsersActionBar({
       {/* Top Action Buttons */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-gray-50 border-[3px] border-black p-3 shadow-[3px_3px_0px_#000]">
         <div className="flex flex-wrap items-center gap-2">
+          <input 
+            type="file" 
+            accept=".xlsx, .xls, .csv" 
+            className="hidden" 
+            ref={fileInputRef}
+            onChange={handleFileChange}
+          />
+          <AdminPopButton 
+            variant="info" 
+            icon="fa-solid fa-upload" 
+            onClick={handleImportClick}
+          >
+            Import
+          </AdminPopButton>
           <AdminPopButton 
             variant="primary" 
             icon="fa-solid fa-user-plus" 
@@ -46,6 +79,19 @@ export default function UsersActionBar({
           >
             Khóa Đã Chọn
           </AdminPopButton>
+          <AdminPopButton 
+            variant="secondary" 
+            icon="fa-solid fa-download" 
+            onClick={onExport}
+          >
+            Xuất Excel
+          </AdminPopButton>
+          <button 
+            onClick={onResetFilters}
+            className="flex items-center gap-1 text-gray-500 hover:text-red-600 font-bold text-sm transition-colors ml-2"
+          >
+            <i className="fa-solid fa-filter-circle-xmark"></i>
+          </button>
         </div>
 
         {/* Quick Search Global Filter */}

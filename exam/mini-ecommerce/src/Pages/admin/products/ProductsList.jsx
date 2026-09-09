@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { useGetProducts } from "../../../Services/queries/useProducts";
+import { useGetProducts, useCreateProduct } from "../../../Services/queries/useProducts";
 import { STATUS } from "../../../Constants";
 import { useDebounce } from "../../../Utils/useDebounce";
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
@@ -7,9 +7,12 @@ import AdminPagination from "../../../Components/admin/AdminPagination";
 import ProductsActionBar from "./_components/ProductsActionBar";
 import ProductsTable from "./_components/ProductsTable";
 import ProductDrawer from "./_components/ProductDrawer";
+import { exportToExcel, importFromExcel } from "../../../Utils/excel";
+import { toast } from "sonner";
 
 export default function ProductsList() {
   const { data: products = [], isLoading } = useGetProducts();
+  const createMutation = useCreateProduct();
 
   const [columnFilters, setColumnFilters] = useState({
     sku: "",
@@ -112,6 +115,58 @@ export default function ProductsList() {
     setIsDrawerOpen(true);
   };
 
+  const handleExport = () => {
+    const exportData = filteredProducts.map(p => ({
+      "Mã SKU": p.sku || p.id,
+      "Tên Sản Phẩm": p.name,
+      "Định Dạng": p.format,
+      "Thể Loại": p.category,
+      "Tác Giả": p.author,
+      "Nhà Xuất Bản": p.publisher,
+      "Giá Gốc (VNĐ)": p.originalPrice,
+      "Giá Bán (VNĐ)": p.price,
+      "Số Lượng Tồn": p.stock,
+      "Trạng Thái": p.status
+    }));
+    exportToExcel(exportData, `Danh_Sach_San_Pham_${new Date().toISOString().slice(0,10)}`);
+    toast.success("Xuất file Excel thành công!");
+  };
+
+  const handleImport = async (file) => {
+    try {
+      const data = await importFromExcel(file);
+      if (!data || data.length === 0) {
+        toast.error("File Excel không có dữ liệu!");
+        return;
+      }
+      
+      const importToast = toast.loading(`Đang nhập ${data.length} sản phẩm...`);
+      
+      // Xử lý từng dòng để format lại đúng schema
+      for (const row of data) {
+        const product = {
+          sku: row["Mã SKU"] || `SKU-${Math.floor(Math.random() * 10000)}`,
+          name: row["Tên Sản Phẩm"] || "Sản phẩm không tên",
+          format: row["Định Dạng"] || "Bản Tiêu Chuẩn",
+          category: row["Thể Loại"] || "Khác",
+          author: row["Tác Giả"] || "",
+          publisher: row["Nhà Xuất Bản"] || "Khác",
+          originalPrice: Number(row["Giá Gốc (VNĐ)"]) || 0,
+          price: Number(row["Giá Bán (VNĐ)"]) || 0,
+          stock: Number(row["Số Lượng Tồn"]) || 0,
+          status: row["Trạng Thái"] || "active",
+          image: ""
+        };
+        await createMutation.mutateAsync(product);
+      }
+      
+      toast.dismiss(importToast);
+      toast.success(`Đã nhập thành công ${data.length} sản phẩm!`);
+    } catch (error) {
+      toast.error("Lỗi khi đọc file Excel! Hãy đảm bảo format đúng.");
+    }
+  };
+
   if (isLoading) {
     return <div className="font-comic text-2xl animate-pulse p-10">ĐANG TẢI DỮ LIỆU KHO...</div>;
   }
@@ -130,6 +185,8 @@ export default function ProductsList() {
         <ProductsActionBar 
           onOpenAdd={() => handleOpenDrawer(null)}
           onResetFilters={handleResetFilters}
+          onExport={handleExport}
+          onImport={handleImport}
         />
         
         <ProductsTable 
