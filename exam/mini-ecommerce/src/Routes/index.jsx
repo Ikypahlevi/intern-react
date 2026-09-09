@@ -18,6 +18,7 @@ import Profile from "../Pages/profile/Profile";
 import Contact from "../Pages/contact/Contact";
 import About from "../Pages/about/About";
 import Overview from "../Pages/admin/overview/Overview";
+import UsersList from "../Pages/admin/users/UsersList";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
           {
             path: "overview",
             element: <Overview />
+          },
+          {
+            path: "users",
+            element: <UsersList />
           }
         ]
       }
