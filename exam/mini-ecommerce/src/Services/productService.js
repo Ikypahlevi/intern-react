@@ -15,7 +15,7 @@ export const productService = {
   },
   // Cập nhật (Dành cho admin)
   update: async (id, data) => {
-    return await api.put(`/products/${id}`, data);
+    return await api.patch(`/products/${id}`, data);
   },
   // Xóa (Dành cho admin)
   delete: async (id) => {

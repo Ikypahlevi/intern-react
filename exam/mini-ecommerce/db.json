@@ -68,8 +68,12 @@
       "description": "One Piece là bộ manga dành cho lứa tuổi thiếu niên của tác giả Oda Eiichiro. Câu chuyện kể về Monkey D. Luffy, một chàng trai trẻ tuổi, lấy cảm hứng từ thần tượng thuở nhỏ của mình là vị thuyền trưởng hải tặc khét tiếng Shanks \"Tóc Đỏ\", bắt đầu cuộc hành trình từ Biển Đông đi tìm kho báu huyền thoại One Piece để trở thành Vua Hải Tặc.",
       "publisher": "NXB Kim Đồng",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 124
+      "status": "active",
+      "sold": 124,
+      "originalPrice": 29000,
+      "sku": "MANGA-001",
+      "author": "Eiichiro Oda",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "2",
@@ -81,8 +85,12 @@
       "description": "Câu chuyện kể về hành trình đầy gian khổ của Kamado Tanjirou sau khi gia đình bị quỷ tàn sát dã man và em gái Nezuko bị hóa thành quỷ. Nhằm tìm cách chữa trị cho em gái và trả thù cho gia đình, Tanjirou gia nhập Sát Quỷ Đoàn, cùng đồng đội vượt qua vô vàn trận chiến ác liệt để tiêu diệt chúa quỷ Muzan.",
       "publisher": "Amak Books",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 129
+      "status": "active",
+      "sold": 129,
+      "originalPrice": 23000,
+      "sku": "MANGA-002",
+      "author": "Koyoharu Gotouge",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "3",
@@ -94,8 +102,12 @@
       "description": "Ở một thế giới xuất hiện các \"Cổng\" kết nối với hầm ngục đầy quái vật, Sung Jin-Woo là một thợ săn hạng E cực kỳ yếu ớt. Sau khi suýt chết trong một hầm ngục kép bí ẩn, anh nhận được một hệ thống thăng cấp độc nhất vô nhị. Từ thợ săn yếu nhất nhân loại, Jin-Woo bắt đầu hành trình vượt qua giới hạn để trở thành thợ săn mạnh nhất thế giới.",
       "publisher": "NXB Kim Đồng",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 504
+      "status": "active",
+      "sold": 504,
+      "originalPrice": 23000,
+      "sku": "MANGA-003",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "4",
@@ -107,8 +119,12 @@
       "description": "Câu chuyện diễn ra sau khi tổ đội anh hùng tiêu diệt Ma Vương và mang lại hòa bình cho thế giới. Pháp sư yêu tinh Frieren, người có tuổi thọ hàng ngàn năm, bắt đầu một cuộc hành trình mới để tìm hiểu về trái tim con người và trân trọng những khoảnh khắc ngắn ngủi bên những người bạn đồng hành mới sau sự ra đi của anh hùng Himmel.",
       "publisher": "Wings Books",
       "rating": 4,
-      "status": "Có sẵn (In stock)",
-      "sold": 277
+      "status": "active",
+      "sold": 277,
+      "originalPrice": 23000,
+      "sku": "MANGA-004",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "5",
@@ -120,8 +136,12 @@
       "description": "Tác phẩm kể về cuộc đời của cậu bé Nobita hậu đậu, yếu ớt và chú mèo máy Doraemon đến từ thế kỷ 22 với chiếc túi thần kỳ chứa vô vàn bảo bối tương lai. Những câu chuyện thường ngày xoay quanh tình bạn, trường học và những cuộc phiêu lưu giả tưởng đầy ý nghĩa của nhóm bạn Nobita, Shizuka, Gian, Suneo.",
       "publisher": "Hikari Light Novel",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 153
+      "status": "active",
+      "sold": 153,
+      "originalPrice": 23000,
+      "sku": "MANGA-005",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "6",
@@ -133,8 +153,12 @@
       "description": "Hajime Nagumo cùng lớp học của mình bị triệu hồi đến một thế giới khác làm anh hùng cứu thế. Trong khi các bạn cùng lớp sở hữu những chỉ số sức mạnh phi thường, Hajime chỉ có nghề nghiệp \"Biến đổi sư\" vô dụng. Sau khi bị phản bội và rơi xuống vực sâu ngục tối, anh phải tự lực cánh sinh để sinh tồn và vươn lên đỉnh cao sức mạnh.",
       "publisher": "NXB Kim Đồng",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 435
+      "status": "active",
+      "sold": 435,
+      "originalPrice": 29000,
+      "sku": "MANGA-006",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "7",
@@ -146,8 +170,12 @@
       "description": "Kudo Shinichi - thám tử học sinh tài ba - bị Tổ chức Áo đen bí ẩn ép uống thuốc độc APTX 4869 khiến cơ thể bị teo nhỏ thành một đứa trẻ tiểu học. Dưới thân phận mới là Edogawa Conan, cậu chuyển đến sống cùng ông bố của bạn gái Ran - thám tử khờ khạo Mori Kogoro - âm thầm phá giải các vụ án hóc búa để truy tìm manh mối về tổ chức hắc ám.",
       "publisher": "Wings Books",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 87
+      "status": "active",
+      "sold": 87,
+      "originalPrice": 29000,
+      "sku": "MANGA-007",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "8",
@@ -159,8 +187,12 @@
       "description": "Eren Yeager cùng nhân loại sống yên bình sau những bức tường khổng lồ để bảo vệ mình khỏi các Titan ăn thịt người khát máu. Sau khi bức tường ngoài cùng sụp đổ và mẹ bị Titan sát hại dã man, Eren thề sẽ hủy diệt toàn bộ Titan trên thế giới, gia nhập Trinh sát binh đoàn để tìm kiếm sự thật đen tối đằng sau thế giới này.",
       "publisher": "NXB Trẻ",
       "rating": 4,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 215
+      "status": "active",
+      "sold": 215,
+      "originalPrice": 29000,
+      "sku": "MANGA-008",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "9",
@@ -172,8 +204,12 @@
       "description": "Bị trục xuất khỏi Hội đồng Bộ lạc và phản bội bởi chính đồng đội, Light rơi xuống tầng sâu nhất của Vực Thẳm - ngục tối chết chóc chỉ có quái vật ngự trị. Để tồn tại, anh kích hoạt kỹ năng duy nhất của mình: Gacha Vô hạn. Tưởng chừng vô dụng, Gacha lần này lại triệu hồi Mei, một chiến binh cấp 9999 tuyệt sắc trong bộ dạng hầu gái. Ba năm trôi qua, Light đã xây dựng một vương quốc hùng mạnh nơi vực tối, với đội quân mỹ nhân cấp 9999 trung thành tuyệt đối. Giờ đây, với sức mạnh của một chúa tể tối thượng, anh bắt đầu hành trình trả thù, trừng phạt từng kẻ đã phản bội mình.",
       "publisher": "IPM",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 460
+      "status": "active",
+      "sold": 460,
+      "originalPrice": 35000,
+      "sku": "MANGA-009",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "10",
@@ -185,8 +221,12 @@
       "description": "Itadori Yuji là một học sinh trung học bình thường nhưng có thể chất phi thường. Để cứu bạn bè khỏi các nguyền hồn độc ác, cậu đã nuốt ngón tay của Vua Nguyền Hồn Ryomen Sukuna và bị dính lời nguyền. Yuji gia nhập Trường Chuyên chú thuật Tokyo dưới sự dẫn dắt của chú thuật sư mạnh nhất Gojo Satoru để truy tìm và thanh tẩy toàn bộ ngón tay của Sukuna.",
       "publisher": "Wings Books",
       "rating": 3,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 194
+      "status": "active",
+      "sold": 194,
+      "originalPrice": 29000,
+      "sku": "MANGA-010",
+      "author": "Gege Akutami",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "11",
@@ -198,8 +238,12 @@
       "description": "Ở Nhật Bản, quốc gia có tỷ lệ quái vật Kaiju xuất hiện cao nhất thế giới, Kafka Hibino luôn ước mơ gia nhập Lực lượng Phòng vệ để chiến đấu bảo vệ t�� quốc. Sau một tai nạn bất ngờ khiến cơ thể bị biến đổi thành một Kaiju dạng người có sức mạnh hủy diệt, Kafka phải che giấu thân phận dưới mật danh Kaiju Số 8 để tiếp tục theo đuổi ước mơ.",
       "publisher": "IPM",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 431
+      "status": "active",
+      "sold": 431,
+      "originalPrice": 35000,
+      "sku": "MANGA-011",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "12",
@@ -211,8 +255,12 @@
       "description": "Kiyotaka Ayanokoji nhập học vào Trường Trung học Cấp cao Tokyo Metropolitan Advanced Nurturing - nơi nổi tiếng với tỷ lệ đỗ đại học và có việc làm 100%. Trường chia học sinh thành các lớp từ A đến D dựa trên thực lực. Ayanokoji cố tình giấu kín năng lực thiên tài của mình ở lớp D, cùng những người bạn vượt qua những bài thi sinh tồn đầy mưu mẹo của nhà trường.",
       "publisher": "NXB Trẻ",
       "rating": 3,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 538
+      "status": "active",
+      "sold": 538,
+      "originalPrice": 29000,
+      "sku": "MANGA-012",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "13",
@@ -224,8 +272,12 @@
       "description": "Năm 2022, game thực tế ảo MMORPG Sword Art Online ra mắt. 10.000 người chơi bị mắc kẹt trong game, không thể đăng xuất, và nếu chết trong game sẽ chết ngoài đời thật. Kirito, một game thủ solo cô độc, phải chiến đấu xuyên qua 100 tầng của tòa tháp Aincrad để giải phóng tất cả người chơi.",
       "publisher": "NXB Kim Đồng",
       "rating": 3,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 209
+      "status": "active",
+      "sold": 209,
+      "originalPrice": 29000,
+      "sku": "MANGA-013",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "14",
@@ -237,8 +289,12 @@
       "description": "Rimuru Tempest nguyên là một nhân viên văn phòng 37 tuổi bị sát hại dã man trên đường phố và được chuyển sinh sang thế giới ma thuật giả tưởng dưới hình dạng một chú Slime siêu cấp dễ thương. Nhờ sở hữu hai kỹ năng bá đạo là Đại Hiền Triết và Kẻ Săn Mồi, Rimuru nhanh chóng kết bạn với rồng bão tố Veldora, thành lập quốc gia liên minh ma thú Jura Tempest hùng mạnh.",
       "publisher": "Hikari Light Novel",
       "rating": 4,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 275
+      "status": "active",
+      "sold": 275,
+      "originalPrice": 35000,
+      "sku": "MANGA-014",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "15",
@@ -250,8 +306,12 @@
       "description": "Machio Hiraku qua đời vì bạo bệnh ở tuổi 39. Cậu được Thượng Đế ban cho cơ hội hồi sinh ở một thế giới khác với cơ thể khỏe mạnh và một \"Nông cụ vạn năng\". Hiraku quyết định chọn một cuộc sống nông dân thanh bình sâu trong khu rừng tử thần, khai hoang ruộng đất, chăn nuôi gia súc và dần xây dựng nên một ngôi làng thịnh vượng đầy ắp tiếng cười.",
       "publisher": "IPM",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 391
+      "status": "active",
+      "sold": 391,
+      "originalPrice": 29000,
+      "sku": "MANGA-015",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "16",
@@ -263,8 +323,12 @@
       "description": "Leon là một nhân viên văn phòng Nhật Bản đột tử và được chuyển sinh vào thế giới của một trò chơi Otome game giả tưởng khắc nghiệt, nơi phụ nữ nắm quyền lực tối cao và đàn ông chỉ là công cụ. Bằng cách sử dụng những kiến thức từ kiếp trước của mình, Leon quyết định sống một cuộc sống yên bình làm nhân vật quần chúng, nhưng vô tình bị cuốn vào những biến cố vĩ đại của vương quốc.",
       "publisher": "NXB Trẻ",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 317
+      "status": "active",
+      "sold": 317,
+      "originalPrice": 23000,
+      "sku": "MANGA-016",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "17",
@@ -276,8 +340,12 @@
       "description": "Vương Lệnh là một thiên tài tu chân tu luyện đến cảnh giới tối cao Tiên Vương từ khi còn nhỏ. Nhằm sống một cuộc sống học đường yên bình như bao học sinh cấp ba bình thường khác, cậu phải sử dụng những lá bùa phong ấn để kìm hãm luồng sức mạnh hủy thiên diệt địa của mình. Thế nhưng, những rắc rối học đường liên tục kéo đến buộc cậu phải âm thầm ra tay giải cứu thế giới.",
       "publisher": "Hikari Light Novel",
       "rating": 5,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 526
+      "status": "active",
+      "sold": 526,
+      "originalPrice": 35000,
+      "sku": "MANGA-017",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "18",
@@ -289,8 +357,12 @@
       "description": "Câu chuyện kể về cuộc sống tàn tạ, làm việc 24/7 của lão Quỷ Vương gian ác và thuộc hạ của lão sau khi bị các dũng sĩ đá đít tới một thế giới khác - Trái Đất Ừ thì đọc đến đó thôi là hết muốn coi chứ gì, còn nữa Được sống một cuộc sống ăn mày yên bình thì không nói gì, nhưng cái lũ từ bên thế giới cũ cứ lần lượt đến phá Trái đất, thế là biệt đội Quỷ Vương - Osin của Quỷ Vương - Tsundere Dũng Sĩ phải ngăn chúng lại.",
       "publisher": "NXB Kim Đồng",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 208
+      "status": "active",
+      "sold": 208,
+      "originalPrice": 29000,
+      "sku": "MANGA-018",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "38",
@@ -302,8 +374,12 @@
       "description": "Hành trình trưởng thành của Uzumaki Naruto, một cậu bé mang trong mình Cửu Vĩ Hồ Ly bị mọi người xa lánh nhưng không bao giờ từ bỏ ước mơ trở thành Hokage vĩ đại nhất để được công nhận. Một tượng đài Shounen về ý chí, tình bạn và sự nỗ lực không ngừng nghỉ.",
       "publisher": "Amak Books",
       "rating": 3,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 148
+      "status": "active",
+      "sold": 148,
+      "originalPrice": 29000,
+      "sku": "MANGA-038",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "39",
@@ -315,8 +391,12 @@
       "description": "Siêu phẩm hành động huyền thoại gắn liền với tuổi thơ của vô số độc giả. Hành trình phiêu lưu tìm kiếm 7 viên ngọc rồng, vượt qua giới hạn sức mạnh, bảo vệ Trái Đất và vũ trụ khỏi tay những ác nhân tàn bạo của Son Goku và đồng đội.",
       "publisher": "IPM",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 522
+      "status": "active",
+      "sold": 522,
+      "originalPrice": 29000,
+      "sku": "MANGA-039",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "40",
@@ -328,8 +408,12 @@
       "description": "Ichigo Kurosaki, một học sinh trung học có khả năng nhìn thấy linh hồn, bất ngờ nhận được sức mạnh từ một Shinigami (Tử thần) tên Rukia. Anh dấn thân vào cuộc chiến vô tận để bảo vệ thế giới loài người và Linh giới khỏi các thế lực tà ác.",
       "publisher": "IPM",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 53
+      "status": "active",
+      "sold": 53,
+      "originalPrice": 29000,
+      "sku": "MANGA-040",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "41",
@@ -341,8 +425,12 @@
       "description": "Câu chuyện đầy máu me, bạo lực nhưng vô cùng cuốn hút về Denji - một thiếu niên nghèo khổ vô tình sáp nhập với ác quỷ cưa máy Pochita. Cậu gia nhập tổ chức thợ săn quỷ cộng đồng để tìm kiếm cuộc sống bình dị với ba bữa ăn mỗi ngày và một mái ấm.",
       "publisher": "IPM",
       "rating": 3,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 528
+      "status": "active",
+      "sold": 528,
+      "originalPrice": 29000,
+      "sku": "MANGA-041",
+      "author": "Tatsuki Fujimoto",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "42",
@@ -354,8 +442,12 @@
       "description": "Takemichi Hanagaki, một chàng trai thất bại ở độ tuổi 26, vô tình sở hữu năng lực du hành thời gian trở về thời cấp 2. Cậu quyết tâm thâm nhập vào băng đảng Tokyo Manji tàn bạo để cứu lấy mối tình đầu của mình khỏi cái chết bi thảm ở tương lai.",
       "publisher": "NXB Trẻ",
       "rating": 5,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 163
+      "status": "active",
+      "sold": 163,
+      "originalPrice": 29000,
+      "sku": "MANGA-042",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "43",
@@ -367,8 +459,12 @@
       "description": "Trong một thế giới nơi 80% dân số đều sở hữu siêu năng lực (Kosei), Izuku Midoriya sinh ra lại là kẻ vô năng. Dù vậy, cậu chưa bao giờ từ bỏ ước mơ trở thành siêu anh hùng số 1. Cuộc đời cậu bước sang trang mới khi gặp gỡ thần tượng All Might.",
       "publisher": "Wings Books",
       "rating": 3,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 499
+      "status": "active",
+      "sold": 499,
+      "originalPrice": 29000,
+      "sku": "MANGA-043",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "44",
@@ -380,8 +476,12 @@
       "description": "Cuộc phiêu lưu kỳ thú của Gon Freecss trong hành trình thi tuyển Hunter để tìm người cha mất tích. Hệ thống sức mạnh Niệm (Nen) đỉnh cao, những trận chiến hack não và thế giới vô cùng tàn nhẫn, sâu sắc tạo nên sức hút khó cưỡng của siêu phẩm này.",
       "publisher": "Wings Books",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 195
+      "status": "active",
+      "sold": 195,
+      "originalPrice": 29000,
+      "sku": "MANGA-044",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "45",
@@ -393,8 +493,12 @@
       "description": "Momo Ayase (tin vào ma quỷ) và Okarun (tin vào người ngoài hành tinh) vô tình kích hoạt cả hai thế lực siêu nhiên này. Một tác phẩm cực kỳ điên rồ, hành động mãn nhãn với nét vẽ sáng tạo không giới hạn, phá vỡ mọi quy chuẩn của manga truyền thống.",
       "publisher": "IPM",
       "rating": 4,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 540
+      "status": "active",
+      "sold": 540,
+      "originalPrice": 29000,
+      "sku": "MANGA-045",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "46",
@@ -406,8 +510,12 @@
       "description": "Hai anh em Edward và Alphonse Elric phải trả giá đắt sau khi sử dụng thuật giả kim cấm kỵ để hồi sinh người mẹ quá cố. Cuộc phiêu lưu tìm kiếm Hòn Đá Triết Gia để khôi phục cơ thể dần lôi kéo họ vào một âm mưu diệt vong đen tối cấp quốc gia.",
       "publisher": "Hikari Light Novel",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 261
+      "status": "active",
+      "sold": 261,
+      "originalPrice": 29000,
+      "sku": "MANGA-046",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "47",
@@ -419,8 +527,12 @@
       "description": "Bối cảnh Edo bị người ngoài hành tinh (Amanto) xâm lược. Samurai Sakata Gintoki cùng hai nhân viên lập ra Tiệm Vạn Năng chuyên nhận làm mọi việc. Một bộ phim tấu hài cực lầy lội, phá vỡ bức tường thứ 4, nhưng khi vào mạch truyện chính lại vô cùng bi tráng và đẫm máu.",
       "publisher": "NXB Kim Đồng",
       "rating": 5,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 257
+      "status": "active",
+      "sold": 257,
+      "originalPrice": 29000,
+      "sku": "MANGA-047",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "48",
@@ -432,8 +544,12 @@
       "description": "Một gã NEET thất bại 34 tuổi chết trong vụ tai nạn giao thông và chuyển sinh thành Rudeus Greyrat ở thế giới phép thuật. Cậu quyết tâm làm lại cuộc đời, học hỏi pháp thuật, chu du thế giới và sống một cuộc đời không hối tiếc. Tác phẩm tiên phong của thể loại Isekai.",
       "publisher": "Wings Books",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 260
+      "status": "active",
+      "sold": 260,
+      "originalPrice": 29000,
+      "sku": "MANGA-048",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "49",
@@ -445,8 +561,12 @@
       "description": "Natsuki Subaru vô tình bị triệu hồi đến thế giới kỳ ảo. Cậu không có sức mạnh bá đạo nào ngoại trừ năng lực 'Trở về từ cõi chết' (Return by Death). Subaru phải trải qua vô vàn cái chết đau đớn, tuyệt vọng để bảo vệ Emilia và những người cậu yêu thương.",
       "publisher": "Amak Books",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 406
+      "status": "active",
+      "sold": 406,
+      "originalPrice": 29000,
+      "sku": "MANGA-049",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "50",
@@ -458,8 +578,12 @@
       "description": "Momonga, một game thủ kỳ cựu bị kẹt lại trong trò chơi thực tế ảo với hình dáng của một Undead Đại Pháp Sư tên Ainz Ooal Gown. Với sức mạnh vô song cùng sự trung thành tuyệt đối của các thuộc hạ tại Lăng mộ Nazarick, anh bắt đầu hành trình chinh phục thế giới mới.",
       "publisher": "NXB Kim Đồng",
       "rating": 4,
-      "status": "Có sẵn (In stock)",
-      "sold": 128
+      "status": "active",
+      "sold": 128,
+      "originalPrice": 29000,
+      "sku": "MANGA-050",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "51",
@@ -471,8 +595,12 @@
       "description": "Kazuma chết lãng xẹt sau khi cố cứu một cô gái. Cậu được nữ thần Aqua trao cơ hội chuyển sinh và quyết định kéo theo cô nàng phế vật này làm bạn đồng hành. Một câu chuyện Isekai tấu hài đỉnh cao với tổ đội gồm những thành viên lập dị, vô tri nhất từng có.",
       "publisher": "NXB Trẻ",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 196
+      "status": "active",
+      "sold": 196,
+      "originalPrice": 29000,
+      "sku": "MANGA-051",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "52",
@@ -484,8 +612,12 @@
       "description": "Cid Kagenou có ước mơ trở thành 'kẻ giật dây trong bóng tối'. Chuyển sinh sang dị giới, cậu lập ra tổ chức Shadow Garden để chống lại Giáo phái Diabolos (vốn do cậu tự bịa ra). Oái oăm thay, mọi thứ cậu bịa ra đều là sự thật! Câu chuyện tấu hài nhưng hành động bao ngầu.",
       "publisher": "NXB Trẻ",
       "rating": 4,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 348
+      "status": "active",
+      "sold": 348,
+      "originalPrice": 29000,
+      "sku": "MANGA-052",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "53",
@@ -497,8 +629,12 @@
       "description": "Hai anh em Sora và Shiro, những game thủ huyền thoại mang tên [Blank], bị triệu hồi đến thế giới Disboard - nơi mọi xung đột đều được giải quyết bằng các trò chơi. Họ sử dụng trí tuệ vượt trội của mình để đưa nhân loại thoát khỏi bờ vực tuyệt vọng.",
       "publisher": "Hikari Light Novel",
       "rating": 5,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 197
+      "status": "active",
+      "sold": 197,
+      "originalPrice": 29000,
+      "sku": "MANGA-053",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "54",
@@ -510,8 +646,12 @@
       "description": "Naofumi bị triệu hồi làm Khiên Hiệp Sĩ để bảo vệ dị giới. Tuy nhiên, anh lập tức bị phản bội, vu oan và bị xa lánh. Từ đáy vực thẳm của sự tuyệt vọng, Naofumi mua cô bé á nhân Raphtalia và bắt đầu hành trình rửa hận, chứng minh giá trị bản thân.",
       "publisher": "NXB Trẻ",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 69
+      "status": "active",
+      "sold": 69,
+      "originalPrice": 29000,
+      "sku": "MANGA-054",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "55",
@@ -523,8 +663,12 @@
       "description": "Câu chuyện u tối và tàn bạo về Guts, Hắc Kiếm Sĩ mang trên mình thanh đại kiếm diệt quỷ và một dấu ấn nguyền rủa. Anh băng qua những vùng đất hoang tàn đầy quỷ dữ để trả thù người bạn cũ Griffith. Một Masterpiece tuyệt đối của Dark Fantasy.",
       "publisher": "Wings Books",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 235
+      "status": "active",
+      "sold": 235,
+      "originalPrice": 29000,
+      "sku": "MANGA-055",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "56",
@@ -536,8 +680,12 @@
       "description": "Dưới thời hoàng kim của người Viking, cậu bé Thorfinn gia nhập băng lính đánh thuê của Askeladd - kẻ đã giết cha cậu, nhằm chờ ngày báo thù. Câu chuyện phát triển thành một thiên sử thi về sự chuộc lỗi, ý nghĩa của hòa bình và vùng đất hứa Vinland.",
       "publisher": "Hikari Light Novel",
       "rating": 3,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 359
+      "status": "active",
+      "sold": 359,
+      "originalPrice": 29000,
+      "sku": "MANGA-056",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "57",
@@ -549,8 +697,12 @@
       "description": "Yagami Light nhặt được cuốn sổ tử thần có khả năng giết bất cứ ai bị ghi tên vào đó. Cậu quyết định tạo ra một thế giới không có tội phạm dưới cái tên 'Kira'. Cuộc đấu trí vô tiền khoáng hậu giữa Kira và vị thám tử thiên tài L bắt đầu.",
       "publisher": "NXB Trẻ",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 534
+      "status": "active",
+      "sold": 534,
+      "originalPrice": 29000,
+      "sku": "MANGA-057",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "58",
@@ -562,8 +714,12 @@
       "description": "Mảng tối tàn khốc của ngành công nghiệp giải trí (Showbiz) Nhật Bản được lột trần thông qua câu chuyện tái sinh của vị bác sĩ thành con trai của thần tượng mà anh hâm mộ - Hoshino Ai. Kịch tính, đen tối và mang đến những góc nhìn cực kỳ bất ngờ.",
       "publisher": "NXB Kim Đồng",
       "rating": 3,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 520
+      "status": "active",
+      "sold": 520,
+      "originalPrice": 29000,
+      "sku": "MANGA-058",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "59",
@@ -575,8 +731,12 @@
       "description": "Bác sĩ tài năng Kenzo Tenma cứu sống một cậu bé tên Johan thay vì thị trưởng. Nhiều năm sau, cậu bé ấy trở thành một ác quỷ giết người hàng loạt máu lạnh. Tenma phải từ bỏ mọi thứ để truy lùng và chuộc lại lỗi lầm do chính bàn tay mình tạo ra.",
       "publisher": "Wings Books",
       "rating": 3,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 395
+      "status": "active",
+      "sold": 395,
+      "originalPrice": 29000,
+      "sku": "MANGA-059",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "60",
@@ -588,8 +748,12 @@
       "description": "Kaneki Ken, một sinh viên bình thường, vô tình bị biến thành Bán Ghoul (Ngạ Quỷ) sau một cuộc phẫu thuật cấy ghép nội tạng. Bị kẹt giữa thế giới con người và thế giới tàn khốc của Ngạ Quỷ, cậu phải chiến đấu để bảo vệ những người mình yêu thương.",
       "publisher": "NXB Trẻ",
       "rating": 3,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 72
+      "status": "active",
+      "sold": 72,
+      "originalPrice": 29000,
+      "sku": "MANGA-060",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "61",
@@ -601,8 +765,12 @@
       "description": "Được chuyển thể từ tiểu thuyết Musashi, siêu phẩm này tái hiện lại cuộc đời của Miyamoto Musashi - một trong những kiếm khách vĩ đại nhất lịch sử Nhật Bản. Tác phẩm tập trung vào sự giác ngộ triết lý, nhân sinh quan và võ đạo qua những trận đấu sinh tử.",
       "publisher": "Wings Books",
       "rating": 5,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 142
+      "status": "active",
+      "sold": 142,
+      "originalPrice": 29000,
+      "sku": "MANGA-061",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "62",
@@ -614,8 +782,12 @@
       "description": "Để hoàn thành nhiệm vụ tuyệt mật bảo vệ hòa bình thế giới, siêu điệp viên Twilight buộc phải tạo ra một gia đình giả. Anh vô tình nhận nuôi cô bé thấu thị Anya và kết hôn với Yor - một sát thủ khét tiếng. Cả gia đình che giấu thân phận và tạo ra muôn vàn tình huống dở khóc dở cười.",
       "publisher": "NXB Kim Đồng",
       "rating": 3,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 365
+      "status": "active",
+      "sold": 365,
+      "originalPrice": 29000,
+      "sku": "MANGA-062",
+      "author": "Tatsuya Endo",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "63",
@@ -627,8 +799,12 @@
       "description": "Hội trưởng Miyuki Shirogane và Hội phó Kaguya Shinomiya đều có tình cảm với nhau nhưng lòng kiêu hãnh quá lớn khiến họ tin rằng 'Kẻ nào tỏ tình trước là kẻ thua cuộc!'. Cả hai bày mưu tính kế mỗi ngày để ép đối phương phải mở lời trước.",
       "publisher": "Hikari Light Novel",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 241
+      "status": "active",
+      "sold": 241,
+      "originalPrice": 29000,
+      "sku": "MANGA-063",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "64",
@@ -640,8 +816,12 @@
       "description": "Arima Kousei, một thần đồng piano mất đi khả năng nghe thấy tiếng đàn sau cú sốc mất mẹ. Cuộc đời cậu lấy lại màu sắc khi gặp gỡ Kaori Miyazono, một nữ nhạc công violin tràn đầy sức sống với một bí mật đau lòng được cất giấu dưới nụ cười.",
       "publisher": "NXB Kim Đồng",
       "rating": 4,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 71
+      "status": "active",
+      "sold": 71,
+      "originalPrice": 29000,
+      "sku": "MANGA-064",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "65",
@@ -653,8 +833,12 @@
       "description": "Hitori Goto là một cô bé mắc chứng lo âu xã hội nghiêm trọng nhưng lại có niềm đam mê mãnh liệt với guitar. Cô gia nhập Kessoku Band và bắt đầu hành trình chiến đấu với sự tự ti của bản thân để tỏa sáng trên sân khấu nhạc Rock.",
       "publisher": "NXB Trẻ",
       "rating": 4,
-      "status": "Có sẵn (In stock)",
-      "sold": 460
+      "status": "active",
+      "sold": 460,
+      "originalPrice": 29000,
+      "sku": "MANGA-065",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "66",
@@ -666,8 +850,12 @@
       "description": "Kyouko Hori, một nữ sinh nổi tiếng nhưng khi về nhà lại rất đỗi bình dị, và Izumi Miyamura, cậu bạn trầm tính nhưng mang trên mình đầy hình xăm và khuyên tai. Hai con người trái ngược tìm thấy sự đồng điệu và tạo nên một chuyện tình học đường siêu ngọt ngào.",
       "publisher": "Wings Books",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 451
+      "status": "active",
+      "sold": 451,
+      "originalPrice": 29000,
+      "sku": "MANGA-066",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "67",
@@ -679,8 +867,12 @@
       "description": "Kyotaro Ichikawa mắc hội chứng tuổi teen 'ảo tưởng' rằng mình là kẻ sát nhân đáng sợ và mục tiêu là hoa khôi Anna Yamada. Nhưng cậu nhận ra cô nàng lại là một người siêu ngốc nghếch, tham ăn. Một bộ Rom-com chữa lành với sự tiến triển tình cảm cực tinh tế.",
       "publisher": "Amak Books",
       "rating": 3,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 218
+      "status": "active",
+      "sold": 218,
+      "originalPrice": 29000,
+      "sku": "MANGA-067",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "68",
@@ -692,8 +884,12 @@
       "description": "Fuutarou Uesugi, một học sinh nghèo xuất sắc, nhận công việc gia sư cho 5 chị em sinh năm nhà Nakano. Cả 5 người đều ghét học và có tính cách hoàn toàn khác biệt. Cuộc đấu trí để bắt họ học và những cảm xúc dần nảy nở tạo nên siêu phẩm Harem đỉnh cao.",
       "publisher": "Wings Books",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 418
+      "status": "active",
+      "sold": 418,
+      "originalPrice": 29000,
+      "sku": "MANGA-068",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "69",
@@ -705,8 +901,12 @@
       "description": "Sau thất bại tại World Cup, Nhật Bản tạo ra Blue Lock - một cơ sở đào tạo khắc nghiệt nhằm tìm kiếm một tiền đạo 'Ích Kỷ' nhất thế giới. Các cầu thủ phải loại bỏ nhau để leo lên đỉnh cao. Một bộ anime thể thao phá vỡ hoàn toàn mọi quan niệm về 'Tinh thần đồng đội'.",
       "publisher": "Wings Books",
       "rating": 4,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 110
+      "status": "active",
+      "sold": 110,
+      "originalPrice": 29000,
+      "sku": "MANGA-069",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "70",
@@ -718,8 +918,12 @@
       "description": "Hinata Shouyou, một cậu bé với thân hình nhỏ bé nhưng mang ước mơ bay cao trên sân bóng chuyền. Gia nhập trường Karasuno, cậu gặp lại đối thủ cũ Kageyama Tobio. Cả hai tạo ra sự kết hợp hoàn hảo, cùng đồng đội từng bước chinh phục giải quốc gia.",
       "publisher": "NXB Kim Đồng",
       "rating": 5,
-      "status": "Bản giới hạn (Limited Edition)",
-      "sold": 284
+      "status": "active",
+      "sold": 284,
+      "originalPrice": 29000,
+      "sku": "MANGA-070",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "71",
@@ -731,8 +935,12 @@
       "description": "Sakuragi Hanamichi, một tên côn đồ tóc đỏ tham gia đội bóng rổ trường Shohoku chỉ để gây ấn tượng với một cô gái. Nhưng dần dần, nhiệt huyết, những giọt mồ hôi và tình yêu thực sự với trái bóng cam đã biến cậu thành một tuyển thủ đáng gờm.",
       "publisher": "Hikari Light Novel",
       "rating": 3,
-      "status": "Có sẵn (In stock)",
-      "sold": 273
+      "status": "active",
+      "sold": 273,
+      "originalPrice": 29000,
+      "sku": "MANGA-071",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "id": "72",
@@ -744,8 +952,12 @@
       "description": "Kuroko Tetsuya, thành viên thứ sáu mờ nhạt của 'Thế Hệ Kỳ Tích', kết hợp cùng Kagami Taiga tại trường Seirin. Họ quyết tâm đánh bại những người đồng đội cũ - những kẻ đang sở hữu tài năng bóng rổ ở cấp độ quái vật.",
       "publisher": "NXB Trẻ",
       "rating": 5,
-      "status": "Đặt trước (Pre-order)",
-      "sold": 326
+      "status": "active",
+      "sold": 326,
+      "originalPrice": 29000,
+      "sku": "MANGA-072",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     },
     {
       "createdAt": "2026-09-06T08:09:28.784Z",
@@ -759,8 +971,12 @@
       "description": "Kenichi là một game thủ hạng nặng vô tình bị cuốn vào dị giới (Isekai) ở chế độ Địa ngục cực khó. Bắt đầu từ đáy xã hội với tư cách một Nông nô, anh phải cày cuốc không ngừng nghỉ để thăng cấp và thay đổi vận mệnh của mình. Ở Season 2 này, những thử thách mới sẽ còn kinh khủng hơn rất nhiều!",
       "publisher": "Amak Books",
       "rating": 5,
-      "status": "Có sẵn (In stock)",
-      "sold": 172
+      "status": "active",
+      "sold": 172,
+      "originalPrice": 40000,
+      "sku": "MANGA-073",
+      "author": "Chưa cập nhật",
+      "format": "Bản Tiêu Chuẩn"
     }
   ],
   "orders": [

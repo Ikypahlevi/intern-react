@@ -6,7 +6,7 @@ export const useGetUsers = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const response = await api.get("/users");
-      return response.data;
+      return response;
     },
   });
 };
@@ -16,7 +16,7 @@ export const useCreateUser = () => {
   return useMutation({
     mutationFn: async (userData) => {
       const response = await api.post("/users", userData);
-      return response.data;
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
@@ -29,7 +29,7 @@ export const useUpdateUser = () => {
   return useMutation({
     mutationFn: async ({ id, ...data }) => {
       const response = await api.patch(`/users/${id}`, data);
-      return response.data;
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
@@ -42,7 +42,7 @@ export const useDeleteUser = () => {
   return useMutation({
     mutationFn: async (id) => {
       const response = await api.delete(`/users/${id}`);
-      return response.data;
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
