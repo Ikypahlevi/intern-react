@@ -5,6 +5,7 @@ import { formatCurrency } from "../../Utils/format";
 import { useAuthStore } from "../../Stores/authStore";
 import { useGetProducts } from "../../Services/queries/useProducts";
 import { useDebounce } from "../../Utils/useDebounce";
+import { ROLES } from "../../Constants";
 
 export default function Header() {
   const items = useCartStore((state) => state.items);
@@ -139,6 +140,17 @@ export default function Header() {
                     <Link to="/profile" className="hover:text-comic-red">
                       {user?.name || "Khách"}
                     </Link>
+                    {user?.role === ROLES.ADMIN && (
+                      <>
+                        <span className="mx-1">/</span>
+                        <Link
+                          to="/admin"
+                          className="text-blue-600 hover:underline"
+                        >
+                          QUẢN TRỊ
+                        </Link>
+                      </>
+                    )}
                     <span className="mx-1">/</span>
                     <button
                       onClick={logout}

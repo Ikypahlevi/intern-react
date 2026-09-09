@@ -56,7 +56,12 @@ export const useAuth = () => {
         name: user.name || "Khách",
       });
       toast.success(`Chào mừng trở lại, ${user.name || "Anh/Chị"}! 🎉`);
-      navigate("/");
+      
+      if (user.role === ROLES.ADMIN) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       toast.error("Lỗi kết nối máy chủ. Vui lòng thử lại!");
     }
