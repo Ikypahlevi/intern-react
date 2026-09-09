@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -21,8 +21,12 @@ const userSchema = z.object({
 export default function UserDrawer({ user, onClose }) {
   const createUserMutation = useCreateUser();
   const updateUserMutation = useUpdateUser();
+  const fileInputRef = useRef(null);
 
   const isEdit = !!user;
+
+  // State riêng cho avatar
+  const [avatarPreview, setAvatarPreview] = useState("");
 
   const {
     register,
@@ -54,6 +58,7 @@ export default function UserDrawer({ user, onClose }) {
         role: user.role || ROLES.CUSTOMER,
         status: user.status || STATUS.ACTIVE,
       });
+      setAvatarPreview(user.avatar || "");
     } else {
       reset({
         name: "",
@@ -64,6 +69,7 @@ export default function UserDrawer({ user, onClose }) {
         role: ROLES.CUSTOMER,
         status: STATUS.ACTIVE,
       });
+      setAvatarPreview("");
     }
   }, [user, reset]);
 
@@ -74,10 +80,57 @@ export default function UserDrawer({ user, onClose }) {
     setValue("password", pw, { shouldValidate: true });
   };
 
+  // Upload avatar file từ máy → Base64
+  const handleAvatarFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Vui lòng chọn file ảnh (JPG, PNG, WEBP...)");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Ảnh quá lớn! Vui lòng chọn ảnh nhỏ hơn 2MB.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setAvatarPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Kéo thả ảnh avatar
+  const handleAvatarDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Vui lòng kéo thả file ảnh!");
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Ảnh quá lớn! Vui lòng chọn ảnh nhỏ hơn 2MB.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setAvatarPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleClearAvatar = () => {
+    setAvatarPreview("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   const onSubmit = (data) => {
+    // Đính kèm avatar vào data trước khi lưu
+    const payload = { ...data, avatar: avatarPreview };
+
     if (isEdit) {
       updateUserMutation.mutate(
-        { id: user.id, ...data },
+        { id: user.id, ...payload },
         {
           onSuccess: () => {
             toast.success("Đã cập nhật thông tin tài khoản!");
@@ -87,7 +140,7 @@ export default function UserDrawer({ user, onClose }) {
       );
     } else {
       createUserMutation.mutate(
-        data,
+        payload,
         {
           onSuccess: () => {
             toast.success("Đã thêm tài khoản mới!");
@@ -98,9 +151,17 @@ export default function UserDrawer({ user, onClose }) {
     }
   };
 
+  // Lấy 2 chữ cái đầu để hiển thị khi chưa có avatar
+  const getInitials = (name) => {
+    if (!name) return "?";
+    const parts = name.trim().split(" ");
+    if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    return parts[0][0].toUpperCase();
+  };
+
   return (
     <AdminDrawer
-      isOpen={true} // Controlled by parent
+      isOpen={true}
       onClose={onClose}
       title={isEdit ? "CẬP NHẬT HỒ SƠ ✏️" : "THÊM TÀI KHOẢN MỚI ⚡"}
       subtitle="Cấu hình hồ sơ, quyền hạn và trạng thái"
@@ -117,7 +178,93 @@ export default function UserDrawer({ user, onClose }) {
       }
     >
       <form id="userForm" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-        
+
+        {/* ===== BLOCK 0: Avatar ===== */}
+        <div className="flex flex-col gap-3 bg-white p-4 border-[2px] border-black shadow-[3px_3px_0px_#000]">
+          <span className="font-comic text-sm text-black uppercase font-black flex items-center gap-2 border-b-2 border-black pb-2">
+            <i className="fa-solid fa-camera"></i> Ảnh Đại Diện
+          </span>
+
+          <div className="flex items-start gap-4">
+            {/* Avatar Preview — hình tròn kiểu manga */}
+            <div className="relative flex-shrink-0">
+              <div
+                className="w-24 h-24 border-[3px] border-black shadow-[4px_4px_0px_#000] overflow-hidden bg-comic-yellow flex items-center justify-center cursor-pointer"
+                style={{ borderRadius: "50%" }}
+                onClick={() => fileInputRef.current?.click()}
+                onDrop={handleAvatarDrop}
+                onDragOver={(e) => e.preventDefault()}
+                title="Click hoặc kéo thả ảnh vào đây"
+              >
+                {avatarPreview ? (
+                  <img
+                    src={avatarPreview}
+                    alt="Avatar"
+                    className="w-full h-full object-cover"
+                    onError={() => {
+                      setAvatarPreview("");
+                      toast.error("Không thể tải ảnh!");
+                    }}
+                  />
+                ) : (
+                  <span className="font-comic text-3xl font-black text-black select-none">
+                    {/* Nếu đang edit thì hiện chữ cái đầu tên, không thì hiện icon camera */}
+                    {isEdit ? getInitials(user?.name) : <i className="fa-solid fa-camera text-2xl opacity-50"></i>}
+                  </span>
+                )}
+              </div>
+              {/* Badge overlay "Thay ảnh" */}
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="absolute -bottom-1 -right-1 w-7 h-7 bg-black text-white border-[2px] border-white flex items-center justify-center hover:bg-comic-yellow hover:text-black transition-colors"
+                style={{ borderRadius: "50%" }}
+                title="Thay đổi ảnh"
+              >
+                <i className="fa-solid fa-pen text-[10px]"></i>
+              </button>
+            </div>
+
+            {/* Hướng dẫn + nút hành động */}
+            <div className="flex flex-col gap-2 flex-1">
+              <p className="font-bubble text-xs font-bold text-gray-500 uppercase">
+                Hỗ trợ JPG, PNG, WEBP — Tối đa 2MB
+              </p>
+              <p className="font-bubble text-xs font-bold text-gray-400">
+                Click vào avatar hoặc kéo & thả ảnh vào đó để thay đổi.
+              </p>
+              <div className="flex gap-2 mt-1">
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="px-3 py-1.5 bg-comic-yellow text-black border-[2px] border-black font-comic text-xs uppercase font-black shadow-[2px_2px_0px_#000] hover:brightness-95 transition-all flex items-center gap-1"
+                >
+                  <i className="fa-solid fa-upload"></i> Tải Lên
+                </button>
+                {avatarPreview && (
+                  <button
+                    type="button"
+                    onClick={handleClearAvatar}
+                    className="px-3 py-1.5 bg-red-100 text-red-600 border-[2px] border-red-400 font-comic text-xs uppercase font-black hover:bg-red-200 transition-colors flex items-center gap-1"
+                  >
+                    <i className="fa-solid fa-trash"></i> Xóa
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Input file ẩn */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleAvatarFileChange}
+            className="hidden"
+          />
+        </div>
+
+        {/* ===== BLOCK 1: Thông Tin Nhận Diện ===== */}
         <div className="flex flex-col gap-3 bg-white p-4 border-[2px] border-black shadow-[3px_3px_0px_#000]">
           <span className="font-comic text-sm text-black uppercase font-black flex items-center gap-2 border-b-2 border-black pb-2">
             <i className="fa-regular fa-id-card"></i> 1. Thông Tin Nhận Diện
@@ -125,7 +272,7 @@ export default function UserDrawer({ user, onClose }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Họ & Tên *</label>
-              <input 
+              <input
                 {...register("name")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="VD: Nguyễn Văn A"
@@ -135,7 +282,7 @@ export default function UserDrawer({ user, onClose }) {
             </div>
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Biệt Danh / Nickname</label>
-              <input 
+              <input
                 {...register("nickname")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="VD: @otaku_king"
@@ -145,6 +292,7 @@ export default function UserDrawer({ user, onClose }) {
           </div>
         </div>
 
+        {/* ===== BLOCK 2: Liên Hệ & Đăng Nhập ===== */}
         <div className="flex flex-col gap-3 bg-white p-4 border-[2px] border-black shadow-[3px_3px_0px_#000]">
           <span className="font-comic text-sm text-black uppercase font-black flex items-center gap-2 border-b-2 border-black pb-2">
             <i className="fa-regular fa-envelope"></i> 2. Liên Hệ & Đăng Nhập
@@ -152,7 +300,7 @@ export default function UserDrawer({ user, onClose }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Email *</label>
-              <input 
+              <input
                 {...register("email")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="user@swoomanga.vn"
@@ -162,7 +310,7 @@ export default function UserDrawer({ user, onClose }) {
             </div>
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Số Điện Thoại</label>
-              <input 
+              <input
                 {...register("phone")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="09xx.xxx.xxx"
@@ -170,19 +318,19 @@ export default function UserDrawer({ user, onClose }) {
               />
             </div>
           </div>
-          
+
           <div className="flex flex-col gap-1 mt-2">
             <div className="flex items-center justify-between">
               <label className="font-bubble font-bold text-sm text-black uppercase">Mật Khẩu *</label>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={handleGeneratePassword}
                 className="font-comic text-[10px] text-red-600 uppercase font-black hover:underline"
               >
                 Tạo ngẫu nhiên ⚡
               </button>
             </div>
-            <input 
+            <input
               {...register("password")}
               className="w-full p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
               type="text"
@@ -191,14 +339,15 @@ export default function UserDrawer({ user, onClose }) {
           </div>
         </div>
 
+        {/* ===== BLOCK 3: Phân Quyền ===== */}
         <div className="flex flex-col gap-3 bg-white p-4 border-[2px] border-black shadow-[3px_3px_0px_#000]">
           <span className="font-comic text-sm text-black uppercase font-black flex items-center gap-2 border-b-2 border-black pb-2">
             <i className="fa-solid fa-users-gear"></i> 3. Phân Quyền
           </span>
           <div className="flex flex-col gap-2 mt-2">
             <label className="p-3 border-[2px] border-black flex items-center gap-3 cursor-pointer hover:bg-gray-100 transition-colors">
-              <input 
-                type="radio" 
+              <input
+                type="radio"
                 value={ROLES.ADMIN}
                 {...register("role")}
                 className="w-4 h-4 accent-black"
@@ -208,10 +357,9 @@ export default function UserDrawer({ user, onClose }) {
                 <span className="font-bubble text-xs font-bold text-gray-600">Toàn quyền kiểm soát cửa hàng, xem báo cáo, quản lý sản phẩm và user.</span>
               </div>
             </label>
-
             <label className="p-3 border-[2px] border-black flex items-center gap-3 cursor-pointer hover:bg-gray-100 transition-colors">
-              <input 
-                type="radio" 
+              <input
+                type="radio"
                 value={ROLES.CUSTOMER}
                 {...register("role")}
                 className="w-4 h-4 accent-black"
@@ -224,24 +372,24 @@ export default function UserDrawer({ user, onClose }) {
           </div>
         </div>
 
+        {/* ===== BLOCK 4: Trạng Thái ===== */}
         <div className="flex flex-col gap-3 bg-white p-4 border-[2px] border-black shadow-[3px_3px_0px_#000]">
           <span className="font-comic text-sm text-black uppercase font-black flex items-center gap-2 border-b-2 border-black pb-2">
             <i className="fa-solid fa-toggle-on"></i> 4. Trạng Thái
           </span>
           <div className="flex gap-4 mt-2">
             <label className="flex-1 p-2 border-[2px] border-black flex items-center justify-center gap-2 cursor-pointer hover:bg-green-50 transition-colors">
-              <input 
-                type="radio" 
+              <input
+                type="radio"
                 value={STATUS.ACTIVE}
                 {...register("status")}
                 className="w-4 h-4 accent-green-600"
               />
               <span className="font-comic text-sm text-black uppercase font-black">Hoạt Động</span>
             </label>
-
             <label className="flex-1 p-2 border-[2px] border-black flex items-center justify-center gap-2 cursor-pointer hover:bg-red-50 transition-colors">
-              <input 
-                type="radio" 
+              <input
+                type="radio"
                 value={STATUS.LOCKED}
                 {...register("status")}
                 className="w-4 h-4 accent-red-600"
@@ -250,6 +398,7 @@ export default function UserDrawer({ user, onClose }) {
             </label>
           </div>
         </div>
+
       </form>
     </AdminDrawer>
   );
