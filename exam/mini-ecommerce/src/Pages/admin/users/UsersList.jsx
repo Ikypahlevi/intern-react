@@ -1,8 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { useGetUsers } from "../../../Services/queries/useUsers";
 import { useGetOrders } from "../../../Services/queries/useOrders";
+import { ROLES, STATUS } from "../../../Constants";
+import { useDebounce } from "../../../Utils/useDebounce";
 
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
+import AdminPagination from "../../../Components/admin/AdminPagination";
 import UsersActionBar from "./_components/UsersActionBar";
 import UsersTable from "./_components/UsersTable";
 import UserDrawer from "./_components/UserDrawer";
@@ -13,6 +16,8 @@ export default function UsersList() {
 
   const [activeTab, setActiveTab] = useState("all"); // 'all', 'customers', 'admins', 'locked'
   const [globalSearch, setGlobalSearch] = useState("");
+  const debouncedGlobalSearch = useDebounce(globalSearch, 500);
+
   const [columnFilters, setColumnFilters] = useState({
     id: "",
     name: "",
@@ -21,6 +26,8 @@ export default function UsersList() {
     status: "ALL",
     spend: "ALL",
   });
+  
+  const debouncedFilters = useDebounce(columnFilters, 500);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
@@ -38,49 +45,49 @@ export default function UsersList() {
   const filteredUsers = useMemo(() => {
     return usersWithSpend.filter((user) => {
       // 1. Tab filter
-      if (activeTab === "customers" && user.role !== "customer") return false;
-      if (activeTab === "admins" && user.role !== "admin") return false;
-      if (activeTab === "locked" && user.status !== "locked") return false;
+      if (activeTab === "customers" && user.role !== ROLES.CUSTOMER) return false;
+      if (activeTab === "admins" && user.role !== ROLES.ADMIN) return false;
+      if (activeTab === "locked" && user.status !== STATUS.LOCKED) return false;
 
       // 2. Global search
-      if (globalSearch) {
-        const searchStr = globalSearch.toLowerCase();
+      if (debouncedGlobalSearch) {
+        const searchStr = debouncedGlobalSearch.toLowerCase();
         const fullText = `${user.id} ${user.name} ${user.email} ${user.phone || ""} ${user.nickname || ""}`.toLowerCase();
         if (!fullText.includes(searchStr)) return false;
       }
 
       // 3. Column filters
-      if (columnFilters.id && !user.id.toString().includes(columnFilters.id)) return false;
+      if (debouncedFilters.id && !user.id.toString().includes(debouncedFilters.id)) return false;
       
-      if (columnFilters.name) {
+      if (debouncedFilters.name) {
         const nameText = `${user.name} ${user.nickname || ""}`.toLowerCase();
-        if (!nameText.includes(columnFilters.name.toLowerCase())) return false;
+        if (!nameText.includes(debouncedFilters.name.toLowerCase())) return false;
       }
       
-      if (columnFilters.contact) {
+      if (debouncedFilters.contact) {
         const contactText = `${user.email} ${user.phone || ""}`.toLowerCase();
-        if (!contactText.includes(columnFilters.contact.toLowerCase())) return false;
+        if (!contactText.includes(debouncedFilters.contact.toLowerCase())) return false;
       }
       
-      if (columnFilters.role !== "ALL" && user.role !== columnFilters.role) return false;
-      if (columnFilters.status !== "ALL" && user.status !== columnFilters.status) return false;
+      if (debouncedFilters.role !== "ALL" && user.role !== debouncedFilters.role) return false;
+      if (debouncedFilters.status !== "ALL" && user.status !== debouncedFilters.status) return false;
       
-      if (columnFilters.spend !== "ALL") {
-        if (columnFilters.spend === "TOP" && user.totalSpend < 10000000) return false;
-        if (columnFilters.spend === "MID" && (user.totalSpend < 5000000 || user.totalSpend >= 10000000)) return false;
-        if (columnFilters.spend === "LOW" && user.totalSpend >= 1000000) return false;
+      if (debouncedFilters.spend !== "ALL") {
+        if (debouncedFilters.spend === "TOP" && user.totalSpend < 10000000) return false;
+        if (debouncedFilters.spend === "MID" && (user.totalSpend < 5000000 || user.totalSpend >= 10000000)) return false;
+        if (debouncedFilters.spend === "LOW" && user.totalSpend >= 1000000) return false;
       }
 
       return true;
     });
-  }, [usersWithSpend, activeTab, globalSearch, columnFilters]);
+  }, [usersWithSpend, activeTab, debouncedGlobalSearch, debouncedFilters]);
 
   // Tab counts
   const tabCounts = {
     all: usersWithSpend.length,
-    customers: usersWithSpend.filter(u => u.role === "customer").length,
-    admins: usersWithSpend.filter(u => u.role === "admin").length,
-    locked: usersWithSpend.filter(u => u.status === "locked").length,
+    customers: usersWithSpend.filter(u => u.role === ROLES.CUSTOMER).length,
+    admins: usersWithSpend.filter(u => u.role === ROLES.ADMIN).length,
+    locked: usersWithSpend.filter(u => u.status === STATUS.LOCKED).length,
   };
 
   const kpiBlocks = useMemo(() => {
@@ -106,6 +113,16 @@ export default function UsersList() {
     ];
   }, [usersWithSpend.length]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab, debouncedGlobalSearch, debouncedFilters]);
+
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  const currentUsers = filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   const handleOpenDrawer = (user = null) => {
     setEditingUser(user);
     setIsDrawerOpen(true);
@@ -114,6 +131,13 @@ export default function UsersList() {
   const handleCloseDrawer = () => {
     setEditingUser(null);
     setIsDrawerOpen(false);
+  };
+
+  const handleResetFilters = () => {
+    setGlobalSearch("");
+    setColumnFilters({
+      id: "", name: "", contact: "", role: "ALL", status: "ALL", spend: "ALL"
+    });
   };
 
   if (loadingUsers || loadingOrders) {
@@ -146,14 +170,23 @@ export default function UsersList() {
           globalSearch={globalSearch}
           setGlobalSearch={setGlobalSearch}
           onOpenAdd={() => handleOpenDrawer(null)}
+          onResetFilters={handleResetFilters}
           filteredUsers={filteredUsers}
         />
         
         <UsersTable 
-          users={filteredUsers}
+          users={currentUsers}
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
           onEditUser={handleOpenDrawer}
+        />
+        
+        <AdminPagination 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          totalItems={filteredUsers.length}
+          itemsPerPage={itemsPerPage}
         />
       </div>
 

@@ -1,8 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { useCreateUser, useUpdateUser } from "../../../../Services/queries/useUsers";
 import { toast } from "sonner";
 import AdminDrawer from "../../../../Components/admin/AdminDrawer";
 import AdminPopButton from "../../../../Components/admin/AdminPopButton";
+import { ROLES, STATUS } from "../../../../Constants";
+
+const userSchema = z.object({
+  name: z.string().min(2, "Họ tên phải có ít nhất 2 ký tự"),
+  nickname: z.string().optional(),
+  email: z.string().email("Email không hợp lệ"),
+  phone: z.string().optional(),
+  password: z.string().min(6, "Mật khẩu phải từ 6 ký tự trở lên"),
+  role: z.enum([ROLES.ADMIN, ROLES.CUSTOMER]),
+  status: z.enum([STATUS.ACTIVE, STATUS.LOCKED]),
+});
 
 export default function UserDrawer({ user, onClose }) {
   const createUserMutation = useCreateUser();
@@ -10,62 +24,75 @@ export default function UserDrawer({ user, onClose }) {
 
   const isEdit = !!user;
 
-  const [formData, setFormData] = useState({
-    name: "",
-    nickname: "",
-    email: "",
-    phone: "",
-    password: "",
-    role: "customer",
-    status: "active",
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(userSchema),
+    defaultValues: {
+      name: "",
+      nickname: "",
+      email: "",
+      phone: "",
+      password: "",
+      role: ROLES.CUSTOMER,
+      status: STATUS.ACTIVE,
+    },
   });
 
   useEffect(() => {
     if (user) {
-      setFormData({
+      reset({
         name: user.name || "",
         nickname: user.nickname || "",
         email: user.email || "",
         phone: user.phone || "",
         password: user.password || "",
-        role: user.role || "customer",
-        status: user.status || "active",
+        role: user.role || ROLES.CUSTOMER,
+        status: user.status || STATUS.ACTIVE,
+      });
+    } else {
+      reset({
+        name: "",
+        nickname: "",
+        email: "",
+        phone: "",
+        password: "",
+        role: ROLES.CUSTOMER,
+        status: STATUS.ACTIVE,
       });
     }
-  }, [user]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  }, [user, reset]);
 
   const handleGeneratePassword = () => {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%';
     let pw = '';
     for (let i = 0; i < 12; i++) pw += chars.charAt(Math.floor(Math.random() * chars.length));
-    setFormData(prev => ({ ...prev, password: pw }));
+    setValue("password", pw, { shouldValidate: true });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
     if (isEdit) {
       updateUserMutation.mutate(
-        { id: user.id, ...formData },
+        { id: user.id, ...data },
         {
           onSuccess: () => {
             toast.success("Đã cập nhật thông tin tài khoản!");
             onClose();
-          }
+          },
         }
       );
     } else {
       createUserMutation.mutate(
-        formData,
+        data,
         {
           onSuccess: () => {
             toast.success("Đã thêm tài khoản mới!");
             onClose();
-          }
+          },
         }
       );
     }
@@ -89,7 +116,7 @@ export default function UserDrawer({ user, onClose }) {
         </>
       }
     >
-      <form id="userForm" onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <form id="userForm" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         
         <div className="flex flex-col gap-3 bg-white p-4 border-[2px] border-black shadow-[3px_3px_0px_#000]">
           <span className="font-comic text-sm text-black uppercase font-black flex items-center gap-2 border-b-2 border-black pb-2">
@@ -99,21 +126,17 @@ export default function UserDrawer({ user, onClose }) {
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Họ & Tên *</label>
               <input 
-                required
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
+                {...register("name")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="VD: Nguyễn Văn A"
                 type="text"
               />
+              {errors.name && <span className="text-red-500 text-xs font-bold">{errors.name.message}</span>}
             </div>
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Biệt Danh / Nickname</label>
               <input 
-                name="nickname"
-                value={formData.nickname}
-                onChange={handleChange}
+                {...register("nickname")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="VD: @otaku_king"
                 type="text"
@@ -130,21 +153,17 @@ export default function UserDrawer({ user, onClose }) {
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Email *</label>
               <input 
-                required
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
+                {...register("email")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="user@swoomanga.vn"
                 type="email"
               />
+              {errors.email && <span className="text-red-500 text-xs font-bold">{errors.email.message}</span>}
             </div>
             <div className="flex flex-col gap-1">
               <label className="font-bubble font-bold text-sm text-black uppercase">Số Điện Thoại</label>
               <input 
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
+                {...register("phone")}
                 className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
                 placeholder="09xx.xxx.xxx"
                 type="text"
@@ -164,13 +183,11 @@ export default function UserDrawer({ user, onClose }) {
               </button>
             </div>
             <input 
-              required
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
+              {...register("password")}
               className="w-full p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold"
               type="text"
             />
+            {errors.password && <span className="text-red-500 text-xs font-bold">{errors.password.message}</span>}
           </div>
         </div>
 
@@ -182,10 +199,8 @@ export default function UserDrawer({ user, onClose }) {
             <label className="p-3 border-[2px] border-black flex items-center gap-3 cursor-pointer hover:bg-gray-100 transition-colors">
               <input 
                 type="radio" 
-                name="role" 
-                value="admin" 
-                checked={formData.role === "admin"}
-                onChange={handleChange}
+                value={ROLES.ADMIN}
+                {...register("role")}
                 className="w-4 h-4 accent-black"
               />
               <div className="flex flex-col">
@@ -197,10 +212,8 @@ export default function UserDrawer({ user, onClose }) {
             <label className="p-3 border-[2px] border-black flex items-center gap-3 cursor-pointer hover:bg-gray-100 transition-colors">
               <input 
                 type="radio" 
-                name="role" 
-                value="customer" 
-                checked={formData.role === "customer"}
-                onChange={handleChange}
+                value={ROLES.CUSTOMER}
+                {...register("role")}
                 className="w-4 h-4 accent-black"
               />
               <div className="flex flex-col">
@@ -219,10 +232,8 @@ export default function UserDrawer({ user, onClose }) {
             <label className="flex-1 p-2 border-[2px] border-black flex items-center justify-center gap-2 cursor-pointer hover:bg-green-50 transition-colors">
               <input 
                 type="radio" 
-                name="status" 
-                value="active" 
-                checked={formData.status === "active"}
-                onChange={handleChange}
+                value={STATUS.ACTIVE}
+                {...register("status")}
                 className="w-4 h-4 accent-green-600"
               />
               <span className="font-comic text-sm text-black uppercase font-black">Hoạt Động</span>
@@ -231,10 +242,8 @@ export default function UserDrawer({ user, onClose }) {
             <label className="flex-1 p-2 border-[2px] border-black flex items-center justify-center gap-2 cursor-pointer hover:bg-red-50 transition-colors">
               <input 
                 type="radio" 
-                name="status" 
-                value="locked" 
-                checked={formData.status === "locked"}
-                onChange={handleChange}
+                value={STATUS.LOCKED}
+                {...register("status")}
                 className="w-4 h-4 accent-red-600"
               />
               <span className="font-comic text-sm text-red-600 uppercase font-black">Bị Khóa 🔒</span>

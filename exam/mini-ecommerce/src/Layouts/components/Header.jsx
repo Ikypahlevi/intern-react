@@ -4,6 +4,7 @@ import { useCartStore } from "../../Stores/cartStore";
 import { formatCurrency } from "../../Utils/format";
 import { useAuthStore } from "../../Stores/authStore";
 import { useGetProducts } from "../../Services/queries/useProducts";
+import { useDebounce } from "../../Utils/useDebounce";
 
 export default function Header() {
   const items = useCartStore((state) => state.items);
@@ -15,6 +16,9 @@ export default function Header() {
     0,
   );
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
   // Lấy dữ liệu sản phẩm để trích xuất danh mục
   const { data: products = [] } = useGetProducts();
 
@@ -23,11 +27,18 @@ export default function Header() {
     new Set(products.map((p) => p.category).filter(Boolean)),
   );
 
+  React.useEffect(() => {
+    // Only navigate if we are already on products page and typing
+    if (window.location.pathname === '/products') {
+      // Don't navigate if it's empty on first load, but do navigate if they cleared it
+      navigate(`/products?search=${encodeURIComponent(debouncedSearchTerm)}`, { replace: true });
+    }
+  }, [debouncedSearchTerm, navigate]);
+
   const handleSearch = (e) => {
     e.preventDefault();
-    const keyword = e.target.search.value;
-    if (keyword) {
-      navigate(`/products?search=${encodeURIComponent(keyword)}`);
+    if (searchTerm) {
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
     }
   };
 
@@ -88,22 +99,14 @@ export default function Header() {
                 className="flex-1 px-4 py-2 font-bubble text-sm text-stone-900 placeholder-stone-400 focus:outline-none border-none font-bold"
                 placeholder="Tìm manga, light novel, artbook..."
                 type="text"
+                value={searchTerm}
                 onChange={(e) => {
-                  const keyword = e.target.value;
-                  // If on products page, update URL instantly
-                  if (window.location.pathname === '/products') {
-                    navigate(`/products?search=${encodeURIComponent(keyword)}`);
-                  } else {
-                    // Show live results dropdown logic can be added here, or just redirect
-                    if (keyword.length > 2) {
-                      navigate(`/products?search=${encodeURIComponent(keyword)}`);
-                    }
-                  }
+                  setSearchTerm(e.target.value);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
-                    navigate(`/products?search=${encodeURIComponent(e.target.value)}`);
+                    navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
                   }
                 }}
               />
@@ -111,8 +114,7 @@ export default function Header() {
                 className="bg-comic-yellow hover:bg-comic-gold text-stone-900 px-6 font-comic text-lg flex items-center justify-center border-l-2 border-stone-900 transition-colors"
                 type="button"
                 onClick={() => {
-                  const input = document.querySelector('input[name="search"]');
-                  navigate(`/products?search=${encodeURIComponent(input.value)}`);
+                  navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
                 }}
               >
                 <i className="fa-solid fa-magnifying-glass mr-1 text-sm"></i>{" "}

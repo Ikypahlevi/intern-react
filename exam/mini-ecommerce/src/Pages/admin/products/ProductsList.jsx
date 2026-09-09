@@ -1,6 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { useGetProducts } from "../../../Services/queries/useProducts";
+import { STATUS } from "../../../Constants";
+import { useDebounce } from "../../../Utils/useDebounce";
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
+import AdminPagination from "../../../Components/admin/AdminPagination";
 import ProductsActionBar from "./_components/ProductsActionBar";
 import ProductsTable from "./_components/ProductsTable";
 import ProductDrawer from "./_components/ProductDrawer";
@@ -18,6 +21,8 @@ export default function ProductsList() {
     stock: "",
     status: "",
   });
+  
+  const debouncedFilters = useDebounce(columnFilters, 500);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -25,32 +30,32 @@ export default function ProductsList() {
   // Filtering Logic
   const filteredProducts = useMemo(() => {
     return products.filter(p => {
-      if (columnFilters.sku && !p.sku.toLowerCase().includes(columnFilters.sku.toLowerCase())) return false;
-      if (columnFilters.name && !p.name.toLowerCase().includes(columnFilters.name.toLowerCase())) return false;
-      if (columnFilters.genre && p.category !== columnFilters.genre) return false;
-      if (columnFilters.publisher && p.publisher !== columnFilters.publisher) return false;
+      if (debouncedFilters.sku && !p.sku.toLowerCase().includes(debouncedFilters.sku.toLowerCase())) return false;
+      if (debouncedFilters.name && !p.name.toLowerCase().includes(debouncedFilters.name.toLowerCase())) return false;
+      if (debouncedFilters.genre && p.category !== debouncedFilters.genre) return false;
+      if (debouncedFilters.publisher && p.publisher !== debouncedFilters.publisher) return false;
       
       const price = p.price || 0;
-      if (columnFilters.priceMin && price < Number(columnFilters.priceMin)) return false;
-      if (columnFilters.priceMax && price > Number(columnFilters.priceMax)) return false;
+      if (debouncedFilters.priceMin && price < Number(debouncedFilters.priceMin)) return false;
+      if (debouncedFilters.priceMax && price > Number(debouncedFilters.priceMax)) return false;
 
-      if (columnFilters.stock) {
+      if (debouncedFilters.stock) {
         const stock = p.stock || 0;
-        if (columnFilters.stock === 'instock' && stock < 50) return false;
-        if (columnFilters.stock === 'lowstock' && (stock >= 50 || stock === 0)) return false;
-        if (columnFilters.stock === 'outstock' && stock !== 0) return false;
+        if (debouncedFilters.stock === 'instock' && stock < 50) return false;
+        if (debouncedFilters.stock === 'lowstock' && (stock >= 50 || stock === 0)) return false;
+        if (debouncedFilters.stock === 'outstock' && stock !== 0) return false;
       }
 
-      if (columnFilters.status && p.status !== columnFilters.status) return false;
+      if (debouncedFilters.status && p.status !== debouncedFilters.status) return false;
 
       return true;
     });
-  }, [products, columnFilters]);
+  }, [products, debouncedFilters]);
 
   // KPI Calculations
   const kpiBlocks = useMemo(() => {
     const total = products.length;
-    const active = products.filter(p => p.status === 'active' || p.stock > 0).length;
+    const active = products.filter(p => p.status === STATUS.ACTIVE || p.stock > 0).length;
     const outOfStock = products.filter(p => p.stock === 0).length;
 
     return [
@@ -86,6 +91,16 @@ export default function ProductsList() {
     ];
   }, [products]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedFilters]);
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const currentProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   const handleResetFilters = () => {
     setColumnFilters({
       sku: "", name: "", genre: "", publisher: "", priceMin: "", priceMax: "", stock: "", status: ""
@@ -118,10 +133,18 @@ export default function ProductsList() {
         />
         
         <ProductsTable 
-          products={filteredProducts}
+          products={currentProducts}
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
           onEditProduct={handleOpenDrawer}
+        />
+        
+        <AdminPagination 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          totalItems={filteredProducts.length}
+          itemsPerPage={itemsPerPage}
         />
       </div>
 

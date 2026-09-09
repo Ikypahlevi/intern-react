@@ -1,23 +1,17 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import api from "../api";
+import { userService } from "../userService";
 
 export const useGetUsers = () => {
   return useQuery({
     queryKey: ["users"],
-    queryFn: async () => {
-      const response = await api.get("/users");
-      return response;
-    },
+    queryFn: userService.getAll,
   });
 };
 
 export const useCreateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (userData) => {
-      const response = await api.post("/users", userData);
-      return response;
-    },
+    mutationFn: userService.create,
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
     },
@@ -27,10 +21,7 @@ export const useCreateUser = () => {
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id, ...data }) => {
-      const response = await api.patch(`/users/${id}`, data);
-      return response;
-    },
+    mutationFn: ({ id, ...data }) => userService.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
     },
@@ -40,10 +31,7 @@ export const useUpdateUser = () => {
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (id) => {
-      const response = await api.delete(`/users/${id}`);
-      return response;
-    },
+    mutationFn: userService.delete,
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]);
     },
