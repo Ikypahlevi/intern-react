@@ -4,6 +4,7 @@ import { STATUS } from "../../../Constants";
 import { useDebounce } from "../../../Utils/useDebounce";
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
 import AdminPagination from "../../../Components/admin/AdminPagination";
+import ConfirmModal from "../../../Components/admin/ConfirmModal";
 import ProductsActionBar from "./_components/ProductsActionBar";
 import ProductsTable from "./_components/ProductsTable";
 import ProductDrawer from "./_components/ProductDrawer";
@@ -115,7 +116,9 @@ export default function ProductsList() {
     setIsDrawerOpen(true);
   };
 
-  const handleExport = () => {
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+
+  const handleConfirmExport = () => {
     const exportData = filteredProducts.map(p => ({
       "Mã SKU": p.sku || p.id,
       "Tên Sản Phẩm": p.name,
@@ -172,44 +175,57 @@ export default function ProductsList() {
   }
 
   return (
-    <div className="flex flex-col w-full pb-12 gap-8 max-w-[1400px] mx-auto font-bubble">
-      <AdminPageHeader 
-        title="QUẢN LÝ KHO TRUYỆN TRANH & SẢN PHẨM"
-        description={`Quản lý tập trung ${products.length} đầu truyện manga, light novel, boxset sưu tầm giới hạn.`}
-        iconClass="fa-book"
-        versionTag="INVENTORY CONTROL v2.4"
-        kpiBlocks={kpiBlocks}
-      />
-      
-      <div className="flex flex-col gap-4">
-        <ProductsActionBar 
-          onOpenAdd={() => handleOpenDrawer(null)}
-          onResetFilters={handleResetFilters}
-          onExport={handleExport}
-          onImport={handleImport}
+    <>
+      <div className="flex flex-col w-full pb-12 gap-8 max-w-[1400px] mx-auto font-bubble">
+        <AdminPageHeader 
+          title="QUẢN LÝ KHO TRUYỆN TRANH & SẢN PHẨM"
+          description={`Quản lý tập trung ${products.length} đầu truyện manga, light novel, boxset sưu tầm giới hạn.`}
+          iconClass="fa-book"
+          versionTag="INVENTORY CONTROL v2.4"
+          kpiBlocks={kpiBlocks}
         />
         
-        <ProductsTable 
-          products={currentProducts}
-          columnFilters={columnFilters}
-          setColumnFilters={setColumnFilters}
-          onEditProduct={handleOpenDrawer}
-        />
-        
-        <AdminPagination 
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-          totalItems={filteredProducts.length}
-          itemsPerPage={itemsPerPage}
+        <div className="flex flex-col gap-4">
+          <ProductsActionBar 
+            onOpenAdd={() => handleOpenDrawer(null)}
+            onResetFilters={handleResetFilters}
+            onExport={() => setIsExportModalOpen(true)}
+            onImport={handleImport}
+          />
+          
+          <ProductsTable 
+            products={currentProducts}
+            columnFilters={columnFilters}
+            setColumnFilters={setColumnFilters}
+            onEditProduct={handleOpenDrawer}
+          />
+          
+          <AdminPagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            totalItems={filteredProducts.length}
+            itemsPerPage={itemsPerPage}
+          />
+        </div>
+
+        <ProductDrawer 
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          product={editingProduct}
         />
       </div>
 
-      <ProductDrawer 
-        isOpen={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        product={editingProduct}
+      <ConfirmModal 
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        onConfirm={handleConfirmExport}
+        title="XÁC NHẬN XUẤT EXCEL"
+        message={`Hệ thống sẽ xuất danh sách gồm ${filteredProducts.length} sản phẩm ra file Excel. Bạn có muốn tiếp tục?`}
+        confirmText="XUẤT EXCEL"
+        cancelText="HỦY"
+        isDanger={false}
       />
-    </div>
+    </>
   );
 }

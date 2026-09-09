@@ -6,6 +6,7 @@ import { useDebounce } from "../../../Utils/useDebounce";
 
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
 import AdminPagination from "../../../Components/admin/AdminPagination";
+import ConfirmModal from "../../../Components/admin/ConfirmModal";
 import UsersActionBar from "./_components/UsersActionBar";
 import UsersTable from "./_components/UsersTable";
 import UserDrawer from "./_components/UserDrawer";
@@ -143,7 +144,9 @@ export default function UsersList() {
     });
   };
 
-  const handleExport = () => {
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
+
+  const handleConfirmExport = () => {
     const exportData = filteredUsers.map(u => ({
       "ID": u.id,
       "Tên Đầy Đủ": u.name,
@@ -157,6 +160,7 @@ export default function UsersList() {
     }));
     exportToExcel(exportData, `Danh_Sach_Tai_Khoan_${new Date().toISOString().slice(0,10)}`);
     toast.success("Xuất file Excel thành công!");
+    setIsExportModalOpen(false);
   };
 
   const handleImport = async (file) => {
@@ -195,59 +199,72 @@ export default function UsersList() {
   }
 
   return (
-    <div className="flex flex-col w-full pb-12 gap-8 max-w-7xl mx-auto font-bubble">
-      <AdminPageHeader 
-        title="QUẢN LÝ TÀI KHOẢN & PHÂN QUYỀN"
-        description="Quản lý tổng quan dữ liệu thành viên, cấp phép vai trò và khóa tài khoản vi phạm."
-        iconClass="fa-users"
-        versionTag="Otaku Core v2.4"
-        kpiBlocks={kpiBlocks}
-      >
-        <div className="relative bg-red-600 text-white px-6 py-2 border-[3px] border-black shadow-[3px_3px_0px_#000] flex items-center justify-between overflow-hidden mb-4">
-          <div className="flex items-center gap-2">
-            <i className="fa-solid fa-bullhorn text-comic-yellow text-xl"></i>
-            <span className="font-comic text-sm uppercase tracking-wider font-bold">Lưu ý quản trị:</span>
-            <span className="font-bold text-sm">Chỉ Admin mới có quyền truy cập và thay đổi cấu hình tài khoản.</span>
+    <>
+      <div className="flex flex-col w-full pb-12 gap-8 max-w-7xl mx-auto font-bubble">
+        <AdminPageHeader 
+          title="QUẢN LÝ TÀI KHOẢN & PHÂN QUYỀN"
+          description="Quản lý tổng quan dữ liệu thành viên, cấp phép vai trò và khóa tài khoản vi phạm."
+          iconClass="fa-users"
+          versionTag="Otaku Core v2.4"
+          kpiBlocks={kpiBlocks}
+        >
+          <div className="relative bg-red-600 text-white px-6 py-2 border-[3px] border-black shadow-[3px_3px_0px_#000] flex items-center justify-between overflow-hidden mb-4">
+            <div className="flex items-center gap-2">
+              <i className="fa-solid fa-bullhorn text-comic-yellow text-xl"></i>
+              <span className="font-comic text-sm uppercase tracking-wider font-bold">Lưu ý quản trị:</span>
+              <span className="font-bold text-sm">Chỉ Admin mới có quyền truy cập và thay đổi cấu hình tài khoản.</span>
+            </div>
           </div>
+        </AdminPageHeader>
+        
+        <div className="flex flex-col gap-4">
+          <UsersActionBar 
+            activeTab={activeTab} 
+            setActiveTab={setActiveTab}
+            tabCounts={tabCounts}
+            globalSearch={globalSearch}
+            setGlobalSearch={setGlobalSearch}
+            onOpenAdd={() => handleOpenDrawer(null)}
+            onResetFilters={handleResetFilters}
+            filteredUsers={filteredUsers}
+            onExport={() => setIsExportModalOpen(true)}
+            onImport={handleImport}
+          />
+          
+          <UsersTable 
+            users={currentUsers}
+            columnFilters={columnFilters}
+            setColumnFilters={setColumnFilters}
+            onEditUser={handleOpenDrawer}
+          />
+          
+          <AdminPagination 
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            totalItems={filteredUsers.length}
+            itemsPerPage={itemsPerPage}
+          />
         </div>
-      </AdminPageHeader>
-      
-      <div className="flex flex-col gap-4">
-        <UsersActionBar 
-          activeTab={activeTab} 
-          setActiveTab={setActiveTab}
-          tabCounts={tabCounts}
-          globalSearch={globalSearch}
-          setGlobalSearch={setGlobalSearch}
-          onOpenAdd={() => handleOpenDrawer(null)}
-          onResetFilters={handleResetFilters}
-          filteredUsers={filteredUsers}
-          onExport={handleExport}
-          onImport={handleImport}
-        />
-        
-        <UsersTable 
-          users={currentUsers}
-          columnFilters={columnFilters}
-          setColumnFilters={setColumnFilters}
-          onEditUser={handleOpenDrawer}
-        />
-        
-        <AdminPagination 
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-          totalItems={filteredUsers.length}
-          itemsPerPage={itemsPerPage}
-        />
+
+        {isDrawerOpen && (
+          <UserDrawer 
+            user={editingUser} 
+            onClose={handleCloseDrawer} 
+          />
+        )}
       </div>
 
-      {isDrawerOpen && (
-        <UserDrawer 
-          user={editingUser} 
-          onClose={handleCloseDrawer} 
-        />
-      )}
-    </div>
+      <ConfirmModal 
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        onConfirm={handleConfirmExport}
+        title="XÁC NHẬN XUẤT EXCEL"
+        message={`Hệ thống sẽ xuất danh sách gồm ${filteredUsers.length} tài khoản ra file Excel. Bạn có muốn tiếp tục?`}
+        confirmText="XUẤT EXCEL"
+        cancelText="HỦY"
+        isDanger={false}
+      />
+    </>
   );
 }
