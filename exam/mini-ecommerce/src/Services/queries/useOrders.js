@@ -6,7 +6,7 @@ export const useGetOrders = () => {
     queryKey: ["orders"],
     queryFn: async () => {
       const response = await api.get("/orders");
-      return response.data;
+      return response;
     },
   });
 };
@@ -16,7 +16,7 @@ export const useUpdateOrderStatus = () => {
   return useMutation({
     mutationFn: async ({ orderId, status }) => {
       const response = await api.patch(`/orders/${orderId}`, { status });
-      return response.data;
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["orders"]);
