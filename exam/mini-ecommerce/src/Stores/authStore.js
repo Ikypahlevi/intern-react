@@ -6,11 +6,17 @@ export const useAuthStore = create(
     (set) => ({
       user: null,
       isAuthenticated: false,
+      _hasHydrated: false,
       login: (userData) => set({ user: userData, isAuthenticated: true }),
       logout: () => set({ user: null, isAuthenticated: false }),
+      setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
-      name: "auth-storage", // name of item in localStorage
+      name: "auth-storage",
+      onRehydrateStorage: () => (state) => {
+        // Sau khi đọc xong localStorage, đánh dấu là đã hydrate xong
+        state?.setHasHydrated(true);
+      },
     }
   )
 );
