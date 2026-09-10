@@ -20,24 +20,27 @@ export default function Overview() {
   const isLoading = loadingOrders || loadingProducts || loadingUsers;
 
   if (isLoading) {
-    return <div className="font-comic text-2xl animate-pulse p-10">ĐANG TẢI DỮ LIỆU HQ...</div>;
+    return (
+      <div className="font-comic text-2xl animate-pulse p-10">
+        ĐANG TẢI DỮ LIỆU HQ...
+      </div>
+    );
   }
 
   return (
     <div className="flex flex-col w-full pb-12 gap-8 max-w-7xl mx-auto font-bubble">
-      
-      <AdminPageHeader 
+      <AdminPageHeader
         title="BẢNG ĐIỀU KHIỂN TỔNG QUAN"
         description="Giám sát hiệu suất doanh thu kho truyện, đơn xuất bản và hội viên độc giả toàn quốc."
         iconClass="fa-chart-pie"
         versionTag="OTAKU DATA LIVE"
         kpiBlocks={[]}
       >
-        <div className="flex justify-end mb-4">
+        {/* <div className="flex justify-end mb-4">
           <AdminPopButton variant="outline" icon="fa-solid fa-download">
             Xuất Báo Cáo
           </AdminPopButton>
-        </div>
+        </div> */}
       </AdminPageHeader>
 
       <KpiCards orders={orders} products={products} users={users} />
@@ -48,7 +51,7 @@ export default function Overview() {
           <RevenueChart orders={orders} />
         </div>
         <div className="xl:col-span-4">
-          <CategoryDonut products={products} />
+          <CategoryDonut products={products} orders={orders} />
         </div>
       </div>
 
@@ -64,7 +67,6 @@ export default function Overview() {
 
       {/* Low Stock Alert */}
       <LowStockAlert products={products} />
-
     </div>
   );
 }

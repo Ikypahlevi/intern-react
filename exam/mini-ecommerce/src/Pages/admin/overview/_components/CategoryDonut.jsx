@@ -1,14 +1,31 @@
 import React, { useMemo } from "react";
 
-export default function CategoryDonut({ products }) {
+export default function CategoryDonut({ products, orders }) {
   const categoryStats = useMemo(() => {
     const stats = {};
+    
+    // Tạo map để tra cứu danh mục của sản phẩm nhanh chóng
+    const productCategoryMap = {};
     products.forEach(p => {
-      if (!stats[p.category]) {
-        stats[p.category] = 0;
-      }
-      stats[p.category] += (p.price * p.sold);
+      productCategoryMap[p.id] = p.category || "Khác";
     });
+
+    // Lặp qua tất cả đơn hàng (không tính đơn đã hủy)
+    if (orders && orders.length > 0) {
+      orders.forEach(order => {
+        if (order.status === 'cancelled') return;
+        
+        if (order.items && order.items.length > 0) {
+          order.items.forEach(item => {
+            const category = productCategoryMap[item.productId] || "Khác";
+            if (!stats[category]) {
+              stats[category] = 0;
+            }
+            stats[category] += (item.price * item.quantity);
+          });
+        }
+      });
+    }
 
     // Sắp xếp giảm dần theo doanh thu
     const sorted = Object.entries(stats)
@@ -16,11 +33,17 @@ export default function CategoryDonut({ products }) {
       .sort((a, b) => b.revenue - a.revenue);
 
     // Lấy top 4, phần còn lại gộp vào 'Khác'
-    const top3 = sorted.slice(0, 3);
+    let top3 = sorted.slice(0, 3);
     const othersRevenue = sorted.slice(3).reduce((acc, curr) => acc + curr.revenue, 0);
     
     if (othersRevenue > 0) {
-      top3.push({ name: "Khác", revenue: othersRevenue });
+      // Nếu đã có mục "Khác" trong top 3, cộng dồn vào đó. Nếu chưa có thì tạo mới.
+      const existingOtherIndex = top3.findIndex(t => t.name === "Khác");
+      if (existingOtherIndex !== -1) {
+        top3[existingOtherIndex].revenue += othersRevenue;
+      } else {
+        top3.push({ name: "Khác", revenue: othersRevenue });
+      }
     }
 
     const total = top3.reduce((acc, curr) => acc + curr.revenue, 0);
@@ -32,7 +55,7 @@ export default function CategoryDonut({ products }) {
         percent: total === 0 ? 0 : Math.round((t.revenue / total) * 100)
       }))
     };
-  }, [products]);
+  }, [products, orders]);
 
   const colors = ["bg-red-500", "bg-blue-500", "bg-green-500", "bg-gray-400"];
 
