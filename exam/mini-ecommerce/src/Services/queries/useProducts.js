@@ -23,9 +23,11 @@ export const useCreateProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: productService.create,
-    onSuccess: () => {
-      // Làm mới lại danh sách sản phẩm sau khi thêm thành công
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+    onSuccess: (newProduct) => {
+      // Cập nhật trực tiếp vào cache để UI mượt mà, không bị giật (blink) do tải lại
+      queryClient.setQueryData(["products"], (old) => {
+        return old ? [...old, newProduct] : [newProduct];
+      });
     },
   });
 };
@@ -35,8 +37,10 @@ export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, data }) => productService.update(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+    onSuccess: (updatedProduct) => {
+      queryClient.setQueryData(["products"], (old) => {
+        return old ? old.map((p) => (p.id === updatedProduct.id ? updatedProduct : p)) : old;
+      });
     },
   });
 };
@@ -46,8 +50,10 @@ export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: productService.delete,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+    onSuccess: (_, deletedId) => {
+      queryClient.setQueryData(["products"], (old) => {
+        return old ? old.filter((p) => p.id !== deletedId) : old;
+      });
     },
   });
 };

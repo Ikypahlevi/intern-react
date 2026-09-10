@@ -23,8 +23,11 @@ export const useUpdateOrderStatus = () => {
       const response = await api.patch(`/orders/${orderId}`, { status });
       return response;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["orders"]);
+    onSuccess: (updatedOrder) => {
+      // Cập nhật trực tiếp vào cache để giao diện thay đổi tức thì (Pessimistic Update)
+      queryClient.setQueryData(["orders"], (old) => {
+        return old ? old.map((o) => (o.id === updatedOrder.id ? updatedOrder : o)) : old;
+      });
     },
   });
 };
