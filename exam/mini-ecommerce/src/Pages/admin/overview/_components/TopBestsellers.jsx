@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-export default function TopBestsellers({ products }) {
-  // Sort products by sold descending, take top 4
-  const topProducts = [...products].sort((a, b) => (b.sold || 0) - (a.sold || 0)).slice(0, 4);
+export default function TopBestsellers({ products, orders }) {
+  // Calculate real sold quantities from orders
+  const topProducts = useMemo(() => {
+    const salesMap = {};
+    
+    if (orders && orders.length > 0) {
+      orders.forEach(order => {
+        if (order.status !== 'cancelled' && order.items) {
+          order.items.forEach(item => {
+            if (!salesMap[item.productId]) {
+              salesMap[item.productId] = 0;
+            }
+            salesMap[item.productId] += item.quantity;
+          });
+        }
+      });
+    }
+
+    return [...products]
+      .map(p => ({
+        ...p,
+        realSold: salesMap[p.id] || 0
+      }))
+      .sort((a, b) => b.realSold - a.realSold)
+      .slice(0, 4);
+  }, [products, orders]);
 
   return (
     <div className="bg-white border-[3px] border-black shadow-[5px_5px_0px_#000] flex flex-col h-full font-bubble">
@@ -27,7 +50,7 @@ export default function TopBestsellers({ products }) {
               <p className="font-comic text-xs text-red-600 font-bold">{product.price.toLocaleString()}₫</p>
             </div>
             <div className="text-right">
-              <div className="font-black text-lg">{product.sold}</div>
+              <div className="font-black text-lg">{product.realSold}</div>
               <div className="text-[10px] text-gray-500 font-bold uppercase">Đã Bán</div>
             </div>
           </div>

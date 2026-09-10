@@ -61,7 +61,7 @@ export default function Overview() {
           <PendingOrders orders={orders} />
         </div>
         <div className="xl:col-span-4">
-          <TopBestsellers products={products} />
+          <TopBestsellers products={products} orders={orders} />
         </div>
       </div>
 
