@@ -1066,7 +1066,7 @@
         }
       ],
       "totalAmount": 235000,
-      "status": "shipping",
+      "status": "completed",
       "createdAt": "2026-09-21T20:39:43.005Z"
     },
     {
@@ -1085,7 +1085,7 @@
         }
       ],
       "totalAmount": 65000,
-      "status": "pending",
+      "status": "shipping",
       "createdAt": "2026-09-17T21:08:28.459Z"
     },
     {

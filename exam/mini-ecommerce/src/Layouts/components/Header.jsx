@@ -34,17 +34,22 @@ export default function Header() {
 
   return (
     <>
-      {/* Top Banner */}
-      <aside className="bg-comic-red border-b-[3px] border-stone-900 text-white relative overflow-hidden hidden sm:block">
-        {/* Comic dots pattern */}
-        <div className="absolute inset-0 halftone-dark opacity-20"></div>
+      {/* Top Announcement Banner */}
+      <aside
+        className="bg-comic-yellow comic-border-sm border-x-0 border-t-0 py-2 px-4 shadow-sm"
+        data-purpose="top-announcement"
+      >
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 sm:gap-3">
             <span className="font-comic text-base tracking-wider bg-comic-red text-white comic-border-sm px-2.5 py-0.5 rounded shadow-comic-sm transform -rotate-2">
-              ⚡ FLASH DEAL!
+              💥 FLASH DEAL!
             </span>
             <span className="font-bubble font-bold text-xs sm:text-sm text-stone-900 tracking-tight">
-              TẶNG KÈM BOOKMARK ĐỘC QUYỀN VỚI ĐƠN HÀNG TRÊN 200K! 💥
+              Spring Manga Festival: Giảm tới{" "}
+              <span className="bg-comic-orange text-white px-1.5 py-0.5 comic-border-sm shadow-comic-sm font-comic text-sm">
+                50% OFF
+              </span>{" "}
+              cho Manga Shonen & Seinen!
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -52,7 +57,7 @@ export default function Header() {
               to="/products"
               className="font-comic text-sm tracking-wide bg-comic-ink text-comic-yellow hover:bg-comic-red hover:text-white px-4 py-1 rounded comic-border-sm shadow-comic-sm comic-btn-hover transition-transform"
             >
-              MUA NGAY 💨
+              MUA NGAY ⚡
             </Link>
           </div>
         </div>
@@ -67,46 +72,48 @@ export default function Header() {
               <i className="fa-solid fa-book-open"></i>
             </div>
             <div className="leading-none">
-              <h1 className="font-comic text-2xl tracking-widest text-stone-900 uppercase italic">
-                Swoo <span className="text-comic-red">Manga</span>
-              </h1>
-              <span className="font-bubble text-[10px] font-black uppercase text-stone-600 tracking-widest block -mt-1">
-                Comic Store
+              <span className="font-comic text-3xl tracking-wide text-stone-900">
+                SWOO<span className="text-comic-red">!</span>
+              </span>
+              <span className="block font-comic text-xs tracking-widest text-comic-orange bg-black text-white px-1.5 py-0.2 rounded comic-border-sm -mt-1 shadow-comic-sm">
+                MANGA HEROES ⚡
               </span>
             </div>
           </Link>
 
-          {/* Search Bar */}
-          <div className="flex-1 max-w-xl mx-4 hidden md:block">
-            <div className="relative group">
-              <div className="flex items-stretch h-10 rounded-xl overflow-hidden comic-border shadow-comic group-hover:-translate-y-0.5 group-hover:shadow-comic-md transition-all">
-                <input
-                  type="text"
-                  placeholder="Hôm nay bạn muốn đọc gì?..."
-                  className="flex-1 bg-[#FFFCEB] px-4 font-bubble font-bold text-stone-800 placeholder-stone-500 outline-none"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      e.preventDefault();
-                      navigate(
-                        `/products?search=${encodeURIComponent(searchTerm)}`,
-                      );
-                    }
-                  }}
-                />
-                <button
-                  className="bg-comic-yellow hover:bg-comic-gold text-stone-900 px-6 font-comic text-lg flex items-center justify-center border-l-2 border-stone-900 transition-colors"
-                  type="button"
-                  onClick={() => {
+          {/* Search Bar - Realtime */}
+          <div className="hidden lg:flex flex-1 max-w-2xl mx-4 relative group/search">
+            <div className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden">
+              <input
+                name="search"
+                className="flex-1 px-4 py-2 font-bubble text-sm text-stone-900 placeholder-stone-400 focus:outline-none border-none font-bold"
+                placeholder="Tìm manga, light novel, artbook..."
+                type="text"
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
                     navigate(
                       `/products?search=${encodeURIComponent(searchTerm)}`,
                     );
-                  }}
-                >
-                  <i className="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
+                  }
+                }}
+              />
+              <button
+                className="bg-comic-yellow hover:bg-comic-gold text-stone-900 px-6 font-comic text-lg flex items-center justify-center border-l-2 border-stone-900 transition-colors"
+                type="button"
+                onClick={() => {
+                  navigate(
+                    `/products?search=${encodeURIComponent(searchTerm)}`,
+                  );
+                }}
+              >
+                <i className="fa-solid fa-magnifying-glass mr-1 text-sm"></i>{" "}
+                TÌM KIẾM!
+              </button>
             </div>
           </div>
 
@@ -126,6 +133,17 @@ export default function Header() {
                     <Link to="/profile" className="hover:text-comic-red">
                       {user?.name || "Khách"}
                     </Link>
+                    {user?.role === ROLES.ADMIN && (
+                      <>
+                        <span className="mx-1">/</span>
+                        <Link
+                          to="/admin"
+                          className="text-blue-600 hover:underline"
+                        >
+                          QUẢN TRỊ
+                        </Link>
+                      </>
+                    )}
                     <span className="mx-1">/</span>
                     <button
                       onClick={logout}
