@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../Stores/authStore";
 import api from "../../Services/api";
+import { useGetOrders } from "../../Services/queries/useOrders";
 import ProfileSidebar from "./_components/ProfileSidebar";
 import ProfileDetails from "./_components/ProfileDetails";
 import OrderHistory from "./_components/OrderHistory";
@@ -10,6 +11,9 @@ export default function Profile() {
   const { user, login } = useAuthStore();
   const [activeTab, setActiveTab] = useState("profile"); // 'profile' hoặc 'orders'
   const [loading, setLoading] = useState(true);
+
+  const { data: allOrders } = useGetOrders();
+  const userOrders = allOrders ? allOrders.filter(o => String(o.userId) === String(user?.id)) : [];
 
   useEffect(() => {
     // Fetch dữ liệu user mới nhất khi vào trang
@@ -55,7 +59,7 @@ export default function Profile() {
           {/* Cột phải: Content */}
           <section className="lg:col-span-9 space-y-8">
             {activeTab === "profile" && <ProfileDetails user={user} />}
-            {activeTab === "orders" && <OrderHistory orders={user.orders || []} />}
+            {activeTab === "orders" && <OrderHistory orders={userOrders} />}
           </section>
         </div>
       </main>

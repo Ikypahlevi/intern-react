@@ -20,6 +20,7 @@ import About from "../Pages/about/About";
 import Overview from "../Pages/admin/overview/Overview";
 import UsersList from "../Pages/admin/users/UsersList";
 import ProductsListAdmin from "../Pages/admin/products/ProductsList";
+import OrdersListAdmin from "../Pages/admin/orders/OrdersList";
 
 const router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
           {
             path: "products",
             element: <ProductsListAdmin />
+          },
+          {
+            path: "orders",
+            element: <OrdersListAdmin />
           }
         ]
       }

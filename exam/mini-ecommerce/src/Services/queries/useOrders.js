@@ -8,6 +8,11 @@ export const useGetOrders = () => {
       const response = await api.get("/orders");
       return response;
     },
+    // Tự động fetch lại mỗi 5 giây để đồng bộ real-time
+    refetchInterval: 5000,
+    // Tạm dừng fetch nếu chuyển sang tab khác để tiết kiệm tài nguyên
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: true,
   });
 };
 
