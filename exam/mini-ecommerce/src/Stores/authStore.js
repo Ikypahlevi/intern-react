@@ -23,6 +23,12 @@ export const useAuthStore = create(
       onRehydrateStorage: () => (state) => {
         // Sau khi đọc xong localStorage, đánh dấu là đã hydrate xong
         state?.setHasHydrated(true);
+        // Đồng bộ giỏ hàng với trạng thái user hiện tại
+        if (state?.user) {
+          useCartStore.getState().switchUser(state.user.id);
+        } else {
+          useCartStore.getState().switchUser(null);
+        }
       },
     }
   )

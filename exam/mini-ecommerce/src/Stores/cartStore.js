@@ -40,7 +40,8 @@ export const useCartStore = create(
         } else if (targetUserId === "guest" && currentActive !== "guest") {
            // LOGOUT SCENARIO: Save User cart, load Guest cart
            updatedCarts[currentActive] = state.items;
-           nextItems = updatedCarts["guest"] || [];
+           updatedCarts["guest"] = []; // Force clear guest cart on logout
+           nextItems = [];
         } else {
            // SWITCHING FROM USER TO USER
            updatedCarts[currentActive] = state.items;
