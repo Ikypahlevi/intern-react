@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { useCartStore } from "./cartStore";
 
 export const useAuthStore = create(
   persist(
@@ -7,8 +8,14 @@ export const useAuthStore = create(
       user: null,
       isAuthenticated: false,
       _hasHydrated: false,
-      login: (userData) => set({ user: userData, isAuthenticated: true }),
-      logout: () => set({ user: null, isAuthenticated: false }),
+      login: (userData) => {
+        set({ user: userData, isAuthenticated: true });
+        useCartStore.getState().switchUser(userData.id);
+      },
+      logout: () => {
+        set({ user: null, isAuthenticated: false });
+        useCartStore.getState().switchUser(null);
+      },
       setHasHydrated: (state) => set({ _hasHydrated: state }),
     }),
     {
