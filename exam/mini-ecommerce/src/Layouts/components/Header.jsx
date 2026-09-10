@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCartStore } from "../../Stores/cartStore";
 import { formatCurrency } from "../../Utils/format";
 import { useAuthStore } from "../../Stores/authStore";
-import { useGetProducts } from "../../Services/queries/useProducts";
 import { useDebounce } from "../../Utils/useDebounce";
 import { ROLES } from "../../Constants";
+import { useGetCategories } from "../../Services/queries/useCategories";
 
 export default function Header() {
   const items = useCartStore((state) => state.items);
@@ -20,47 +20,31 @@ export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  // Lấy dữ liệu sản phẩm để trích xuất danh mục
-  const { data: products = [] } = useGetProducts();
-
-  // Trích xuất các category duy nhất
-  const categories = Array.from(
-    new Set(products.map((p) => p.category).filter(Boolean)),
-  );
+  // Fetch real categories from DB
+  const { data: categories = [] } = useGetCategories();
 
   React.useEffect(() => {
     // Only navigate if we are already on products page and typing
-    if (window.location.pathname === '/products') {
-      // Don't navigate if it's empty on first load, but do navigate if they cleared it
-      navigate(`/products?search=${encodeURIComponent(debouncedSearchTerm)}`, { replace: true });
+    if (window.location.pathname === "/products") {
+      navigate(`/products?search=${encodeURIComponent(debouncedSearchTerm)}`, {
+        replace: true,
+      });
     }
   }, [debouncedSearchTerm, navigate]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm) {
-      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
-    }
-  };
-
   return (
     <>
-      {/* Top Announcement Banner */}
-      <aside
-        className="bg-comic-yellow comic-border-sm border-x-0 border-t-0 py-2 px-4 shadow-sm"
-        data-purpose="top-announcement"
-      >
+      {/* Top Banner */}
+      <aside className="bg-comic-red border-b-[3px] border-stone-900 text-white relative overflow-hidden hidden sm:block">
+        {/* Comic dots pattern */}
+        <div className="absolute inset-0 halftone-dark opacity-20"></div>
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 sm:gap-3">
             <span className="font-comic text-base tracking-wider bg-comic-red text-white comic-border-sm px-2.5 py-0.5 rounded shadow-comic-sm transform -rotate-2">
-              💥 FLASH DEAL!
+              ⚡ FLASH DEAL!
             </span>
             <span className="font-bubble font-bold text-xs sm:text-sm text-stone-900 tracking-tight">
-              Spring Manga Festival: Giảm tới{" "}
-              <span className="bg-comic-orange text-white px-1.5 py-0.5 comic-border-sm shadow-comic-sm font-comic text-sm">
-                50% OFF
-              </span>{" "}
-              cho Manga Shonen & Seinen!
+              TẶNG KÈM BOOKMARK ĐỘC QUYỀN VỚI ĐƠN HÀNG TRÊN 200K! 💥
             </span>
           </div>
           <div className="flex items-center gap-4">
@@ -68,7 +52,7 @@ export default function Header() {
               to="/products"
               className="font-comic text-sm tracking-wide bg-comic-ink text-comic-yellow hover:bg-comic-red hover:text-white px-4 py-1 rounded comic-border-sm shadow-comic-sm comic-btn-hover transition-transform"
             >
-              MUA NGAY ⚡
+              MUA NGAY 💨
             </Link>
           </div>
         </div>
@@ -83,44 +67,46 @@ export default function Header() {
               <i className="fa-solid fa-book-open"></i>
             </div>
             <div className="leading-none">
-              <span className="font-comic text-3xl tracking-wide text-stone-900">
-                SWOO<span className="text-comic-red">!</span>
-              </span>
-              <span className="block font-comic text-xs tracking-widest text-comic-orange bg-black text-white px-1.5 py-0.2 rounded comic-border-sm -mt-1 shadow-comic-sm">
-                MANGA HEROES ⚡
+              <h1 className="font-comic text-2xl tracking-widest text-stone-900 uppercase italic">
+                Swoo <span className="text-comic-red">Manga</span>
+              </h1>
+              <span className="font-bubble text-[10px] font-black uppercase text-stone-600 tracking-widest block -mt-1">
+                Comic Store
               </span>
             </div>
           </Link>
 
-          {/* Search Bar - Realtime */}
-          <div className="hidden lg:flex flex-1 max-w-2xl mx-4 relative group/search">
-            <div className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden">
-              <input
-                name="search"
-                className="flex-1 px-4 py-2 font-bubble text-sm text-stone-900 placeholder-stone-400 focus:outline-none border-none font-bold"
-                placeholder="Tìm manga, light novel, artbook..."
-                type="text"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
-                  }
-                }}
-              />
-              <button
-                className="bg-comic-yellow hover:bg-comic-gold text-stone-900 px-6 font-comic text-lg flex items-center justify-center border-l-2 border-stone-900 transition-colors"
-                type="button"
-                onClick={() => {
-                  navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
-                }}
-              >
-                <i className="fa-solid fa-magnifying-glass mr-1 text-sm"></i>{" "}
-                TÌM KIẾM!
-              </button>
+          {/* Search Bar */}
+          <div className="flex-1 max-w-xl mx-4 hidden md:block">
+            <div className="relative group">
+              <div className="flex items-stretch h-10 rounded-xl overflow-hidden comic-border shadow-comic group-hover:-translate-y-0.5 group-hover:shadow-comic-md transition-all">
+                <input
+                  type="text"
+                  placeholder="Hôm nay bạn muốn đọc gì?..."
+                  className="flex-1 bg-[#FFFCEB] px-4 font-bubble font-bold text-stone-800 placeholder-stone-500 outline-none"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      navigate(
+                        `/products?search=${encodeURIComponent(searchTerm)}`,
+                      );
+                    }
+                  }}
+                />
+                <button
+                  className="bg-comic-yellow hover:bg-comic-gold text-stone-900 px-6 font-comic text-lg flex items-center justify-center border-l-2 border-stone-900 transition-colors"
+                  type="button"
+                  onClick={() => {
+                    navigate(
+                      `/products?search=${encodeURIComponent(searchTerm)}`,
+                    );
+                  }}
+                >
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -131,8 +117,8 @@ export default function Header() {
               <div className="w-8 h-8 rounded-lg bg-white comic-border-sm flex items-center justify-center text-stone-900">
                 <i className="fa-solid fa-user-ninja text-sm"></i>
               </div>
-              <div className="hidden sm:block text-left leading-none font-bubble pr-2">
-                <span className="text-stone-500 block text-[10px] font-bold">
+              <div className="hidden lg:block text-left pr-2">
+                <span className="block text-[10px] font-bold uppercase tracking-wider font-bubble text-stone-500 leading-none">
                   THÀNH VIÊN
                 </span>
                 {isAuthenticated ? (
@@ -140,17 +126,6 @@ export default function Header() {
                     <Link to="/profile" className="hover:text-comic-red">
                       {user?.name || "Khách"}
                     </Link>
-                    {user?.role === ROLES.ADMIN && (
-                      <>
-                        <span className="mx-1">/</span>
-                        <Link
-                          to="/admin"
-                          className="text-blue-600 hover:underline"
-                        >
-                          QUẢN TRỊ
-                        </Link>
-                      </>
-                    )}
                     <span className="mx-1">/</span>
                     <button
                       onClick={logout}
@@ -205,9 +180,9 @@ export default function Header() {
         </div>
 
         {/* Navigation Menu Bar */}
-        <nav className="border-t-2 border-stone-900 bg-comic-yellow/20">
+        <nav className="border-t-2 border-stone-900 bg-comic-yellow/20 relative z-30">
           <div className="max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between text-sm py-1 gap-2">
-            <div className="flex items-center gap-4 lg:gap-6 w-full lg:w-auto overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-4 lg:gap-6 w-full lg:w-auto">
               {/* All Departments Button */}
               <div className="relative py-1 shrink-0 group">
                 <button className="bg-comic-ink text-comic-yellow group-hover:bg-comic-red group-hover:text-white px-4 py-1.5 rounded-lg comic-border shadow-comic font-comic text-sm tracking-wider flex items-center gap-2 comic-btn-hover transition-colors">
@@ -216,16 +191,16 @@ export default function Header() {
                   <i className="fa-solid fa-chevron-down text-xs group-hover:rotate-180 transition-transform"></i>
                 </button>
                 {/* Dropdown Menu */}
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white comic-border-sm shadow-comic rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                  <ul className="py-2">
+                <div className="absolute top-full left-0 mt-1 w-48 bg-white comic-border-sm shadow-comic rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <ul className="py-2 max-h-64 overflow-y-auto">
                     {categories.length > 0 ? (
-                      categories.map((cat, idx) => (
-                        <li key={idx}>
+                      categories.map((cat) => (
+                        <li key={cat.id}>
                           <Link
-                            to={`/products?category=${encodeURIComponent(cat)}`}
+                            to={`/products?category=${encodeURIComponent(cat.name)}`}
                             className="block px-4 py-2 font-bubble text-sm font-bold text-stone-800 hover:bg-comic-yellow hover:text-stone-900 transition-colors"
                           >
-                            {cat}
+                            {cat.name}
                           </Link>
                         </li>
                       ))
