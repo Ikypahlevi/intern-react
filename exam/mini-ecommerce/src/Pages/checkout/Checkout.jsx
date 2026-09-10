@@ -71,33 +71,27 @@ export default function Checkout() {
     try {
       setIsSubmitting(true);
       
-      // Lấy thông tin user mới nhất từ API
-      const currentUser = await api.get(`/users/${user.id}`);
-      const currentOrders = currentUser.orders || [];
-
-      // Tạo object đơn hàng mới
+      // Tạo object đơn hàng mới theo đúng chuẩn db.json
       const newOrder = {
-        id: `SWOO-${Date.now()}`,
-        date: new Date().toISOString(),
-        items: checkoutItems,
-        total: totalAmount + shippingFee,
-        shippingFee,
-        shippingDetails: formData,
-        paymentMethod,
-        status: "PENDING"
+        id: `SWOO-${Math.floor(Math.random() * 100000)}`,
+        userId: String(user.id),
+        customerName: `${formData.firstName} ${formData.lastName}`.trim(),
+        phone: formData.phone,
+        address: `${formData.street}, ${formData.district}, ${formData.city}`,
+        items: checkoutItems.map(item => ({
+          productId: String(item.id),
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image
+        })),
+        totalAmount: totalAmount + shippingFee,
+        status: "pending",
+        createdAt: new Date().toISOString()
       };
 
-      // Cập nhật mảng orders của user
-      const updatedUser = {
-        ...currentUser,
-        orders: [...currentOrders, newOrder]
-      };
-
-      // Đẩy lên MockAPI
-      await api.put(`/users/${user.id}`, updatedUser);
-
-      // Cập nhật lại user trong store (tuỳ chọn)
-      login(updatedUser);
+      // Push to /orders
+      await api.post('/orders', newOrder);
 
       // Xóa các sản phẩm đã thanh toán khỏi giỏ hàng
       selectedIds.forEach(id => removeItem(id));
