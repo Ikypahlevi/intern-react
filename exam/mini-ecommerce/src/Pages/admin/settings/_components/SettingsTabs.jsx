@@ -9,15 +9,15 @@ export default function SettingsTabs({ activeTab, onTabChange }) {
   ];
 
   return (
-    <div className="flex items-center gap-space-xs overflow-x-auto pb-space-xs mb-space-xl border-b-[2px] border-on-background font-bubble">
+    <div className="flex items-center gap-3 overflow-x-auto pb-3 mb-10 border-b-[2px] border-black font-bubble">
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`flex items-center gap-space-2xs px-space-md py-space-xs border-[2px] border-on-background font-headline-sm text-[16px] font-bold uppercase tracking-wider shrink-0 transition-all ${
+          className={`flex items-center gap-2 px-6 py-3 border-[2px] border-black font-comic text-[16px] font-bold uppercase tracking-wider shrink-0 transition-all ${
             activeTab === tab.id
-              ? "bg-primary-container text-on-background shadow-[3px_3px_0px_#1c1b1b] hover:translate-y-[-1px]"
-              : "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high"
+              ? "bg-comic-yellow text-black shadow-[3px_3px_0px_#000] hover:translate-y-[-1px]"
+              : "bg-white text-gray-600 hover:bg-gray-100"
           }`}
         >
           <i className={`fa-solid ${tab.icon} text-[16px]`}></i>

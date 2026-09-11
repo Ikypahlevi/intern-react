@@ -132,7 +132,7 @@ export default function Settings() {
       <SettingsTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
       {/* GRID LAYOUT */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-3xl">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 mb-16">
         <div className="xl:col-span-7" ref={generalRef}>
           <GeneralSettings
             settings={draftSettings}
