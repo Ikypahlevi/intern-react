@@ -56,28 +56,37 @@ export const useCartStore = create(
       },
 
       addItem: (product, quantity = 1) => {
+        if (quantity < 1) quantity = 1; // Validation
         const currentItems = get().items;
         const existingItem = currentItems.find(
           (item) => item.id === product.id,
         );
 
         if (existingItem) {
+          const newQty = existingItem.quantity + quantity;
           set({
             items: currentItems.map((item) =>
               item.id === product.id
-                ? { ...item, quantity: item.quantity + quantity }
+                ? { ...item, quantity: newQty > (product.stock || newQty) ? product.stock : newQty }
                 : item,
             ),
           });
         } else {
-          set({ items: [...currentItems, { ...product, quantity }] });
+          const safeQty = quantity > (product.stock || quantity) ? product.stock : quantity;
+          set({ items: [...currentItems, { ...product, quantity: safeQty }] });
         }
       },
       updateQuantity: (id, quantity) => {
+        if (quantity < 1) quantity = 1; // Validation chặn số 0 hoặc âm
+        
         set({
-          items: get().items.map((item) =>
-            item.id === id ? { ...item, quantity } : item,
-          ),
+          items: get().items.map((item) => {
+            if (item.id === id) {
+              const safeQty = quantity > (item.stock || quantity) ? item.stock : quantity;
+              return { ...item, quantity: safeQty };
+            }
+            return item;
+          }),
         });
       },
       removeItem: (id) => {

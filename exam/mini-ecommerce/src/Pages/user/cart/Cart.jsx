@@ -118,8 +118,9 @@ export default function Cart() {
                     isSelected={selectedIds.includes(item.id)}
                     onToggleSelect={handleToggleSelect}
                     onIncrease={(id, q) => updateQuantity(id, q + 1)}
-                    onDecrease={(id, q) => updateQuantity(id, q - 1)}
+                    onDecrease={(id, q) => updateQuantity(id, Math.max(1, q - 1))}
                     onRemove={removeItem}
+                    onUpdateQuantity={updateQuantity}
                   />
                 ))}
               </div>

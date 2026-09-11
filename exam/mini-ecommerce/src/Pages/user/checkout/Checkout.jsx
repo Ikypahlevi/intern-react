@@ -1,5 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { checkoutSchema } from "./_schema/checkoutSchema";
 import { useCartStore } from "../../../Stores/cartStore";
 import { useAuthStore } from "../../../Stores/authStore";
 import api from "../../../Services/api";
@@ -10,7 +13,7 @@ export default function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { items, removeItem } = useCartStore();
-  const { user, login } = useAuthStore(); // login để cập nhật lại thông tin user trong store nếu cần
+  const { user } = useAuthStore(); 
 
   // Lấy danh sách ID sản phẩm được chọn từ giỏ hàng (truyền qua state)
   const selectedIds = location.state?.selectedIds || items.map(item => item.id);
@@ -22,16 +25,19 @@ export default function Checkout() {
 
   const shippingFee = 30000; // Cố định 30k giao tiêu chuẩn
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    country: "VN",
-    street: "",
-    city: "HCM",
-    district: "",
-    phone: "",
-    email: user?.email || "",
-    notes: ""
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      country: "VN",
+      street: "",
+      city: "HCM",
+      district: "",
+      phone: "",
+      email: user?.email || "",
+      notes: ""
+    }
   });
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -55,16 +61,9 @@ export default function Checkout() {
     );
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     if (!user) {
       alert("Vui lòng đăng nhập để tiếp tục!");
-      return;
-    }
-
-    // Validate cơ bản
-    if (!formData.firstName || !formData.lastName || !formData.street || !formData.phone || !formData.email) {
-      alert("Vui lòng điền đầy đủ các thông tin bắt buộc (*)");
       return;
     }
 
@@ -75,9 +74,9 @@ export default function Checkout() {
       const newOrder = {
         id: `SWOO-${Math.floor(Math.random() * 100000)}`,
         userId: String(user.id),
-        customerName: `${formData.firstName} ${formData.lastName}`.trim(),
-        phone: formData.phone,
-        address: `${formData.street}, ${formData.district}, ${formData.city}`,
+        customerName: `${data.firstName} ${data.lastName}`.trim(),
+        phone: data.phone,
+        address: `${data.street}, ${data.district}, ${data.city}`,
         items: checkoutItems.map(item => ({
           productId: String(item.id),
           name: item.name,
@@ -121,10 +120,10 @@ export default function Checkout() {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Cột trái: Form */}
           <div className="lg:col-span-7">
-            <CheckoutForm formData={formData} setFormData={setFormData} />
+            <CheckoutForm register={register} errors={errors} />
           </div>
 
           {/* Cột phải: Summary */}
@@ -135,7 +134,6 @@ export default function Checkout() {
               shippingFee={shippingFee}
               paymentMethod={paymentMethod}
               setPaymentMethod={setPaymentMethod}
-              onSubmit={handleSubmit}
               isSubmitting={isSubmitting}
             />
           </div>

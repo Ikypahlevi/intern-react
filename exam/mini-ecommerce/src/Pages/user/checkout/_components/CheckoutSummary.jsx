@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../../../../Components/user/Button/Button";
 import { formatCurrency } from "../../../../Utils/format";
 
-export default function CheckoutSummary({ items, totalAmount, shippingFee, paymentMethod, setPaymentMethod, onSubmit, isSubmitting }) {
+export default function CheckoutSummary({ items, totalAmount, shippingFee, paymentMethod, setPaymentMethod, isSubmitting }) {
   const grandTotal = totalAmount + shippingFee;
 
   return (
@@ -127,8 +127,7 @@ export default function CheckoutSummary({ items, totalAmount, shippingFee, payme
 
       {/* Final Place Order Button */}
       <Button 
-        type="button" 
-        onClick={onSubmit} 
+        type="submit" 
         disabled={isSubmitting || items.length === 0}
         className="w-full bg-green-500 hover:bg-green-600 text-white font-comic text-2xl py-4 rounded-lg tracking-wider flex items-center justify-center gap-2 mt-auto text-shadow"
       >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { formatCurrency } from "../../../../Utils/format";
 
 export default function CartItem({ 
@@ -7,8 +7,28 @@ export default function CartItem({
   onToggleSelect, 
   onIncrease, 
   onDecrease, 
-  onRemove 
+  onRemove,
+  onUpdateQuantity
 }) {
+  const [inputValue, setInputValue] = useState(item.quantity);
+
+  useEffect(() => {
+    setInputValue(item.quantity);
+  }, [item.quantity]);
+
+  const handleInputChange = (e) => {
+    const val = e.target.value.replace(/[^0-9]/g, '');
+    setInputValue(val);
+  };
+
+  const handleInputBlur = () => {
+    let newQty = parseInt(inputValue, 10);
+    if (isNaN(newQty) || newQty < 1) newQty = 1;
+    if (item.stock && newQty > item.stock) newQty = item.stock;
+    setInputValue(newQty);
+    if (onUpdateQuantity) onUpdateQuantity(item.id, newQty);
+  };
+
   return (
     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 comic-border shadow-comic rounded-xl transition-all duration-200 bg-white relative hover:-translate-y-0.5 gap-4">
       <div className="flex items-start sm:items-center space-x-4 w-full sm:w-auto">
@@ -65,19 +85,22 @@ export default function CartItem({
         <div className="flex items-center comic-border-sm rounded-lg h-8 text-sm text-black bg-comic-yellow shadow-comic-sm font-black">
           <button 
             onClick={() => onDecrease(item.id, item.quantity)}
-            className="w-8 h-full flex items-center justify-center hover:bg-yellow-400 rounded-l font-black text-base transition-colors"
+            disabled={item.quantity <= 1}
+            className="w-8 h-full flex items-center justify-center hover:bg-yellow-400 rounded-l font-black text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             -
           </button>
           <input 
             type="text" 
-            value={item.quantity} 
-            readOnly
+            value={inputValue} 
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
             className="w-10 h-full text-center bg-white border-y-0 border-x-2 border-black text-xs font-black font-comic outline-none focus:ring-0"
           />
           <button 
             onClick={() => onIncrease(item.id, item.quantity)}
-            className="w-8 h-full flex items-center justify-center hover:bg-yellow-400 rounded-r font-black text-base transition-colors"
+            disabled={item.stock && item.quantity >= item.stock}
+            className="w-8 h-full flex items-center justify-center hover:bg-yellow-400 rounded-r font-black text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             +
           </button>
