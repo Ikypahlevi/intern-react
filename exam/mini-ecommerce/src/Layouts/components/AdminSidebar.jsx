@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuthStore } from "../../Stores/authStore";
 import { useNavigate } from "react-router-dom";
 
-export default function AdminSidebar() {
+export default function AdminSidebar({ isOpen, setIsOpen }) {
   const { user, logout } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,12 +22,11 @@ export default function AdminSidebar() {
     { path: "/admin/products", icon: "fa-solid fa-book", label: "Sản phẩm" },
     { path: "/admin/users", icon: "fa-solid fa-users", label: "Tài khoản" },
     { path: "/admin/orders", icon: "fa-solid fa-truck", label: "Đơn hàng" },
-    // { path: "/admin/promotions", icon: "fa-solid fa-tag", label: "Khuyến mãi" },
     { path: "/admin/settings", icon: "fa-solid fa-gear", label: "Cài đặt" },
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r-[3px] border-black z-50 flex flex-col justify-between overflow-y-auto font-bubble">
+    <aside className={`fixed left-0 top-0 h-screen w-64 bg-white border-r-[3px] border-black z-50 flex flex-col justify-between overflow-y-auto font-bubble transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
       <div className="flex flex-col">
         <div className="p-4 border-b-[3px] border-black bg-comic-yellow flex flex-col gap-2 shadow-[0_3px_0px_#000]">
           <div className="flex items-center justify-between">

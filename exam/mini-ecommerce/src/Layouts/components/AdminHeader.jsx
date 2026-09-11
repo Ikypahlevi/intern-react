@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetProducts } from "../../Services/queries/useProducts";
 import { useGetOrders } from "../../Services/queries/useOrders";
 
-export default function AdminHeader() {
+export default function AdminHeader({ onMenuClick }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
   const navigate = useNavigate();
@@ -22,13 +22,21 @@ export default function AdminHeader() {
   // Focus effect for shortcut Ctrl+K could be added here
 
   return (
-    <header className="fixed top-0 left-64 right-0 h-16 bg-white border-b-[3px] border-black z-40 px-6 flex items-center justify-between shadow-[0_3px_0px_#000] font-bubble">
+    <header className="fixed top-0 left-0 lg:left-64 right-0 h-16 bg-white border-b-[3px] border-black z-30 px-4 sm:px-6 flex items-center justify-between shadow-[0_3px_0px_#000] font-bubble transition-all duration-300">
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 font-comic text-lg text-black uppercase">
+        {/* Hamburger Menu cho Mobile */}
+        <button 
+          className="lg:hidden flex items-center justify-center w-8 h-8 bg-comic-yellow border-[2px] border-black shadow-[2px_2px_0px_#000]"
+          onClick={onMenuClick}
+        >
+          <i className="fa-solid fa-bars text-black"></i>
+        </button>
+
+        <div className="hidden sm:flex items-center gap-2 font-comic text-sm sm:text-lg text-black uppercase">
           <i className="fa-solid fa-terminal text-green-600 font-bold"></i>
           <span>Swoo Manga</span>
           <i className="fa-solid fa-arrow-right text-red-600 text-sm"></i>
-          <span className="bg-comic-yellow px-2 py-0.5 border border-black shadow-[2px_2px_0px_#000] text-sm">
+          <span className="bg-comic-yellow px-2 py-0.5 border border-black shadow-[2px_2px_0px_#000] text-xs sm:text-sm">
             HQ Panel
           </span>
         </div>
@@ -129,11 +137,11 @@ export default function AdminHeader() {
 
         <button 
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 bg-blue-500 text-white border-[2px] border-black font-comic text-sm px-3 py-1.5 shadow-[3px_3px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0px_#000] transition-all uppercase font-black"
+          className="flex items-center gap-2 bg-blue-500 text-white border-[2px] border-black font-comic text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 shadow-[2px_2px_0px_#000] sm:shadow-[3px_3px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000] transition-all uppercase font-black"
           title="Trải nghiệm như User"
         >
           <i className="fa-solid fa-store"></i>
-          <span>GIAO DIỆN USER</span>
+          <span className="hidden sm:inline">GIAO DIỆN USER</span>
         </button>
 
         <div className="relative flex items-center justify-center p-2 border-[2px] border-black bg-white shadow-[2px_2px_0px_#000] cursor-pointer hover:bg-gray-100">

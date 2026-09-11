@@ -1583,6 +1583,32 @@
       "totalAmount": 155000,
       "status": "shipping",
       "createdAt": "2026-01-06T19:26:42.436Z"
+    },
+    {
+      "id": "SWOO-30619",
+      "userId": "2",
+      "customerName": "Nguyễn Dương",
+      "phone": "0939857638",
+      "address": "79 Thanh Đàm, Hoàng Mai, HN",
+      "items": [
+        {
+          "productId": "11",
+          "name": "Kaiju no 8 - Quái vật số 8",
+          "price": 30000,
+          "quantity": 1,
+          "image": "/img/kaijuno8.jpg"
+        },
+        {
+          "productId": "9",
+          "name": "Vô hạn Gacha",
+          "price": 30000,
+          "quantity": 1,
+          "image": "/img/gacha.png"
+        }
+      ],
+      "totalAmount": 90000,
+      "status": "pending",
+      "createdAt": "2026-09-11T09:49:13.601Z"
     }
   ],
   "categories": [
