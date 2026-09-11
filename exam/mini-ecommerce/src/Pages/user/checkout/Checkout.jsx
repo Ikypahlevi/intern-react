@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -72,7 +72,7 @@ export default function Checkout() {
       setIsSubmitting(true);
       
       // SECURITY CHECK: Verify user is not locked
-      const userData = await api.get(/users/${user.id});
+      const userData = await api.get(`/users/${user.id}`);
       if (userData.status === "locked") {
         toast.error("Tài khoản của bạn đã bị khóa! Không thể đặt hàng.");
         logout();

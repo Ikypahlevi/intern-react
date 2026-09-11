@@ -1,4 +1,4 @@
-﻿import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api";
 
 export const useGetOrders = () => {
@@ -18,7 +18,7 @@ export const useCreateOrder = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (newOrder) => {
-      const response = await api.post(/orders, newOrder);
+      const response = await api.post(`/orders`, newOrder);
       return response;
     },
     onSuccess: () => {
@@ -31,7 +31,7 @@ export const useUpdateOrderStatus = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ orderId, status }) => {
-      const response = await api.patch(/orders/${orderId}, { status });
+      const response = await api.patch(`/orders/${orderId}`, { status });
       return response;
     },
     onSuccess: (updatedOrder) => {
