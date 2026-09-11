@@ -94,6 +94,11 @@ export const useCartStore = create(
           items: get().items.filter((item) => item.id !== id),
         });
       },
+      removeItems: (ids) => {
+        set({
+          items: get().items.filter((item) => !ids.includes(item.id)),
+        });
+      },
       clearCart: () => set({ items: [] }),
       getTotalItems: () => get().items.reduce((total, item) => total + item.quantity, 0),
       getTotalPrice: () => get().items.reduce((total, item) => total + (item.price * item.quantity), 0),

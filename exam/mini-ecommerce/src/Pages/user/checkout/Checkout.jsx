@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,16 +6,18 @@ import { checkoutSchema } from "./_schema/checkoutSchema";
 import { useCartStore } from "../../../Stores/cartStore";
 import { useAuthStore } from "../../../Stores/authStore";
 import api from "../../../Services/api";
+import { useCreateOrder } from "../../../Services/queries/useOrders";
 import CheckoutForm from "./_components/CheckoutForm";
 import CheckoutSummary from "./_components/CheckoutSummary";
+import { toast } from "sonner";
 
 export default function Checkout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { items, removeItem } = useCartStore();
-  const { user } = useAuthStore(); 
+  const { items, removeItems } = useCartStore();
+  const { user, logout } = useAuthStore(); 
+  const createOrderMutation = useCreateOrder();
 
-  // Lấy danh sách ID sản phẩm được chọn từ giỏ hàng (truyền qua state)
   const selectedIds = location.state?.selectedIds || items.map(item => item.id);
   const checkoutItems = useMemo(() => items.filter(item => selectedIds.includes(item.id)), [items, selectedIds]);
 
@@ -23,7 +25,7 @@ export default function Checkout() {
     checkoutItems.reduce((total, item) => total + (item.price * item.quantity), 0),
   [checkoutItems]);
 
-  const shippingFee = 30000; // Cố định 30k giao tiêu chuẩn
+  const shippingFee = 30000; 
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(checkoutSchema),
@@ -43,7 +45,6 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Nếu không có sản phẩm nào để thanh toán
   if (checkoutItems.length === 0) {
     return (
       <main className="max-w-7xl mx-auto px-4 py-16 flex-grow flex items-center justify-center">
@@ -63,20 +64,28 @@ export default function Checkout() {
 
   const onSubmit = async (data) => {
     if (!user) {
-      alert("Vui lòng đăng nhập để tiếp tục!");
+      toast.error("Vui lòng đăng nhập để tiếp tục!");
       return;
     }
 
     try {
       setIsSubmitting(true);
       
-      // Tạo object đơn hàng mới theo đúng chuẩn db.json
+      // SECURITY CHECK: Verify user is not locked
+      const userData = await api.get(/users/${user.id});
+      if (userData.status === "locked") {
+        toast.error("Tài khoản của bạn đã bị khóa! Không thể đặt hàng.");
+        logout();
+        navigate("/login");
+        return;
+      }
+
       const newOrder = {
-        id: `SWOO-${Math.floor(Math.random() * 100000)}`,
+        id: "SWOO-" + Math.floor(Math.random() * 100000),
         userId: String(user.id),
-        customerName: `${data.firstName} ${data.lastName}`.trim(),
+        customerName: (data.firstName + " " + data.lastName).trim(),
         phone: data.phone,
-        address: `${data.street}, ${data.district}, ${data.city}`,
+        address: data.street + ", " + data.district + ", " + data.city,
         items: checkoutItems.map(item => ({
           productId: String(item.id),
           name: item.name,
@@ -89,18 +98,15 @@ export default function Checkout() {
         createdAt: new Date().toISOString()
       };
 
-      // Push to /orders
-      await api.post('/orders', newOrder);
+      await createOrderMutation.mutateAsync(newOrder);
 
-      // Xóa các sản phẩm đã thanh toán khỏi giỏ hàng
-      selectedIds.forEach(id => removeItem(id));
+      removeItems(selectedIds);
 
-      // Hiển thị thông báo và chuyển hướng sang trang Success
       navigate("/checkout-success", { state: { orderId: newOrder.id } });
 
     } catch (error) {
       console.error("Lỗi khi đặt hàng:", error);
-      alert("Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại sau!");
+      toast.error("Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại sau!");
     } finally {
       setIsSubmitting(false);
     }
@@ -108,7 +114,6 @@ export default function Checkout() {
 
   return (
     <>
-      {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 py-4 w-full text-xs">
         <nav className="inline-flex items-center space-x-2 bg-white comic-border shadow-comic-sm px-4 py-1.5 rounded-lg font-bubble font-bold text-sm">
           <Link to="/" className="hover:text-comic-red text-stone-800">TRANG CHỦ</Link>
@@ -121,12 +126,10 @@ export default function Checkout() {
 
       <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Cột trái: Form */}
           <div className="lg:col-span-7">
             <CheckoutForm register={register} errors={errors} />
           </div>
 
-          {/* Cột phải: Summary */}
           <div className="lg:col-span-5 h-full">
             <CheckoutSummary 
               items={checkoutItems}

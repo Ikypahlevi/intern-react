@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+﻿import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../api";
 
 export const useGetOrders = () => {
@@ -8,11 +8,22 @@ export const useGetOrders = () => {
       const response = await api.get("/orders");
       return response;
     },
-    // Tự động fetch lại mỗi 5 giây để đồng bộ real-time
     refetchInterval: 5000,
-    // Tạm dừng fetch nếu chuyển sang tab khác để tiết kiệm tài nguyên
     refetchIntervalInBackground: false,
     refetchOnWindowFocus: true,
+  });
+};
+
+export const useCreateOrder = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (newOrder) => {
+      const response = await api.post(/orders, newOrder);
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["orders"]);
+    }
   });
 };
 
@@ -20,11 +31,10 @@ export const useUpdateOrderStatus = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ orderId, status }) => {
-      const response = await api.patch(`/orders/${orderId}`, { status });
+      const response = await api.patch(/orders/${orderId}, { status });
       return response;
     },
     onSuccess: (updatedOrder) => {
-      // Cập nhật trực tiếp vào cache để giao diện thay đổi tức thì (Pessimistic Update)
       queryClient.setQueryData(["orders"], (old) => {
         return old ? old.map((o) => (o.id === updatedOrder.id ? updatedOrder : o)) : old;
       });
