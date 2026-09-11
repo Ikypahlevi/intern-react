@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function PendingOrders({ orders }) {
   const pendingOrders = orders.filter(o => o.status === 'pending').slice(0, 5);
@@ -7,6 +7,12 @@ export default function PendingOrders({ orders }) {
   const formatDate = (isoString) => {
     const d = new Date(isoString);
     return `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}`;
+  };
+
+  const navigate = useNavigate();
+
+  const handleApproveClick = (orderId) => {
+    navigate("/admin/orders", { state: { highlightOrderId: orderId } });
   };
 
   return (
@@ -51,7 +57,10 @@ export default function PendingOrders({ orders }) {
                     {formatDate(order.createdAt)}
                   </td>
                   <td className="p-3 text-center">
-                    <button className="bg-green-500 text-white border-[2px] border-black font-comic text-xs px-2 py-1 shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000] uppercase font-bold">
+                    <button 
+                      onClick={() => handleApproveClick(order.id)}
+                      className="bg-green-500 text-white border-[2px] border-black font-comic text-xs px-2 py-1 shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000] uppercase font-bold"
+                    >
                       Duyệt
                     </button>
                   </td>

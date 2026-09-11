@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAuthStore } from "../../../Stores/authStore";
+import { useAuthStore } from "../../../../Stores/authStore";
 
 export default function ContactForm() {
   const { user } = useAuthStore();

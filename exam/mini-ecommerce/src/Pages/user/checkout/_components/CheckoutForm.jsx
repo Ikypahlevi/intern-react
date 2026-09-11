@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "../../../Components/Input/Input";
-import Select from "../../../Components/Select/Select";
+import Input from "../../../../Components/user/Input/Input";
+import Select from "../../../../Components/user/Select/Select";
 
 export default function CheckoutForm({ formData, setFormData }) {
   const handleChange = (e) => {

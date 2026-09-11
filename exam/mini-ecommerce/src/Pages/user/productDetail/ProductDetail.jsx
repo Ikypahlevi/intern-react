@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useGetProducts } from "../../Services/queries/useProducts";
+import { useGetProducts } from "../../../Services/queries/useProducts";
 import ProductGallery from "./_components/ProductGallery";
 import ProductInfo from "./_components/ProductInfo";
 import ProductCartAction from "./_components/ProductCartAction";

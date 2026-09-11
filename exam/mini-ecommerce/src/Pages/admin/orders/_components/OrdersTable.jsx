@@ -5,7 +5,8 @@ export default function OrdersTable({
   filters, 
   handleFilterChange, 
   handleResetFilters,
-  onUpdateStatus 
+  onUpdateStatus,
+  highlightId
 }) {
 
   return (
@@ -58,13 +59,14 @@ export default function OrdersTable({
           </thead>
           <tbody className="divide-y-[2px] divide-black">
             {orders.map(order => {
+              const isHighlighted = order.id === highlightId;
               const rowBorder = order.status === 'pending' ? 'border-l-red-500' :
                               order.status === 'shipping' ? 'border-l-blue-400' :
                               order.status === 'completed' ? 'border-l-green-500' :
                               'border-l-gray-500';
                               
               return (
-                <tr key={order.id} className={`hover:bg-yellow-50 transition-colors border-l-4 ${rowBorder} bg-white`}>
+                <tr key={order.id} className={`hover:bg-yellow-50 transition-all duration-500 border-l-[6px] ${rowBorder} ${isHighlighted ? 'bg-yellow-100/80 animate-pulse border-y-[3px] border-y-red-500 shadow-inner' : 'bg-white'}`}>
                   <td className="p-4 align-top">
                     <span className="font-comic text-sm text-blue-600 tracking-tight block">#{order.id}</span>
                     <span className="font-bubble text-xs text-gray-500 block">{new Date(order.createdAt).toLocaleString()}</span>

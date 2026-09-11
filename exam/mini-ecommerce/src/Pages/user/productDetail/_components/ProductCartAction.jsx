@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Button from "../../../Components/Button/Button";
-import { useCartStore } from "../../../Stores/cartStore";
+import Button from "../../../../Components/user/Button/Button";
+import { useCartStore } from "../../../../Stores/cartStore";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 

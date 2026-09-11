@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuthStore } from "../../Stores/authStore";
-import api from "../../Services/api";
-import { useGetOrders } from "../../Services/queries/useOrders";
+import { useAuthStore } from "../../../Stores/authStore";
+import api from "../../../Services/api";
+import { useGetOrders } from "../../../Services/queries/useOrders";
 import ProfileSidebar from "./_components/ProfileSidebar";
 import ProfileDetails from "./_components/ProfileDetails";
 import OrderHistory from "./_components/OrderHistory";

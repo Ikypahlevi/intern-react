@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "./_schema/authSchema";
 import { useAuth } from "./_hooks/useAuth";
-import Input from "../../Components/Input/Input";
-import Button from "../../Components/Button/Button";
+import Input from "../../Components/user/Input/Input";
+import Button from "../../Components/user/Button/Button";
 
 export default function Register() {
   const { handleRegister } = useAuth();

@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../Components/Button/Button";
-import { formatCurrency } from "../../../Utils/format";
+import Button from "../../../../Components/user/Button/Button";
+import { formatCurrency } from "../../../../Utils/format";
 
 export default function CheckoutSummary({ items, totalAmount, shippingFee, paymentMethod, setPaymentMethod, onSubmit, isSubmitting }) {
   const grandTotal = totalAmount + shippingFee;

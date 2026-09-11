@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCartStore } from "../../Stores/cartStore";
+import { useCartStore } from "../../../Stores/cartStore";
 import CartItem from "./_components/CartItem";
 import CartSummary from "./_components/CartSummary";
 import CartSuggestions from "./_components/CartSuggestions";

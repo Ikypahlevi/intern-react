@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import ProductCard from "../../../Components/ProductCard/ProductCard";
-import { useGetProducts } from "../../../Services/queries/useProducts";
+import ProductCard from "../../../../Components/user/ProductCard/ProductCard";
+import { useGetProducts } from "../../../../Services/queries/useProducts";
 import { Link } from "react-router-dom";
 
 export default function CartSuggestions({ cartItems }) {

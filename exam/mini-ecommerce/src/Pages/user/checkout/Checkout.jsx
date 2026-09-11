@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { useCartStore } from "../../Stores/cartStore";
-import { useAuthStore } from "../../Stores/authStore";
-import api from "../../Services/api";
+import { useCartStore } from "../../../Stores/cartStore";
+import { useAuthStore } from "../../../Stores/authStore";
+import api from "../../../Services/api";
 import CheckoutForm from "./_components/CheckoutForm";
 import CheckoutSummary from "./_components/CheckoutSummary";
 

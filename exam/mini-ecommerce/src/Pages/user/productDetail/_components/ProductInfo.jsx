@@ -1,5 +1,5 @@
 import React from "react";
-import { formatCurrency } from "../../../Utils/format";
+import { formatCurrency } from "../../../../Utils/format";
 
 export default function ProductInfo({ product }) {
   const originalPrice = product.price * 1.15;

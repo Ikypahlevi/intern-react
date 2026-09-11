@@ -1,6 +1,6 @@
 import React from "react";
-import { useCartStore } from "../../Stores/cartStore";
-import { formatCurrency } from "../../Utils/format";
+import { useCartStore } from "../../../Stores/cartStore";
+import { formatCurrency } from "../../../Utils/format";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";

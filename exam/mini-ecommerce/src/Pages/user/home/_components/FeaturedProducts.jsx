@@ -1,6 +1,6 @@
 import React from "react";
-import ProductCard from "../../../Components/ProductCard/ProductCard";
-import { useGetProducts } from "../../../Services/queries/useProducts";
+import ProductCard from "../../../../Components/user/ProductCard/ProductCard";
+import { useGetProducts } from "../../../../Services/queries/useProducts";
 
 export default function FeaturedProducts() {
   const { data: products = [], isLoading } = useGetProducts();

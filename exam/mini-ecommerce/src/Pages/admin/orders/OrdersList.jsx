@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
 import AdminPagination from "../../../Components/admin/AdminPagination";
 import { useGetOrders, useUpdateOrderStatus } from "../../../Services/queries/useOrders";
@@ -13,6 +14,8 @@ export default function OrdersList() {
   const { data: ordersData, isLoading, isError } = useGetOrders();
   const updateStatusMutation = useUpdateOrderStatus();
   
+  const location = useLocation();
+  
   const [activeTab, setActiveTab] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -22,6 +25,25 @@ export default function OrdersList() {
     customer: ""
   });
   
+  const [highlightId, setHighlightId] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.highlightOrderId) {
+      const orderId = location.state.highlightOrderId;
+      setFilters(prev => ({ ...prev, id: orderId }));
+      setActiveTab("all");
+      setHighlightId(orderId);
+      
+      // Xóa state để refresh không bị dính
+      window.history.replaceState({}, document.title);
+
+      // Tắt hiệu ứng sau 5 giây
+      setTimeout(() => {
+        setHighlightId(null);
+      }, 5000);
+    }
+  }, [location.state]);
+
   const debouncedFilters = useDebounce(filters, 500);
 
   const orders = useMemo(() => {
@@ -104,6 +126,7 @@ export default function OrdersList() {
         handleFilterChange={handleFilterChange}
         handleResetFilters={handleResetFilters}
         onUpdateStatus={handleUpdateStatus}
+        highlightId={highlightId}
       />
 
       {totalPages > 1 && (

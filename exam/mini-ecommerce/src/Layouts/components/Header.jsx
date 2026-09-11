@@ -133,7 +133,7 @@ export default function Header() {
                     <Link to="/profile" className="hover:text-comic-red">
                       {user?.name || "Khách"}
                     </Link>
-                    {user?.role === ROLES.ADMIN && (
+                    {/* {user?.role === ROLES.ADMIN && (
                       <>
                         <span className="mx-1">/</span>
                         <Link
@@ -143,7 +143,7 @@ export default function Header() {
                           QUẢN TRỊ
                         </Link>
                       </>
-                    )}
+                    )} */}
                     <span className="mx-1">/</span>
                     <button
                       onClick={logout}

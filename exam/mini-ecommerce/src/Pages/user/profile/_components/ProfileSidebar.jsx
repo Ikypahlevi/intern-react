@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuthStore } from "../../../Stores/authStore";
+import { useAuthStore } from "../../../../Stores/authStore";
 
 export default function ProfileSidebar({ activeTab, setActiveTab }) {
   const { user, logout } = useAuthStore();

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Input from "../../../Components/Input/Input";
-import Button from "../../../Components/Button/Button";
-import api from "../../../Services/api";
-import { useAuthStore } from "../../../Stores/authStore";
+import Input from "../../../../Components/user/Input/Input";
+import Button from "../../../../Components/user/Button/Button";
+import api from "../../../../Services/api";
+import { useAuthStore } from "../../../../Stores/authStore";
 
 export default function ProfileDetails({ user }) {
   const { login } = useAuthStore();

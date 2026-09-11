@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useGetProducts } from "../../Services/queries/useProducts";
-import ProductCard from "../../Components/ProductCard/ProductCard";
+import { useGetProducts } from "../../../Services/queries/useProducts";
+import ProductCard from "../../../Components/user/ProductCard/ProductCard";
 import ProductsHeroBanner from "./_components/ProductsHeroBanner";
 import ProductsFilterSidebar from "./_components/ProductsFilterSidebar";
 import Pagination from "./_components/Pagination";

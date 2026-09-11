@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../../Components/Button/Button";
-import Input from "../../../Components/Input/Input";
-import { formatCurrency } from "../../../Utils/format";
+import Button from "../../../../Components/user/Button/Button";
+import Input from "../../../../Components/user/Input/Input";
+import { formatCurrency } from "../../../../Utils/format";
 
 export default function CartSummary({ 
   totalAmount, 

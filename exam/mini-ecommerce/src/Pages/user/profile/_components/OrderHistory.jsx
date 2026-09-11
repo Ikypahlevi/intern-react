@@ -1,6 +1,6 @@
 import React from "react";
-import { formatCurrency } from "../../../Utils/format";
-import { useUpdateOrderStatus } from "../../../Services/queries/useOrders";
+import { formatCurrency } from "../../../../Utils/format";
+import { useUpdateOrderStatus } from "../../../../Services/queries/useOrders";
 import { toast } from "sonner";
 
 export default function OrderHistory({ orders = [] }) {

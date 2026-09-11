@@ -5,18 +5,18 @@ import AdminLayout from "../Layouts/AdminLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import GuestRoute from "./GuestRoute";
 
-import Home from "../Pages/home/Home";
+import Home from "../Pages/user/home/Home";
 import Register from "../Pages/auth/Register";
 import Login from "../Pages/auth/Login";
-import ProductsList from "../Pages/products/ProductsList";
-import ProductDetail from "../Pages/productDetail/ProductDetail";
+import ProductsList from "../Pages/user/products/ProductsList";
+import ProductDetail from "../Pages/user/productDetail/ProductDetail";
 
-import Cart from "../Pages/cart/Cart";
-import Checkout from "../Pages/checkout/Checkout";
-import CheckoutSuccess from "../Pages/checkout/CheckoutSuccess";
-import Profile from "../Pages/profile/Profile";
-import Contact from "../Pages/contact/Contact";
-import About from "../Pages/about/About";
+import Cart from "../Pages/user/cart/Cart";
+import Checkout from "../Pages/user/checkout/Checkout";
+import CheckoutSuccess from "../Pages/user/checkout/CheckoutSuccess";
+import Profile from "../Pages/user/profile/Profile";
+import Contact from "../Pages/user/contact/Contact";
+import About from "../Pages/user/about/About";
 import Overview from "../Pages/admin/overview/Overview";
 import UsersList from "../Pages/admin/users/UsersList";
 import ProductsListAdmin from "../Pages/admin/products/ProductsList";
