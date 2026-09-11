@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function ProductsFilterSidebar({ 
+  isOpen,
+  onClose,
   filters, 
   setFilters, 
   availableCategories, 
@@ -41,8 +43,25 @@ export default function ProductsFilterSidebar({
   };
 
   return (
-    <aside className="lg:col-span-1 space-y-6">
-      <div className="bg-white comic-border shadow-comic p-5">
+    <>
+      {/* Nền mờ cho Mobile */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+      <aside className={`fixed lg:relative top-0 lg:top-0 left-0 h-screen lg:h-auto w-72 lg:w-full bg-[#FFFCEB] lg:bg-transparent p-4 lg:p-0 z-50 lg:z-0 overflow-y-auto lg:overflow-visible transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"} lg:col-span-1 space-y-6`}>
+        
+        {/* Nút đóng cho Mobile */}
+        <button 
+          onClick={onClose}
+          className="lg:hidden absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white comic-border-sm text-black shadow-comic-sm"
+        >
+          <i className="fa-solid fa-xmark"></i>
+        </button>
+
+        <div className="bg-white comic-border shadow-comic p-5">
         {/* Sidebar Title */}
         <div className="flex items-center justify-between border-b-4 border-stone-900 pb-3 mb-4">
           <h2 className="font-comic text-2xl uppercase tracking-wider flex items-center gap-1.5">
@@ -212,5 +231,6 @@ export default function ProductsFilterSidebar({
         </button>
       </div>
     </aside>
+    </>
   );
 }

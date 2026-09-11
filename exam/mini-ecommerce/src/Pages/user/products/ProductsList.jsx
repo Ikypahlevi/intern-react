@@ -14,6 +14,7 @@ export default function ProductsList() {
   const { data: products = [], isLoading } = useGetProducts();
 
   // State Quản lý bộ lọc
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [filters, setFilters] = useState({
     categories: categoryQuery ? [categoryQuery] : [],
     publishers: [],
@@ -96,6 +97,8 @@ export default function ProductsList() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
         {/* Cột trái: Bộ Lọc */}
         <ProductsFilterSidebar 
+          isOpen={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
           filters={filters} 
           setFilters={setFilters}
           availableCategories={availableCategories}
@@ -107,8 +110,15 @@ export default function ProductsList() {
         <section className="lg:col-span-3 space-y-6">
           {/* Top Control Bar */}
           <div className="bg-white comic-border p-3 shadow-comic flex flex-wrap items-center justify-between gap-3 font-bubble">
-            <div className="flex items-center gap-2">
-              <span className="font-comic text-xl text-stone-900">DANH SÁCH ẤN PHẨM</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <button 
+                onClick={() => setIsFilterOpen(true)}
+                className="lg:hidden bg-comic-yellow text-black comic-border-sm px-3 py-1 font-comic text-sm flex items-center gap-2 shadow-comic-sm hover:bg-comic-gold"
+              >
+                <i className="fa-solid fa-filter"></i>
+                <span>Lọc</span>
+              </button>
+              <span className="font-comic text-xl text-stone-900 ml-2">DANH SÁCH ẤN PHẨM</span>
               <span className="bg-stone-100 comic-border-sm px-2 py-0.5 text-xs font-bold text-stone-700">
                 {filteredProducts.length} Sản Phẩm
               </span>
