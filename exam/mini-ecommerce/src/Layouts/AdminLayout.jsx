@@ -1,38 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import React from "react";
+import { Outlet, Navigate } from "react-router-dom";
 import AdminSidebar from "./components/AdminSidebar";
 import AdminHeader from "./components/AdminHeader";
 import { useAuthStore } from "../Stores/authStore";
 
 export default function AdminLayout() {
   const { user } = useAuthStore();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const location = useLocation();
-
-  // Đóng sidebar khi đổi trang trên mobile
-  useEffect(() => {
-    setIsSidebarOpen(false);
-  }, [location.pathname]);
 
   if (!user || user.role !== "admin") {
-    return <Navigate to="/auth/login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return (
-    <div className="bg-[#fcf9f8] min-h-screen text-black antialiased selection:bg-yellow-400 font-bubble flex flex-col">
-      {/* Nền xám mờ khi mở Sidebar trên Mobile */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      )}
-      
-      <AdminSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      
-      <div className="lg:pl-64 transition-all duration-300 w-full flex-1">
-        <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="relative pt-16 w-full min-h-screen p-2 sm:p-4 lg:p-6">
+    <div className="bg-[#fcf9f8] min-h-screen text-black antialiased selection:bg-yellow-400">
+      <AdminSidebar />
+      <div className="pl-64">
+        <AdminHeader />
+        <main className="relative pt-16 w-full min-h-screen p-6">
           <Outlet />
         </main>
       </div>
