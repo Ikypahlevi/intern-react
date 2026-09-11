@@ -21,6 +21,7 @@ import Overview from "../Pages/admin/overview/Overview";
 import UsersList from "../Pages/admin/users/UsersList";
 import ProductsListAdmin from "../Pages/admin/products/ProductsList";
 import OrdersListAdmin from "../Pages/admin/orders/OrdersList";
+import SettingsAdmin from "../Pages/admin/settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -134,6 +135,10 @@ const router = createBrowserRouter([
           {
             path: "orders",
             element: <OrdersListAdmin />
+          },
+          {
+            path: "settings",
+            element: <SettingsAdmin />
           }
         ]
       }
