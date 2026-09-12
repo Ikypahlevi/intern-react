@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
 import AdminPagination from "../../../Components/admin/AdminPagination";
 import { useGetOrders, useUpdateOrderStatus } from "../../../Services/queries/useOrders";
+import { useCreateNotification } from "../../../Services/queries/useNotifications";
 import { useDebounce } from "../../../Utils/useDebounce";
 import { toast } from "sonner";
 import OrdersKpi from "./_components/OrdersKpi";
@@ -13,6 +14,7 @@ import OrdersBottomWidgets from "./_components/OrdersBottomWidgets";
 export default function OrdersList() {
   const { data: ordersData, isLoading, isError } = useGetOrders();
   const updateStatusMutation = useUpdateOrderStatus();
+  const createNotificationMutation = useCreateNotification();
   
   const location = useLocation();
   
@@ -94,6 +96,19 @@ export default function OrdersList() {
     try {
       await updateStatusMutation.mutateAsync({ orderId, status: newStatus });
       toast.success(`Đã cập nhật trạng thái đơn ${orderId} thành công!`);
+
+      const order = orders.find(o => o.id === orderId);
+      if (order && order.userId) {
+        await createNotificationMutation.mutateAsync({
+          id: "NOTIF-" + Math.floor(Math.random() * 100000),
+          userId: String(order.userId),
+          role: "customer",
+          title: "🚚 Cập Nhật Đơn Hàng",
+          message: `Đơn hàng ${orderId} của bạn đã được chuyển sang trạng thái: ${newStatus}.`,
+          link: "/profile",
+          highlightId: orderId
+        });
+      }
     } catch (error) {
       toast.error("Cập nhật trạng thái thất bại.");
     }

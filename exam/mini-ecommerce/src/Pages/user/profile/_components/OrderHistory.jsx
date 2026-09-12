@@ -1,10 +1,12 @@
 import React from "react";
 import { formatCurrency } from "../../../../Utils/format";
 import { useUpdateOrderStatus } from "../../../../Services/queries/useOrders";
+import { useCreateNotification } from "../../../../Services/queries/useNotifications";
 import { toast } from "sonner";
 
 export default function OrderHistory({ orders = [] }) {
   const updateStatusMutation = useUpdateOrderStatus();
+  const createNotificationMutation = useCreateNotification();
 
   // Sắp xếp đơn hàng mới nhất lên đầu
   const sortedOrders = [...orders].sort((a, b) => new Date(b.createdAt || b.date) - new Date(a.createdAt || a.date));
@@ -12,6 +14,16 @@ export default function OrderHistory({ orders = [] }) {
   const handleConfirmReceived = async (orderId) => {
     try {
       await updateStatusMutation.mutateAsync({ orderId, status: "completed" });
+      
+      await createNotificationMutation.mutateAsync({
+        id: "NOTIF-" + Math.floor(Math.random() * 100000),
+        role: "admin",
+        title: "✅ Đơn Hàng Hoàn Tất",
+        message: `Khách hàng vừa xác nhận đã nhận đơn hàng ${orderId}.`,
+        link: "/admin/orders",
+        highlightId: orderId
+      });
+
       toast.success("Cảm ơn bạn đã xác nhận nhận hàng!");
     } catch (error) {
       toast.error("Có lỗi xảy ra, vui lòng thử lại.");

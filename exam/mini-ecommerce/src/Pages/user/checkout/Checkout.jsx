@@ -7,6 +7,7 @@ import { useCartStore } from "../../../Stores/cartStore";
 import { useAuthStore } from "../../../Stores/authStore";
 import api from "../../../Services/api";
 import { useCreateOrder } from "../../../Services/queries/useOrders";
+import { useCreateNotification } from "../../../Services/queries/useNotifications";
 import CheckoutForm from "./_components/CheckoutForm";
 import CheckoutSummary from "./_components/CheckoutSummary";
 import { toast } from "sonner";
@@ -17,6 +18,7 @@ export default function Checkout() {
   const { items, removeItems } = useCartStore();
   const { user, logout } = useAuthStore(); 
   const createOrderMutation = useCreateOrder();
+  const createNotificationMutation = useCreateNotification();
 
   const selectedIds = location.state?.selectedIds || items.map(item => item.id);
   const checkoutItems = useMemo(() => items.filter(item => selectedIds.includes(item.id)), [items, selectedIds]);
@@ -100,6 +102,15 @@ export default function Checkout() {
       };
 
       await createOrderMutation.mutateAsync(newOrder);
+
+      await createNotificationMutation.mutateAsync({
+        id: "NOTIF-" + Math.floor(Math.random() * 100000),
+        role: "admin",
+        title: "📦 Đơn Hàng Mới",
+        message: `Đơn hàng ${newOrder.id} vừa được đặt thành công.`,
+        link: "/admin/orders",
+        highlightId: newOrder.id
+      });
 
       removeItems(selectedIds);
 

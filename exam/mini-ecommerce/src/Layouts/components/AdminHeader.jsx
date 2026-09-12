@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetProducts } from "../../Services/queries/useProducts";
+import { useGetNotifications, useMarkNotificationRead } from "../../Services/queries/useNotifications";
 import { useGetOrders } from "../../Services/queries/useOrders";
 
 export default function AdminHeader({ onMenuClick }) {
@@ -12,6 +13,10 @@ export default function AdminHeader({ onMenuClick }) {
 
   const { data: products = [] } = useGetProducts();
   const { data: orders = [] } = useGetOrders();
+  const { data: notifications = [] } = useGetNotifications();
+  const markReadMutation = useMarkNotificationRead();
+  
+  const adminNotifications = notifications.filter(n => n.role === 'admin' && !n.isRead);
 
   // Close notifications when clicking outside
   useEffect(() => {
@@ -156,16 +161,16 @@ export default function AdminHeader({ onMenuClick }) {
           <i className="fa-solid fa-store text-sm sm:text-base"></i>
         </button>
 
-        {/* Smart Notification Bell */}
+                {/* Smart Notification Bell */}
         <div className="relative" ref={notifRef}>
           <button 
             onClick={() => setShowNotifications(!showNotifications)}
             className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center bg-white border-[2px] border-black shadow-[2px_2px_0px_#000] hover:bg-gray-100 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_#000] transition-all cursor-pointer"
           >
             <i className="fa-regular fa-bell text-black text-sm sm:text-base"></i>
-            {totalNotifications > 0 && (
+            {(totalNotifications + adminNotifications.length) > 0 && (
               <span className="absolute -top-1.5 -right-1.5 bg-red-600 text-white font-comic text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-[2px] border-black font-bold shadow-[1px_1px_0px_#000] animate-bounce">
-                {totalNotifications}
+                {totalNotifications + adminNotifications.length}
               </span>
             )}
           </button>
@@ -175,17 +180,39 @@ export default function AdminHeader({ onMenuClick }) {
             <div className="absolute top-12 right-0 w-72 sm:w-80 bg-white border-[3px] border-black shadow-[5px_5px_0px_#000] font-bubble z-50 overflow-hidden flex flex-col">
               <div className="bg-comic-yellow border-b-[2px] border-black p-3 flex items-center justify-between">
                 <span className="font-black text-sm uppercase">Thông báo hệ thống</span>
-                <span className="text-xs font-bold bg-white px-2 py-0.5 border border-black rounded-full">{totalNotifications} mới</span>
+                <span className="text-xs font-bold bg-white px-2 py-0.5 border border-black rounded-full">{totalNotifications + adminNotifications.length} mới</span>
               </div>
               
               <div className="flex flex-col max-h-[300px] overflow-y-auto">
-                {totalNotifications === 0 ? (
+                {(totalNotifications + adminNotifications.length) === 0 ? (
                   <div className="p-6 flex flex-col items-center justify-center gap-2 text-gray-500">
                     <i className="fa-regular fa-face-smile text-2xl"></i>
                     <span className="text-sm font-bold">Không có thông báo mới!</span>
                   </div>
                 ) : (
                   <>
+                    {/* Event-based notifications */}
+                    {adminNotifications.map(notif => (
+                      <div 
+                        key={notif.id}
+                        onClick={() => { 
+                          markReadMutation.mutate(notif.id);
+                          navigate(notif.link, { state: { highlightOrderId: notif.highlightId } }); 
+                          setShowNotifications(false); 
+                        }} 
+                        className="p-3 border-b-[2px] border-dashed border-gray-300 bg-yellow-100/50 hover:bg-yellow-50 cursor-pointer flex gap-3 items-start transition-colors"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-orange-100 border-[2px] border-black flex items-center justify-center shrink-0">
+                          <i className="fa-solid fa-bell-on text-orange-600 text-xs"></i>
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-black leading-tight">{notif.title}</div>
+                          <div className="text-xs text-gray-600 font-comic mt-1 leading-snug">{notif.message}</div>
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Derived notifications */}
                     {pendingOrdersCount > 0 && (
                       <div 
                         onClick={() => { navigate('/admin/orders'); setShowNotifications(false); }} 
@@ -228,3 +255,5 @@ export default function AdminHeader({ onMenuClick }) {
     </header>
   );
 }
+
+

@@ -5,16 +5,17 @@ import * as z from "zod";
 import AdminDrawer from "../../../../Components/admin/AdminDrawer";
 import AdminPopButton from "../../../../Components/admin/AdminPopButton";
 import { useCreateProduct, useUpdateProduct } from "../../../../Services/queries/useProducts";
+import { useCreateNotification } from "../../../../Services/queries/useNotifications";
 import { toast } from "sonner";
 import { STATUS } from "../../../../Constants";
 
 const productSchema = z.object({
-  sku: z.string().min(1, "MÃ£ SKU khÃ´ng Ä‘Æ°á»£c bá» trá»‘ng"),
+  sku: z.string().min(1, "MÃ£ SKU khÃ´ng Ä‘Æ°á»£c bá»  trá»‘ng"),
   name: z.string().min(2, "TÃªn truyá»‡n pháº£i cÃ³ Ã­t nháº¥t 2 kÃ½ tá»±"),
   author: z.string().optional(),
-  publisher: z.string().min(1, "Vui lÃ²ng chá»n nhÃ  xuáº¥t báº£n"),
-  category: z.string().min(1, "Vui lÃ²ng chá»n thá»ƒ loáº¡i"),
-  format: z.string().min(1, "Vui lÃ²ng chá»n Ä‘á»‹nh dáº¡ng"),
+  publisher: z.string().min(1, "Vui lÃ²ng chá» n nhÃ  xuáº¥t báº£n"),
+  category: z.string().min(1, "Vui lÃ²ng chá» n thá»ƒ loáº¡i"),
+  format: z.string().min(1, "Vui lÃ²ng chá» n Ä‘á»‹nh dáº¡ng"),
   price: z.coerce.number().positive("GiÃ¡ bÃ¡n pháº£i lá»›n hÆ¡n 0"),
   originalPrice: z.coerce.number().min(0, "GiÃ¡ bÃ¬a khÃ´ng há»£p lá»‡"),
   stock: z.coerce.number().min(0, "Tá»“n kho khÃ´ng Ä‘Æ°á»£c Ã¢m"),
@@ -25,6 +26,7 @@ const productSchema = z.object({
 export default function ProductDrawer({ isOpen, onClose, product }) {
   const createMutation = useCreateProduct();
   const updateMutation = useUpdateProduct();
+  const createNotificationMutation = useCreateNotification();
   const fileInputRef = useRef(null);
 
   const isEdit = !!product;
@@ -46,7 +48,7 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
       sku: "",
       name: "",
       author: "",
-      publisher: "NXB Kim Äá»“ng",
+      publisher: "NXB Kim Ä á»“ng",
       category: "HÃ nh Ä‘á»™ng",
       format: "Báº£n TiÃªu Chuáº©n",
       price: 0,
@@ -175,8 +177,15 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
       createMutation.mutate(
         data,
         {
-          onSuccess: () => {
-            toast.success("ThÃªm sáº£n pháº©m má»›i thÃ nh cÃ´ng!");
+          onSuccess: (newProduct) => {
+            toast.success("Thêm sản phẩm mới thành công!");
+            createNotificationMutation.mutateAsync({
+              id: "NOTIF-" + Math.floor(Math.random() * 100000),
+              role: "all",
+              title: "📚 Truyện Mới Về Kho",
+              message: "Truyện vừa lên kệ. Mua ngay kẻo lỡ!",
+              link: "/products"
+            });
             onClose();
           },
         }
@@ -443,3 +452,4 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
     </AdminDrawer>
   );
 }
+

@@ -71,3 +71,15 @@
     scrollbar-width: none;
   }
 }
+@layer base {
+  button, 
+  [role="button"], 
+  a, 
+  input[type="submit"], 
+  input[type="button"], 
+  input[type="radio"], 
+  input[type="checkbox"], 
+  select {
+    cursor: pointer !important;
+  }
+}

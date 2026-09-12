@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import NotificationDropdown from "../../Components/NotificationDropdown";
 import { useCartStore } from "../../Stores/cartStore";
 import { formatCurrency } from "../../Utils/format";
 import { useAuthStore } from "../../Stores/authStore";
@@ -166,28 +167,24 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Cart */}
-            <Link
-              to="/cart"
-              className="relative flex items-center gap-2 bg-comic-yellow hover:bg-comic-gold px-2.5 sm:px-3.5 py-1.5 rounded-xl comic-border shadow-comic comic-btn-hover transition shrink-0"
-            >
-              <div className="relative">
-                <i className="fa-solid fa-basket-shopping text-stone-900 text-base sm:text-lg"></i>
+                        <div className="flex items-center gap-3 shrink-0">
+              {/* Notifications */}
+              {isAuthenticated && <NotificationDropdown />}
+
+              {/* Cart */}
+              <Link
+                to="/cart"
+                className="relative flex items-center justify-center w-10 h-10 bg-comic-yellow hover:bg-comic-gold rounded-xl comic-border shadow-comic transition"
+                title="Giỏ hàng"
+              >
+                <i className="fa-solid fa-basket-shopping text-stone-900 text-lg"></i>
                 {totalItems > 0 && (
-                  <span className="absolute -top-2.5 -right-2.5 bg-comic-red text-white text-[10px] sm:text-[11px] font-comic px-1 min-w-[16px] sm:min-w-[18px] h-4 rounded-full comic-border-sm flex items-center justify-center shadow-comic-sm">
+                  <span className="absolute -top-1 -right-1 bg-comic-red text-white text-[10px] font-comic w-5 h-5 flex items-center justify-center rounded-full comic-border-sm shadow-comic-sm">
                     {totalItems}
                   </span>
                 )}
-              </div>
-              <div className="hidden sm:block text-left leading-none pr-1">
-                <span className="text-stone-700 block text-[10px] font-bold uppercase tracking-wider font-bubble">
-                  Giỏ hàng POW!
-                </span>
-                <span className="font-comic text-base text-stone-900 tracking-wider">
-                  {formatCurrency(totalPrice)}
-                </span>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -291,3 +288,4 @@ export default function Header() {
     </>
   );
 }
+

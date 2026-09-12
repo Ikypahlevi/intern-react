@@ -1,27 +1,37 @@
-﻿# Kế hoạch Cập nhật Logic Tính Doanh Thu
+﻿# Kế hoạch Thêm Hệ Thống Thông Báo (Notifications) & Tối Ưu UX
 
 ## Mục tiêu
-Điều chỉnh lại công thức tính doanh thu trên toàn bộ hệ thống theo đúng yêu cầu:
-1. Đơn thanh toán trước qua QR (MoMo, VNPay, v.v.): Ghi nhận doanh thu ngay lập tức (miễn là không bị hủy).
-2. Đơn thanh toán sau (Ship COD): Chỉ ghi nhận doanh thu khi trạng thái đơn hàng là đã hoàn thành / giao thành công (completed).
+1. Xây dựng hệ thống thông báo realtime cho cả Admin và User khi dữ liệu thay đổi.
+2. Tối ưu giao diện Header User: Rút gọn nút Giỏ hàng và thêm Chuông thông báo.
+3. Đồng bộ hóa con trỏ chuột (cursor: pointer) cho tất cả các phần tử có chức năng tương tác trên toàn hệ thống.
 
-## Các bước triển khai chi tiết
+## Chi tiết các bước thực hiện
 
-### 1. Fix lỗi thiếu dữ liệu (Bug Fix)
-- Hiện tại, chức năng Thanh toán (Checkout) đang quên không lưu trường paymentMethod (Phương thức thanh toán) vào CSDL db.json khi tạo đơn hàng mới.
-- **Giải pháp:** Sửa file Checkout.jsx để đính kèm thêm paymentMethod: paymentMethod vào payload của 
-ewOrder.
+### 1. Cấu hình Dữ Liệu & API (Services)
+- Hệ thống cơ sở dữ liệu (db.json) sẽ được thêm collection "notifications": [].
+- Tạo mới file src/Services/queries/useNotifications.js chứa các custom hooks (useGetNotifications, useCreateNotification, useMarkNotificationRead).
+- Lọc thông báo: 
+  + User thường sẽ nhận thông báo có userId của họ hoặc ole: 'all' (khi có sản phẩm mới).
+  + Admin sẽ nhận thông báo có ole: 'admin'.
 
-### 2. Tạo hàm Utils dùng chung
-- Thay vì viết lại logic tính toán ở 5 file khác nhau, em sẽ tạo một hàm helper isValidRevenue(order) trong src/Utils/helpers.js (hoặc đặt chung vào hàm ormat). Hàm này sẽ nhận vào 1 order và trả về 	rue/false dựa trên 2 quy tắc nêu trên.
+### 2. Bắt Sự Kiện Thay Đổi Dữ Liệu (Triggers)
+Hệ thống sẽ tự động tạo thông báo (POST notification) trong các trường hợp sau:
+- **User đặt hàng thành công (Checkout.jsx):** Bắn thông báo cho Admin "Có đơn hàng mới" -> Kèm link nhảy đến bảng Quản lý Đơn hàng (highlight đơn đó lên).
+- **Admin duyệt/cập nhật đơn hàng (OrdersList.jsx):** Bắn thông báo cho User mua hàng "Đơn hàng của bạn đã được cập nhật..." -> Kèm link nhảy đến trang Profile/Đơn hàng.
+- **Admin thêm sản phẩm mới (ProductsList.jsx):** Bắn thông báo cho tất cả User "Vừa có truyện mới về kho..." -> Kèm link nhảy đến trang danh sách Sản phẩm.
 
-### 3. Cập nhật các bảng thống kê (Admin)
-Áp dụng hàm logic mới vào các khu vực hiển thị doanh thu:
-- **OrdersKpi.jsx**: Khối KPI phía trên cùng của trang Quản lý Đơn Hàng.
-- **KpiCards.jsx**: Khối tổng doanh thu (Card 1) ở trang Overview.
-- **RevenueChart.jsx**: Biểu đồ hình cột hiển thị doanh thu 6 tháng gần nhất.
-- **CategoryDonut.jsx**: Biểu đồ tỷ trọng doanh thu theo thể loại (Donut Chart).
-- **UsersList.jsx**: Cột tổng chi tiêu (Total Spend) của từng khách hàng trong bảng Quản lý User.
+### 3. Tối ưu Header Giao Diện User (Header.jsx)
+- Rút gọn nút Giỏ hàng (xóa phần text thừa, chỉ giữ lại icon asket-shopping và số lượng).
+- Thêm Icon Chuông Thông Báo (Notification Bell) ngay cạnh Giỏ hàng.
+- Khi bấm vào chuông sẽ xổ xuống danh sách thông báo. Bấm vào thông báo nào sẽ điều hướng (
+avigate) đến trang chứa dữ liệu đó.
+
+### 4. Nâng cấp Thông Báo cho Admin (AdminHeader.jsx)
+- Tích hợp thêm các thông báo sự kiện (như có người vừa đặt hàng) vào chung với danh sách cảnh báo tồn kho và chờ duyệt hiện tại.
+- Hỗ trợ click để điều hướng thẳng đến bảng tương ứng (và highlight như yêu cầu).
+
+### 5. Chuẩn hóa UX (Cursor Pointer)
+- Thêm luật CSS toàn cục (Global CSS) vào index.css: Bắt buộc tất cả các thẻ utton,  (link), hoặc các thẻ đóng vai trò nút bấm (ole="button") đều phải có hiệu ứng trỏ chuột bàn tay (cursor: pointer !important).
 
 ## Xác nhận
-Kế hoạch này đảm bảo tính nhất quán dữ liệu cao nhất và xử lý triệt để cái lõi của việc tính sai doanh thu. Nếu anh/chị đồng ý với cách giải quyết này, hãy bấm "Proceed" để em tiến hành viết code cho tất cả các file liên quan nhé!
+Kế hoạch này sẽ thêm một lớp giao tiếp hai chiều hoàn hảo giữa Admin và User. Mọi thay đổi quan trọng đều được báo cáo kịp thời và điều hướng đúng chỗ. Anh/chị hãy đọc qua kế hoạch, nếu đồng ý thì nhấn "Proceed" để em triển khai từ A-Z nhé!
