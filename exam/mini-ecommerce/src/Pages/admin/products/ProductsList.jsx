@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useGetProducts, useCreateProduct } from "../../../Services/queries/useProducts";
 import { STATUS } from "../../../Constants";
 import { useDebounce } from "../../../Utils/useDebounce";
@@ -8,12 +9,17 @@ import ConfirmModal from "../../../Components/admin/ConfirmModal";
 import ProductsActionBar from "./_components/ProductsActionBar";
 import ProductsTable from "./_components/ProductsTable";
 import ProductDrawer from "./_components/ProductDrawer";
+import ProductDetailModal from "./_components/ProductDetailModal";
 import { exportToExcel, importFromExcel } from "../../../Utils/excel";
 import { toast } from "sonner";
 
 export default function ProductsList() {
   const { data: products = [], isLoading } = useGetProducts();
   const createMutation = useCreateProduct();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const viewProductId = searchParams.get('viewProduct');
+  const viewingProduct = useMemo(() => products.find(p => String(p.id) === viewProductId), [products, viewProductId]);
 
   const [columnFilters, setColumnFilters] = useState({
     sku: "",
@@ -197,7 +203,9 @@ export default function ProductsList() {
             products={currentProducts}
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
+            isLoading={isLoading}
             onEditProduct={handleOpenDrawer}
+            onViewProduct={(id) => setSearchParams({ viewProduct: id })}
           />
           
           <AdminPagination 
@@ -213,6 +221,15 @@ export default function ProductsList() {
           isOpen={isDrawerOpen}
           onClose={() => setIsDrawerOpen(false)}
           product={editingProduct}
+        />
+        
+        <ProductDetailModal 
+          isOpen={!!viewProductId}
+          product={viewingProduct}
+          onClose={() => {
+            searchParams.delete('viewProduct');
+            setSearchParams(searchParams);
+          }}
         />
       </div>
 

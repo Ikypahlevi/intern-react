@@ -95,7 +95,10 @@ export default function AdminHeader({ onMenuClick }) {
                     <div
                       key={p.id}
                       className="flex items-center gap-2 hover:bg-yellow-50 p-1 cursor-pointer"
-                      onClick={() => navigate(`/admin/products/${p.id}`)}
+                      onClick={() => {
+                        navigate(`/admin/products?viewProduct=${p.id}`);
+                        setShowResults(false);
+                      }}
                     >
                       <img
                         src={p.image}

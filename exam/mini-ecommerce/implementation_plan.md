@@ -1,25 +1,34 @@
-﻿# Kế hoạch đồng bộ UI Form (Xóa nút X, dùng nút Hủy bỏ)
+﻿# Kế hoạch bổ sung Popup Chi tiết Sản phẩm (Admin)
 
 ## Mục tiêu
-Đồng nhất trải nghiệm người dùng (UX) trên toàn bộ hệ thống bằng cách bắt buộc người dùng sử dụng các nút hành động rõ ràng (như "Hủy bỏ") ở dưới đáy form thay vì bấm nút X tắt nhanh ở góc trên. Tránh tình trạng tắt nhầm form.
+Tạo ra một Popup (Modal) hiển thị toàn bộ thông tin chi tiết của sản phẩm. Popup này sẽ xuất hiện ở hai trường hợp:
+1. Khi Admin bấm vào một sản phẩm từ thanh tìm kiếm (Live Search).
+2. Khi Admin bấm vào nút "Xem" (icon con mắt) trên bảng quản lý sản phẩm.
 
-## Chi tiết thay đổi
+## Giải pháp Kỹ thuật
+Sử dụng **URL Search Params** (?viewProduct=ID) để quản lý trạng thái hiển thị của Popup.
+- Lợi ích: Dễ dàng chia sẻ link, thống nhất trạng thái giữa thanh tìm kiếm toàn cục và trang quản lý sản phẩm mà không cần tạo thêm global state phức tạp (như Redux hay Zustand).
 
-### 1. Khu vực Admin Form (AdminDrawer)
-- **File:** src/Components/admin/AdminDrawer.jsx (Component dùng chung cho các form Thêm/Sửa Sản phẩm, Tài khoản...)
-- **Hành động:** Xóa hoàn toàn nút button chứa icon a-xmark ở góc trên bên phải. Các form hiện tại đều đã có nút "Hủy Bỏ" ở phần footer.
+## Chi tiết các bước thực hiện
 
-### 2. Khu vực Popup Xác nhận (ConfirmModal)
-- **File:** src/Components/admin/ConfirmModal.jsx (Component dùng chung cho popup Xóa, Xuất báo cáo, Xác nhận...)
-- **Hành động:** Lược bỏ nút X ở Header của Modal. Người dùng sẽ chỉ có thể dùng nút "Hủy Bỏ" hoặc "Đồng ý" ở dưới.
+### 1. Cập nhật thanh tìm kiếm (AdminHeader.jsx)
+- Thay đổi logic 
+avigate() khi click vào sản phẩm tìm kiếm.
+- Thay vì điều hướng tới route lỗi /admin/products/:id, hệ thống sẽ điều hướng tới trang quản lý sản phẩm và đính kèm tham số: /admin/products?viewProduct={id}.
 
-### 3. Khu vực User Modal
-- **File:** src/Components/user/Modal/Modal.jsx
-- **Hành động:** Xóa nút X ở trên cùng và bổ sung thêm nút "Hủy bỏ" mặc định ở cuối Modal để đảm bảo người dùng có đường thoát.
+### 2. Thêm nút "Xem chi tiết" vào bảng (ProductsTable.jsx)
+- Trong cột hành động (Actions), bổ sung một nút bấm màu vàng có icon con mắt (a-eye).
+- Khi click, nút này sẽ gọi hàm để đẩy tham số ?viewProduct={id} lên URL.
 
-### 4. Khu vực Lọc Sản Phẩm Mobile (ProductsFilterSidebar)
-- **File:** src/Pages/user/products/_components/ProductsFilterSidebar.jsx
-- **Hành động:** Đây là form bộ lọc trên mobile, nút tắt hiện đang là dấu X. Đổi nút này thành nút chứa chữ "HỦY BỎ" hoặc "ĐÓNG" rõ ràng thay vì chỉ dùng icon.
+### 3. Tạo Component ProductDetailModal.jsx
+- Xây dựng một Popup mới ở src/Pages/admin/products/_components/ProductDetailModal.jsx.
+- Giao diện mang phong cách Comic đặc trưng của dự án (viền dày, shadow đậm).
+- **Dữ liệu hiển thị:** Tên, ảnh, tác giả, nhà xuất bản, thể loại, định dạng, trạng thái (có badge màu), giá bán, giá gốc, số lượng tồn, số lượng bán, và phần mô tả.
+- **Tuân thủ quy tắc cũ:** Không dùng nút X ở góc trên để đóng. Sẽ chỉ có một nút "Đóng lại" ở dưới cùng.
+
+### 4. Tích hợp vào ProductsList.jsx
+- Sử dụng hook useSearchParams để lắng nghe URL. Nếu thấy có iewProduct, trang sẽ tự động render ProductDetailModal và truyền ID vào.
+- Khi đóng Modal, chỉ cần gỡ bỏ tham số iewProduct khỏi URL.
 
 ## Xác nhận
-Kế hoạch này sẽ rà soát và loại bỏ sạch sẽ mọi nút X trên các form toàn dự án. Nếu anh/chị đồng ý thì em sẽ bắt đầu sửa code ngay nhé!
+Kế hoạch này đảm bảo tính năng mới được tích hợp mượt mà, đúng chuẩn luồng dữ liệu của React Router và tuân thủ chặt chẽ phong cách thiết kế UI/UX của toàn dự án. Nếu anh/chị đồng ý, em sẽ code ngay nhé!

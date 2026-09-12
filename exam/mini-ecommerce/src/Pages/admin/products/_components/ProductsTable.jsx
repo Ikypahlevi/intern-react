@@ -5,7 +5,14 @@ import { useDeleteProduct } from "../../../../Services/queries/useProducts";
 import { toast } from "sonner";
 import ConfirmModal from "../../../../Components/admin/ConfirmModal";
 
-export default function ProductsTable({ products, columnFilters, setColumnFilters, onEditProduct }) {
+export default function ProductsTable({ 
+  products, 
+  columnFilters, 
+  setColumnFilters, 
+  isLoading, 
+  onEditProduct, 
+  onViewProduct 
+}) {
   const deleteMutation = useDeleteProduct();
   const [productToDelete, setProductToDelete] = useState(null);
 
@@ -216,6 +223,13 @@ export default function ProductsTable({ products, columnFilters, setColumnFilter
 
                   <td className="p-3 text-center">
                     <div className="flex items-center justify-center gap-2 opacity-100 lg:opacity-50 group-hover:opacity-100 transition-opacity">
+                      <button 
+                        onClick={() => onViewProduct(product.id)}
+                        className="w-8 h-8 bg-yellow-400 text-black border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-yellow-500 transition-colors"
+                        title="Xem Chi Tiết"
+                      >
+                        <i className="fa-solid fa-eye"></i>
+                      </button>
                       <button 
                         onClick={() => onEditProduct(product)}
                         className="w-8 h-8 bg-blue-400 text-black border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-blue-500 transition-colors"
