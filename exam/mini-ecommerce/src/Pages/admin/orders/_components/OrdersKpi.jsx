@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { isOrderCountedInRevenue } from "../../../../Utils/helpers";
 
 export default function OrdersKpi({ orders }) {
   const stats = useMemo(() => {
@@ -9,7 +10,7 @@ export default function OrdersKpi({ orders }) {
     let completed = 0;
 
     orders.forEach(o => {
-      if (o.status !== 'cancelled') {
+      if (isOrderCountedInRevenue(o)) {
         revenue += o.totalAmount;
       }
       if (o.status === 'pending') pending++;

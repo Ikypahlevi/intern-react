@@ -1,28 +1,27 @@
-﻿# Kế hoạch Thay thế Popup bằng Hiệu ứng Highlight Sản Phẩm
+﻿# Kế hoạch Cập nhật Logic Tính Doanh Thu
 
 ## Mục tiêu
-Loại bỏ hoàn toàn Popup hiển thị chi tiết sản phẩm vừa tạo. Thay vào đó, khi Admin click vào một sản phẩm từ thanh tìm kiếm, hệ thống sẽ điều hướng về bảng sản phẩm, tự động chuyển đến trang (pagination) chứa sản phẩm đó, cuộn (scroll) tới dòng chứa sản phẩm, và làm nổi bật (highlight) dòng đó lên.
+Điều chỉnh lại công thức tính doanh thu trên toàn bộ hệ thống theo đúng yêu cầu:
+1. Đơn thanh toán trước qua QR (MoMo, VNPay, v.v.): Ghi nhận doanh thu ngay lập tức (miễn là không bị hủy).
+2. Đơn thanh toán sau (Ship COD): Chỉ ghi nhận doanh thu khi trạng thái đơn hàng là đã hoàn thành / giao thành công (completed).
 
-## Chi tiết các bước thực hiện
+## Các bước triển khai chi tiết
 
-### 1. Dọn dẹp code cũ (Rollback)
-- Xóa hoàn toàn file ProductDetailModal.jsx.
-- Xóa import và component Modal trong ProductsList.jsx.
-- Xóa nút "Xem chi tiết" (icon con mắt) vừa thêm ở cột hành động trong ProductsTable.jsx.
+### 1. Fix lỗi thiếu dữ liệu (Bug Fix)
+- Hiện tại, chức năng Thanh toán (Checkout) đang quên không lưu trường paymentMethod (Phương thức thanh toán) vào CSDL db.json khi tạo đơn hàng mới.
+- **Giải pháp:** Sửa file Checkout.jsx để đính kèm thêm paymentMethod: paymentMethod vào payload của 
+ewOrder.
 
-### 2. Sửa lại thanh tìm kiếm (AdminHeader.jsx)
-- Cập nhật URL khi bấm vào kết quả tìm kiếm: đổi từ ?viewProduct={id} thành ?highlight={id}.
+### 2. Tạo hàm Utils dùng chung
+- Thay vì viết lại logic tính toán ở 5 file khác nhau, em sẽ tạo một hàm helper isValidRevenue(order) trong src/Utils/helpers.js (hoặc đặt chung vào hàm ormat). Hàm này sẽ nhận vào 1 order và trả về 	rue/false dựa trên 2 quy tắc nêu trên.
 
-### 3. Logic tự động nhảy trang (ProductsList.jsx)
-- Đọc tham số highlight từ URL.
-- Dò tìm xem sản phẩm đó nằm ở vị trí (index) số mấy trong danh sách (sau khi đã lọc).
-- Tính toán xem index đó thuộc trang (page) thứ mấy.
-- Tự động setCurrentPage(page) để nhảy đúng đến trang chứa sản phẩm.
-
-### 4. Hiệu ứng Cuộn & Làm nổi bật (ProductsTable.jsx)
-- Dựa vào ID truyền xuống từ URL, tìm thẻ <tr> chứa sản phẩm.
-- Dùng useRef và scrollIntoView({ behavior: 'smooth', block: 'center' }) để cuộn màn hình hiển thị ngay dòng sản phẩm.
-- Thêm class CSS thay đổi màu nền (ví dụ: vàng sáng) cho dòng đó. Hiệu ứng này sẽ kéo dài khoảng 3 giây rồi phai dần về màu trắng bình thường, sau đó hệ thống sẽ tự động gỡ tham số highlight khỏi URL.
+### 3. Cập nhật các bảng thống kê (Admin)
+Áp dụng hàm logic mới vào các khu vực hiển thị doanh thu:
+- **OrdersKpi.jsx**: Khối KPI phía trên cùng của trang Quản lý Đơn Hàng.
+- **KpiCards.jsx**: Khối tổng doanh thu (Card 1) ở trang Overview.
+- **RevenueChart.jsx**: Biểu đồ hình cột hiển thị doanh thu 6 tháng gần nhất.
+- **CategoryDonut.jsx**: Biểu đồ tỷ trọng doanh thu theo thể loại (Donut Chart).
+- **UsersList.jsx**: Cột tổng chi tiêu (Total Spend) của từng khách hàng trong bảng Quản lý User.
 
 ## Xác nhận
-Kế hoạch này mang tính thực tế cao, giúp người quản lý định vị ngay sản phẩm trên bảng dữ liệu mà không cần xem qua popup. Nếu anh/chị chốt phương án này, hãy bấm "Proceed" để em tiến hành dọn dẹp và code luôn nhé!
+Kế hoạch này đảm bảo tính nhất quán dữ liệu cao nhất và xử lý triệt để cái lõi của việc tính sai doanh thu. Nếu anh/chị đồng ý với cách giải quyết này, hãy bấm "Proceed" để em tiến hành viết code cho tất cả các file liên quan nhé!

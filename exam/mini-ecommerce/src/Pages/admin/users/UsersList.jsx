@@ -3,6 +3,7 @@ import { useGetUsers, useCreateUser } from "../../../Services/queries/useUsers";
 import { useGetOrders } from "../../../Services/queries/useOrders";
 import { ROLES, STATUS } from "../../../Constants";
 import { useDebounce } from "../../../Utils/useDebounce";
+import { isOrderCountedInRevenue } from "../../../Utils/helpers";
 
 import AdminPageHeader from "../../../Components/admin/AdminPageHeader";
 import AdminPagination from "../../../Components/admin/AdminPagination";
@@ -18,7 +19,7 @@ export default function UsersList() {
   const { data: orders = [], isLoading: loadingOrders } = useGetOrders();
   const createMutation = useCreateUser();
 
-  const [activeTab, setActiveTab] = useState("all"); // 'all', 'customers', 'admins', 'locked'
+  const [activeTab, setActiveTab] = useState("all"); 
   const [globalSearch, setGlobalSearch] = useState("");
   const debouncedGlobalSearch = useDebounce(globalSearch, 500);
 
@@ -39,10 +40,15 @@ export default function UsersList() {
   // Combine users with their total spend based on orders
   const usersWithSpend = useMemo(() => {
     return users.map((user) => {
-      const userOrders = orders.filter(
-        (o) => o.userId === user.id && o.status !== "cancelled",
-      );
-      const totalSpend = userOrders.reduce((sum, o) => sum + o.totalAmount, 0);
+      const userOrders = orders.filter((o) => o.userId === user.id && o.status !== "cancelled");
+      
+      const totalSpend = userOrders.reduce((sum, o) => {
+        if (isOrderCountedInRevenue(o)) {
+          return sum + o.totalAmount;
+        }
+        return sum;
+      }, 0);
+      
       return { ...user, totalSpend, orderCount: userOrders.length };
     });
   }, [users, orders]);

@@ -94,6 +94,7 @@ export default function Checkout() {
           image: item.image
         })),
         totalAmount: totalAmount + shippingFee,
+        paymentMethod: paymentMethod,
         status: "pending",
         createdAt: new Date().toISOString()
       };

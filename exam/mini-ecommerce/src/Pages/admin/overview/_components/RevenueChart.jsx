@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { isOrderCountedInRevenue } from "../../../../Utils/helpers";
 
 export default function RevenueChart({ orders }) {
   // Generate last 6 months data dynamically
@@ -27,7 +28,9 @@ export default function RevenueChart({ orders }) {
 
       const monthIndex = months.findIndex(m => m.monthValue === orderMonth && m.yearValue === orderYear);
       if (monthIndex !== -1) {
-        months[monthIndex].revenue += order.totalAmount;
+        if (isOrderCountedInRevenue(order)) {
+          months[monthIndex].revenue += order.totalAmount;
+        }
         months[monthIndex].ordersCount += 1;
       }
     });

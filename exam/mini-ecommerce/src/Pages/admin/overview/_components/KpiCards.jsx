@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
+import { isOrderCountedInRevenue } from "../../../../Utils/helpers";
 
 export default function KpiCards({ orders, products, users }) {
   // Calculate dynamic data
   const totalRevenue = useMemo(() => {
     return orders.reduce((acc, order) => {
-      if (order.status !== 'cancelled') {
+      if (isOrderCountedInRevenue(order)) {
         return acc + order.totalAmount;
       }
       return acc;

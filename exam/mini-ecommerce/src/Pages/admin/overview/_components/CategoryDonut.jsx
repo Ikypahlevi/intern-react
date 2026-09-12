@@ -1,19 +1,18 @@
 import React, { useMemo } from "react";
+import { isOrderCountedInRevenue } from "../../../../Utils/helpers";
 
 export default function CategoryDonut({ products, orders }) {
   const categoryStats = useMemo(() => {
     const stats = {};
     
-    // Tạo map để tra cứu danh mục của sản phẩm nhanh chóng
     const productCategoryMap = {};
     products.forEach(p => {
       productCategoryMap[p.id] = p.category || "Khác";
     });
 
-    // Lặp qua tất cả đơn hàng (không tính đơn đã hủy)
     if (orders && orders.length > 0) {
       orders.forEach(order => {
-        if (order.status === 'cancelled') return;
+        if (!isOrderCountedInRevenue(order)) return;
         
         if (order.items && order.items.length > 0) {
           order.items.forEach(item => {
