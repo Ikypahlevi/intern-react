@@ -113,10 +113,8 @@ export default function ProductsList() {
   }, [highlightProductId, filteredProducts, itemsPerPage]);
 
   React.useEffect(() => {
-    if (!highlightProductId) {
-      setCurrentPage(1);
-    }
-  }, [debouncedFilters, highlightProductId]);
+    setCurrentPage(1);
+  }, [debouncedFilters]);
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const currentProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
