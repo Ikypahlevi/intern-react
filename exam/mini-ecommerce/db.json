@@ -1668,7 +1668,7 @@
       "momo": true,
       "zalo": true,
       "cod": true,
-      "stripe": false
+      "stripe": true
     },
     "shipping": {
       "freeshipThreshold": 300000,

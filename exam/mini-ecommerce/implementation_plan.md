@@ -1,24 +1,25 @@
-﻿# Kế hoạch khắc phục dứt điểm lỗi Layout Admin (Vỡ giao diện & Cuộn ngang)
+﻿# Kế hoạch đồng bộ UI Form (Xóa nút X, dùng nút Hủy bỏ)
 
-## Nguyên nhân gốc rễ
-Việc sử dụng thuộc tính padding-left: 256px (pl-64) kết hợp với thẻ header được định vị tuyệt đối ixed left-64 right-0 là cách làm cũ, rất dễ gây lỗi tính toán kích thước (overflow) trên một số độ phân giải màn hình hoặc khi bị kết hợp với các class responsive mới, dẫn đến tình trạng xuất hiện thanh cuộn ngang và bị cắt lẹm nội dung bên phải như trong hình.
+## Mục tiêu
+Đồng nhất trải nghiệm người dùng (UX) trên toàn bộ hệ thống bằng cách bắt buộc người dùng sử dụng các nút hành động rõ ràng (như "Hủy bỏ") ở dưới đáy form thay vì bấm nút X tắt nhanh ở góc trên. Tránh tình trạng tắt nhầm form.
 
-## Giải pháp: Áp dụng CSS Grid Layout
-Chúng ta sẽ đập bỏ cách dàn trang cũ và chuyển sang dùng hệ thống **CSS Grid** hiện đại, đảm bảo Responsive mượt mà 100% không bao giờ vỡ.
+## Chi tiết thay đổi
 
-### 1. Thay đổi cấu trúc AdminLayout.jsx
-- Bỏ cách dùng padding pl-64.
-- Áp dụng Grid: lg:grid lg:grid-cols-[256px_1fr].
-- Cột 1 (256px) dành cho Sidebar. Cột 2 (1fr - lấy toàn bộ phần diện tích còn lại) dành cho Header và Main Content.
+### 1. Khu vực Admin Form (AdminDrawer)
+- **File:** src/Components/admin/AdminDrawer.jsx (Component dùng chung cho các form Thêm/Sửa Sản phẩm, Tài khoản...)
+- **Hành động:** Xóa hoàn toàn nút button chứa icon a-xmark ở góc trên bên phải. Các form hiện tại đều đã có nút "Hủy Bỏ" ở phần footer.
 
-### 2. Tái cấu trúc AdminHeader.jsx
-- Xóa bỏ định vị tĩnh ixed left-64 right-0.
-- Chuyển sang dùng sticky top-0 z-40 w-full.
-- Lợi ích: Header sẽ luôn nằm gọn gàng 100% bên trong không gian của cột 2, không bao giờ bị tràn hay cắt lẹm ra khỏi màn hình. Vẫn đảm bảo tính năng dính chặt trên cùng khi cuộn chuột.
+### 2. Khu vực Popup Xác nhận (ConfirmModal)
+- **File:** src/Components/admin/ConfirmModal.jsx (Component dùng chung cho popup Xóa, Xuất báo cáo, Xác nhận...)
+- **Hành động:** Lược bỏ nút X ở Header của Modal. Người dùng sẽ chỉ có thể dùng nút "Hủy Bỏ" hoặc "Đồng ý" ở dưới.
 
-### 3. Tối ưu AdminSidebar.jsx
-- Trên màn hình máy tính (lg), Sidebar sẽ nằm ngoan ngoãn trong cột 1 của Grid (sticky top-0 h-screen).
-- Trên điện thoại, Sidebar sẽ chuyển thành dạng Drawer (trượt ra trượt vào) đè lên trên nội dung bằng ixed z-50.
+### 3. Khu vực User Modal
+- **File:** src/Components/user/Modal/Modal.jsx
+- **Hành động:** Xóa nút X ở trên cùng và bổ sung thêm nút "Hủy bỏ" mặc định ở cuối Modal để đảm bảo người dùng có đường thoát.
+
+### 4. Khu vực Lọc Sản Phẩm Mobile (ProductsFilterSidebar)
+- **File:** src/Pages/user/products/_components/ProductsFilterSidebar.jsx
+- **Hành động:** Đây là form bộ lọc trên mobile, nút tắt hiện đang là dấu X. Đổi nút này thành nút chứa chữ "HỦY BỎ" hoặc "ĐÓNG" rõ ràng thay vì chỉ dùng icon.
 
 ## Xác nhận
-Với cấu trúc Grid này, giao diện sẽ bám sát 100% kích thước màn hình của anh/chị, dứt điểm hoàn toàn bệnh tràn thanh cuộn ngang.
+Kế hoạch này sẽ rà soát và loại bỏ sạch sẽ mọi nút X trên các form toàn dự án. Nếu anh/chị đồng ý thì em sẽ bắt đầu sửa code ngay nhé!

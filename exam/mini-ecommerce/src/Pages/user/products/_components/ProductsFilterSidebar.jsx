@@ -56,9 +56,9 @@ export default function ProductsFilterSidebar({
         {/* Nút đóng cho Mobile */}
         <button 
           onClick={onClose}
-          className="lg:hidden absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white comic-border-sm text-black shadow-comic-sm"
+          className="lg:hidden absolute top-4 right-4 px-2 py-1 flex items-center justify-center bg-comic-red comic-border-sm text-white shadow-comic-sm font-comic text-xs uppercase"
         >
-          <i className="fa-solid fa-xmark"></i>
+          Hủy bỏ
         </button>
 
         <div className="bg-white comic-border shadow-comic p-5">

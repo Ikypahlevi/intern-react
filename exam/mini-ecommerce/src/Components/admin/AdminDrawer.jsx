@@ -35,12 +35,6 @@ export default function AdminDrawer({
               {subtitle && <p className="font-bubble text-sm font-bold text-gray-800">{subtitle}</p>}
             </div>
           </div>
-          <button 
-            onClick={onClose}
-            className="w-8 h-8 bg-white text-black border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-red-500 hover:text-white transition-colors"
-          >
-            <i className="fa-solid fa-xmark"></i>
-          </button>
         </div>
 
         {/* Form Body */}

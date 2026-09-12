@@ -37,12 +37,6 @@ export default function ConfirmModal({
             <i className={`fa-solid ${isDanger ? 'fa-triangle-exclamation animate-pulse' : 'fa-circle-question'} text-xl`}></i>
             <h3 className="font-comic font-black text-xl tracking-wider uppercase mt-1">{title}</h3>
           </div>
-          <button 
-            onClick={onClose}
-            className={`w-8 h-8 flex items-center justify-center border-[2px] border-black ${isDanger ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'} transition-colors shadow-[2px_2px_0px_#000]`}
-          >
-            <i className="fa-solid fa-xmark text-lg"></i>
-          </button>
         </div>
 
         {/* Body */}
