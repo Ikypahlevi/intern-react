@@ -96,7 +96,7 @@ export default function AdminHeader({ onMenuClick }) {
                       key={p.id}
                       className="flex items-center gap-2 hover:bg-yellow-50 p-1 cursor-pointer"
                       onClick={() => {
-                        navigate(`/admin/products?viewProduct=${p.id}`);
+                        navigate(`/admin/products?highlight=${p.id}`);
                         setShowResults(false);
                       }}
                     >

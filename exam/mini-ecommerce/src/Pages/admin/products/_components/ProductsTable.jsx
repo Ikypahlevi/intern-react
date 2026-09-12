@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { formatCurrency } from "../../../../Utils/format";
 import AdminBadge from "../../../../Components/admin/AdminBadge";
 import { useDeleteProduct } from "../../../../Services/queries/useProducts";
@@ -11,10 +11,25 @@ export default function ProductsTable({
   setColumnFilters, 
   isLoading, 
   onEditProduct, 
-  onViewProduct 
+  highlightProductId,
+  onClearHighlight
 }) {
   const deleteMutation = useDeleteProduct();
   const [productToDelete, setProductToDelete] = useState(null);
+  const rowRefs = useRef({});
+
+  useEffect(() => {
+    if (highlightProductId && rowRefs.current[highlightProductId]) {
+      rowRefs.current[highlightProductId].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+      const timer = setTimeout(() => {
+        if (onClearHighlight) onClearHighlight();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [highlightProductId, onClearHighlight]);
 
   const handleFilterChange = (col, value) => {
     setColumnFilters(prev => ({ ...prev, [col]: value }));
@@ -160,11 +175,14 @@ export default function ProductsTable({
 
             {/* TBODY */}
             <tbody className="divide-y-[2px] divide-black font-bubble text-sm">
-              {products.length > 0 ? products.map((product) => (
-                <tr 
-                  key={product.id} 
-                  className="hover:bg-yellow-50 transition-colors bg-white group"
-                >
+              {products.length > 0 ? products.map((product) => {
+                const isHighlighted = String(product.id) === String(highlightProductId);
+                return (
+                  <tr 
+                    key={product.id} 
+                    ref={(el) => rowRefs.current[product.id] = el}
+                    className={`transition-colors duration-1000 group ${isHighlighted ? 'bg-yellow-200' : 'bg-white hover:bg-yellow-50'}`}
+                  >
                   <td className="p-3 border-r-[2px] border-black">
                     <span className="font-comic font-black bg-gray-200 px-2 py-1 shadow-[1px_1px_0px_#000] border-[2px] border-black">
                       {product.sku || product.id}
@@ -246,8 +264,9 @@ export default function ProductsTable({
                       </button>
                     </div>
                   </td>
-                </tr>
-              )) : (
+                  </tr>
+                );
+              }) : (
                 <tr>
                   <td colSpan="8" className="p-10 text-center">
                     <div className="flex flex-col items-center justify-center gap-2">

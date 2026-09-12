@@ -9,7 +9,6 @@ import ConfirmModal from "../../../Components/admin/ConfirmModal";
 import ProductsActionBar from "./_components/ProductsActionBar";
 import ProductsTable from "./_components/ProductsTable";
 import ProductDrawer from "./_components/ProductDrawer";
-import ProductDetailModal from "./_components/ProductDetailModal";
 import { exportToExcel, importFromExcel } from "../../../Utils/excel";
 import { toast } from "sonner";
 
@@ -18,8 +17,7 @@ export default function ProductsList() {
   const createMutation = useCreateProduct();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const viewProductId = searchParams.get('viewProduct');
-  const viewingProduct = useMemo(() => products.find(p => String(p.id) === viewProductId), [products, viewProductId]);
+  const highlightProductId = searchParams.get('highlight');
 
   const [columnFilters, setColumnFilters] = useState({
     sku: "",
@@ -105,8 +103,20 @@ export default function ProductsList() {
   const itemsPerPage = 10;
 
   React.useEffect(() => {
-    setCurrentPage(1);
-  }, [debouncedFilters]);
+    if (highlightProductId && filteredProducts.length > 0) {
+      const index = filteredProducts.findIndex(p => String(p.id) === highlightProductId);
+      if (index !== -1) {
+        const page = Math.floor(index / itemsPerPage) + 1;
+        setCurrentPage(page);
+      }
+    }
+  }, [highlightProductId, filteredProducts, itemsPerPage]);
+
+  React.useEffect(() => {
+    if (!highlightProductId) {
+      setCurrentPage(1);
+    }
+  }, [debouncedFilters, highlightProductId]);
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const currentProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -205,7 +215,11 @@ export default function ProductsList() {
             setColumnFilters={setColumnFilters}
             isLoading={isLoading}
             onEditProduct={handleOpenDrawer}
-            onViewProduct={(id) => setSearchParams({ viewProduct: id })}
+            highlightProductId={highlightProductId}
+            onClearHighlight={() => {
+              searchParams.delete('highlight');
+              setSearchParams(searchParams);
+            }}
           />
           
           <AdminPagination 
@@ -221,15 +235,6 @@ export default function ProductsList() {
           isOpen={isDrawerOpen}
           onClose={() => setIsDrawerOpen(false)}
           product={editingProduct}
-        />
-        
-        <ProductDetailModal 
-          isOpen={!!viewProductId}
-          product={viewingProduct}
-          onClose={() => {
-            searchParams.delete('viewProduct');
-            setSearchParams(searchParams);
-          }}
         />
       </div>
 

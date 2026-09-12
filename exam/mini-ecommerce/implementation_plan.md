@@ -1,34 +1,28 @@
-﻿# Kế hoạch bổ sung Popup Chi tiết Sản phẩm (Admin)
+﻿# Kế hoạch Thay thế Popup bằng Hiệu ứng Highlight Sản Phẩm
 
 ## Mục tiêu
-Tạo ra một Popup (Modal) hiển thị toàn bộ thông tin chi tiết của sản phẩm. Popup này sẽ xuất hiện ở hai trường hợp:
-1. Khi Admin bấm vào một sản phẩm từ thanh tìm kiếm (Live Search).
-2. Khi Admin bấm vào nút "Xem" (icon con mắt) trên bảng quản lý sản phẩm.
-
-## Giải pháp Kỹ thuật
-Sử dụng **URL Search Params** (?viewProduct=ID) để quản lý trạng thái hiển thị của Popup.
-- Lợi ích: Dễ dàng chia sẻ link, thống nhất trạng thái giữa thanh tìm kiếm toàn cục và trang quản lý sản phẩm mà không cần tạo thêm global state phức tạp (như Redux hay Zustand).
+Loại bỏ hoàn toàn Popup hiển thị chi tiết sản phẩm vừa tạo. Thay vào đó, khi Admin click vào một sản phẩm từ thanh tìm kiếm, hệ thống sẽ điều hướng về bảng sản phẩm, tự động chuyển đến trang (pagination) chứa sản phẩm đó, cuộn (scroll) tới dòng chứa sản phẩm, và làm nổi bật (highlight) dòng đó lên.
 
 ## Chi tiết các bước thực hiện
 
-### 1. Cập nhật thanh tìm kiếm (AdminHeader.jsx)
-- Thay đổi logic 
-avigate() khi click vào sản phẩm tìm kiếm.
-- Thay vì điều hướng tới route lỗi /admin/products/:id, hệ thống sẽ điều hướng tới trang quản lý sản phẩm và đính kèm tham số: /admin/products?viewProduct={id}.
+### 1. Dọn dẹp code cũ (Rollback)
+- Xóa hoàn toàn file ProductDetailModal.jsx.
+- Xóa import và component Modal trong ProductsList.jsx.
+- Xóa nút "Xem chi tiết" (icon con mắt) vừa thêm ở cột hành động trong ProductsTable.jsx.
 
-### 2. Thêm nút "Xem chi tiết" vào bảng (ProductsTable.jsx)
-- Trong cột hành động (Actions), bổ sung một nút bấm màu vàng có icon con mắt (a-eye).
-- Khi click, nút này sẽ gọi hàm để đẩy tham số ?viewProduct={id} lên URL.
+### 2. Sửa lại thanh tìm kiếm (AdminHeader.jsx)
+- Cập nhật URL khi bấm vào kết quả tìm kiếm: đổi từ ?viewProduct={id} thành ?highlight={id}.
 
-### 3. Tạo Component ProductDetailModal.jsx
-- Xây dựng một Popup mới ở src/Pages/admin/products/_components/ProductDetailModal.jsx.
-- Giao diện mang phong cách Comic đặc trưng của dự án (viền dày, shadow đậm).
-- **Dữ liệu hiển thị:** Tên, ảnh, tác giả, nhà xuất bản, thể loại, định dạng, trạng thái (có badge màu), giá bán, giá gốc, số lượng tồn, số lượng bán, và phần mô tả.
-- **Tuân thủ quy tắc cũ:** Không dùng nút X ở góc trên để đóng. Sẽ chỉ có một nút "Đóng lại" ở dưới cùng.
+### 3. Logic tự động nhảy trang (ProductsList.jsx)
+- Đọc tham số highlight từ URL.
+- Dò tìm xem sản phẩm đó nằm ở vị trí (index) số mấy trong danh sách (sau khi đã lọc).
+- Tính toán xem index đó thuộc trang (page) thứ mấy.
+- Tự động setCurrentPage(page) để nhảy đúng đến trang chứa sản phẩm.
 
-### 4. Tích hợp vào ProductsList.jsx
-- Sử dụng hook useSearchParams để lắng nghe URL. Nếu thấy có iewProduct, trang sẽ tự động render ProductDetailModal và truyền ID vào.
-- Khi đóng Modal, chỉ cần gỡ bỏ tham số iewProduct khỏi URL.
+### 4. Hiệu ứng Cuộn & Làm nổi bật (ProductsTable.jsx)
+- Dựa vào ID truyền xuống từ URL, tìm thẻ <tr> chứa sản phẩm.
+- Dùng useRef và scrollIntoView({ behavior: 'smooth', block: 'center' }) để cuộn màn hình hiển thị ngay dòng sản phẩm.
+- Thêm class CSS thay đổi màu nền (ví dụ: vàng sáng) cho dòng đó. Hiệu ứng này sẽ kéo dài khoảng 3 giây rồi phai dần về màu trắng bình thường, sau đó hệ thống sẽ tự động gỡ tham số highlight khỏi URL.
 
 ## Xác nhận
-Kế hoạch này đảm bảo tính năng mới được tích hợp mượt mà, đúng chuẩn luồng dữ liệu của React Router và tuân thủ chặt chẽ phong cách thiết kế UI/UX của toàn dự án. Nếu anh/chị đồng ý, em sẽ code ngay nhé!
+Kế hoạch này mang tính thực tế cao, giúp người quản lý định vị ngay sản phẩm trên bảng dữ liệu mà không cần xem qua popup. Nếu anh/chị chốt phương án này, hãy bấm "Proceed" để em tiến hành dọn dẹp và code luôn nhé!
