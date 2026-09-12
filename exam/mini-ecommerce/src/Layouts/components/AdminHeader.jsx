@@ -22,7 +22,7 @@ export default function AdminHeader({ onMenuClick }) {
   // Focus effect for shortcut Ctrl+K could be added here
 
   return (
-    <header className="fixed top-0 left-0 lg:left-64 right-0 h-16 bg-white border-b-[3px] border-black z-40 px-4 sm:px-6 flex items-center justify-between shadow-[0_3px_0px_#000] font-bubble transition-all duration-300">
+    <header className="sticky top-0 w-full h-16 bg-white border-b-[3px] border-black z-40 px-4 sm:px-6 flex items-center justify-between shadow-[0_3px_0px_#000] font-bubble transition-all duration-300">
       <div className="flex items-center gap-4">
         {/* Hamburger Menu cho Mobile */}
         <button 

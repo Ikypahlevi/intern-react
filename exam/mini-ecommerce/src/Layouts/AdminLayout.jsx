@@ -18,7 +18,7 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="bg-[#fcf9f8] min-h-screen text-black antialiased selection:bg-yellow-400 relative">
+    <div className="bg-[#fcf9f8] min-h-screen text-black antialiased selection:bg-yellow-400 relative lg:grid lg:grid-cols-[256px_1fr]">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div 
@@ -29,9 +29,10 @@ export default function AdminLayout() {
 
       <AdminSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       
-      <div className="pl-0 lg:pl-64 transition-all duration-300">
+      {/* Main Content Column */}
+      <div className="flex flex-col min-w-0 w-full transition-all duration-300">
         <AdminHeader onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="relative pt-16 w-full min-h-screen p-2 sm:p-4 lg:p-6 overflow-x-hidden">
+        <main className="relative w-full p-2 sm:p-4 lg:p-6">
           <Outlet />
         </main>
       </div>

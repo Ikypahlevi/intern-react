@@ -27,7 +27,7 @@ export default function AdminSidebar({ isOpen, setIsOpen }) {
   ];
 
   return (
-    <aside className={`fixed left-0 top-0 h-screen w-64 bg-white border-r-[3px] border-black z-50 flex flex-col justify-between overflow-y-auto font-bubble transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+    <aside className={`fixed lg:sticky left-0 top-0 h-screen w-64 bg-white lg:border-r-[3px] border-r-[3px] border-black z-50 flex flex-col justify-between overflow-y-auto font-bubble transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
       <div className="flex flex-col">
         <div className="p-4 border-b-[3px] border-black bg-comic-yellow flex flex-col gap-2 shadow-[0_3px_0px_#000]">
           <div className="flex items-center justify-between">
