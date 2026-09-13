@@ -1663,6 +1663,33 @@
       "paymentMethod": "ONLINE",
       "status": "completed",
       "createdAt": "2026-09-13T04:07:58.185Z"
+    },
+    {
+      "id": "SWOO-16886",
+      "userId": "2",
+      "customerName": "Nguyễn Dương",
+      "phone": "0939857638",
+      "address": "79 Thanh Đàm, Hoàng Mai, HN",
+      "items": [
+        {
+          "productId": "2",
+          "name": "Kimetsu no yaiba - Thanh gươm diệt quỷ ",
+          "price": 20000,
+          "quantity": 1,
+          "image": "/img/kimetsunoyaiba.jpg"
+        },
+        {
+          "productId": "4",
+          "name": "Frieren - Pháp sư tiễn táng",
+          "price": 20000,
+          "quantity": 1,
+          "image": "/img/frieren.jpg"
+        }
+      ],
+      "totalAmount": 70000,
+      "paymentMethod": "COD",
+      "status": "pending",
+      "createdAt": "2026-09-13T09:42:28.942Z"
     }
   ],
   "categories": [
@@ -1797,6 +1824,16 @@
       "highlightId": "SWOO-83544",
       "isRead": false,
       "createdAt": "2026-09-13T04:09:43.228Z"
+    },
+    {
+      "id": "NOTIF-9531",
+      "role": "admin",
+      "title": "📦 Đơn Hàng Mới",
+      "message": "Đơn hàng SWOO-16886 vừa được đặt thành công.",
+      "link": "/admin/orders",
+      "highlightId": "SWOO-16886",
+      "isRead": false,
+      "createdAt": "2026-09-13T09:42:29.027Z"
     }
   ]
 }

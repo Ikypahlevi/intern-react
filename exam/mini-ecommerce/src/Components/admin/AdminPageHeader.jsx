@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 /**
  * Shared Admin Page Header Component
@@ -20,7 +20,7 @@ export default function AdminPageHeader({
   return (
     <>
       {children}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 bg-white border-[3px] border-black p-6 shadow-[5px_5px_0px_#000]">
+      <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 bg-white border-[3px] border-black p-6 shadow-[5px_5px_0px_#000]">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <span className="px-2 py-0.5 bg-comic-yellow text-black border-[2px] border-black font-comic text-[10px] font-bold uppercase shadow-[2px_2px_0px_#000]">
@@ -37,7 +37,7 @@ export default function AdminPageHeader({
           <p className="font-bold text-gray-700">{description}</p>
         </div>
 
-        <div className="flex items-center gap-6 overflow-x-auto pb-2 lg:pb-0">
+        <div className="flex items-center gap-6 flex-wrap pb-2 xl:pb-0">
           {kpiBlocks.map((block, idx) => (
             <div key={idx} className={`${block.bgColor || 'bg-gray-100'} border-[2px] border-black p-3 flex flex-col items-start min-w-[140px] shadow-[3px_3px_0px_#000]`}>
               <span className={`font-comic text-[10px] ${block.labelColor || 'text-gray-600'} uppercase font-bold tracking-wider`}>
@@ -61,3 +61,5 @@ export default function AdminPageHeader({
     </>
   );
 }
+
+
