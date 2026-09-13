@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { formatCurrency } from "../../../../Utils/format";
 import AdminBadge from "../../../../Components/admin/AdminBadge";
 import { useDeleteProduct } from "../../../../Services/queries/useProducts";
@@ -66,24 +66,24 @@ export default function ProductsTable({
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left whitespace-nowrap">
             {/* THEAD */}
-            <thead className="bg-blue-200 border-b-[3px] border-black font-comic text-sm uppercase select-none">
+                        <thead className="bg-blue-200 border-b-[3px] border-black font-comic text-sm uppercase select-none">
               {/* Header Titles */}
               <tr>
                 <th className="p-3 align-top border-r-[2px] border-black w-24">
                   <div className="mb-1 font-black">MÃ SKU</div>
-                  <input 
+                  <input
                     value={columnFilters.sku}
-                    onChange={(e) => handleFilterChange('sku', e.target.value)}
+                    onChange={(e) => handleFilterChange("sku", e.target.value)}
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000]"
                     placeholder="VD: OP-108"
                   />
                 </th>
-                
+
                 <th className="p-3 align-top border-r-[2px] border-black min-w-64">
                   <div className="mb-1 font-black">HÌNH ẢNH & TÊN MANGA</div>
-                  <input 
+                  <input
                     value={columnFilters.name}
-                    onChange={(e) => handleFilterChange('name', e.target.value)}
+                    onChange={(e) => handleFilterChange("name", e.target.value)}
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000]"
                     placeholder="Gõ tên manga..."
                   />
@@ -91,43 +91,45 @@ export default function ProductsTable({
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-36">
                   <div className="mb-1 font-black">THỂ LOẠI</div>
-                  <select 
+                                    <select 
                     value={columnFilters.genre}
                     onChange={(e) => handleFilterChange('genre', e.target.value)}
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000] cursor-pointer"
                   >
                     <option value="">Tất cả</option>
-                    <option value="Hành động">Hành động</option>
-                    <option value="Hài hước">Hài hước</option>
-                    <option value="Boxset">Boxset</option>
+                    {allCategories.map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
                   </select>
                 </th>
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-36">
                   <div className="mb-1 font-black">NXB / ĐỐI TÁC</div>
-                  <select 
+                                    <select 
                     value={columnFilters.publisher}
                     onChange={(e) => handleFilterChange('publisher', e.target.value)}
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000] cursor-pointer"
                   >
                     <option value="">Tất cả NXB</option>
-                    <option value="NXB Kim Đồng">NXB Kim Đồng</option>
-                    <option value="NXB Trẻ">NXB Trẻ</option>
-                    <option value="IPM">IPM Manga</option>
+                    {allPublishers.map(pub => (
+                      <option key={pub} value={pub}>{pub}</option>
+                    ))}
                   </select>
                 </th>
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-32">
-                  <div className="mb-1 font-black text-right">GIÁ BÁN (VND)</div>
+                  <div className="mb-1 font-black text-right">
+                    GIÁ BÁN (VND)
+                  </div>
                   <div className="flex gap-1">
-                    <input 
+                    <input
                       type="number"
                       value={columnFilters.priceMin}
                       onChange={(e) => handleFilterChange('priceMin', e.target.value)}
                       className="w-1/2 bg-white border-[2px] border-black px-1 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000]"
                       placeholder="Min"
                     />
-                    <input 
+                    <input
                       type="number"
                       value={columnFilters.priceMax}
                       onChange={(e) => handleFilterChange('priceMax', e.target.value)}
@@ -294,3 +296,7 @@ export default function ProductsTable({
     </>
   );
 }
+
+
+
+

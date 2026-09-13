@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useGetProducts, useCreateProduct } from "../../../Services/queries/useProducts";
 import { STATUS } from "../../../Constants";
@@ -34,6 +34,10 @@ export default function ProductsList() {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+
+    // Dynamically extract unique categories and publishers
+  const allCategories = useMemo(() => Array.from(new Set(products.map(p => p.category).filter(Boolean))), [products]);
+  const allPublishers = useMemo(() => Array.from(new Set(products.map(p => p.publisher).filter(Boolean))), [products]);
 
   // Filtering Logic
   const filteredProducts = useMemo(() => {
@@ -207,8 +211,10 @@ export default function ProductsList() {
             onImport={handleImport}
           />
           
-          <ProductsTable 
+                    <ProductsTable 
             products={currentProducts}
+            allCategories={allCategories}
+            allPublishers={allPublishers}
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
             isLoading={isLoading}
@@ -249,3 +255,4 @@ export default function ProductsList() {
     </>
   );
 }
+

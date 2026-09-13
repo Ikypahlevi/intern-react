@@ -79,7 +79,7 @@
       "id": "2",
       "name": "Kimetsu no yaiba - Thanh gươm diệt quỷ ",
       "price": 20000,
-      "stock": 3,
+      "stock": 30,
       "category": "Hành động",
       "image": "/img/kimetsunoyaiba.jpg",
       "description": "Câu chuyện kể về hành trình đầy gian khổ của Kamado Tanjirou sau khi gia đình bị quỷ tàn sát dã man và em gái Nezuko bị hóa thành quỷ. Nhằm tìm cách chữa trị cho em gái và trả thù cho gia đình, Tanjirou gia nhập Sát Quỷ Đoàn, cùng đồng đội vượt qua vô vàn trận chiến ác liệt để tiêu diệt chúa quỷ Muzan.",
@@ -96,7 +96,7 @@
       "id": "3",
       "name": "Sololeveling",
       "price": 20000,
-      "stock": 12,
+      "stock": 120,
       "category": "Hành động",
       "image": "/img/sololeveling.png",
       "description": "Ở một thế giới xuất hiện các \"Cổng\" kết nối với hầm ngục đầy quái vật, Sung Jin-Woo là một thợ săn hạng E cực kỳ yếu ớt. Sau khi suýt chết trong một hầm ngục kép bí ẩn, anh nhận được một hệ thống thăng cấp độc nhất vô nhị. Từ thợ săn yếu nhất nhân loại, Jin-Woo bắt đầu hành trình vượt qua giới hạn để trở thành thợ săn mạnh nhất thế giới.",
@@ -1007,20 +1007,6 @@
       "id": "7I3gTUg"
     },
     {
-      "sku": "MANGA-052",
-      "name": "Frieren: Pháp sư tiễn táng - Tập 1",
-      "format": "Bản Tiêu Chuẩn",
-      "category": "Kỳ ảo",
-      "author": "Kanehito Yamada",
-      "publisher": "NXB Trẻ",
-      "originalPrice": 35000,
-      "price": 32000,
-      "stock": 120,
-      "status": "active",
-      "image": "",
-      "id": "z1gBHw4"
-    },
-    {
       "sku": "MANGA-053",
       "name": "Oshi no Ko - Tập 1",
       "format": "Bản Tiêu Chuẩn",
@@ -1033,6 +1019,48 @@
       "status": "active",
       "image": "",
       "id": "xpzhgrV"
+    },
+    {
+      "sku": "MANGA-050",
+      "name": "Sakamoto Days - Tập 1",
+      "format": "Bản Tiêu Chuẩn",
+      "category": "Hành động",
+      "author": "Yuto Suzuki",
+      "publisher": "NXB Trẻ",
+      "originalPrice": 30000,
+      "price": 25000,
+      "stock": 100,
+      "status": "active",
+      "image": "",
+      "id": "7hNW5xY"
+    },
+    {
+      "sku": "MANGA-051",
+      "name": "Blue Lock - Tập 1",
+      "format": "Bản Đặc Biệt",
+      "category": "Thể thao",
+      "author": "Muneyuki Kaneshiro",
+      "publisher": "NXB Trẻ",
+      "originalPrice": 45000,
+      "price": 40000,
+      "stock": 50,
+      "status": "active",
+      "image": "",
+      "id": "vhfP9Te"
+    },
+    {
+      "sku": "MANGA-052",
+      "name": "Frieren: Pháp sư tiễn táng - Tập 1",
+      "format": "Bản Tiêu Chuẩn",
+      "category": "Kỳ ảo",
+      "author": "Kanehito Yamada",
+      "publisher": "NXB Trẻ",
+      "originalPrice": 35000,
+      "price": 32000,
+      "stock": 120,
+      "status": "active",
+      "image": "",
+      "id": "ody1tFR"
     }
   ],
   "orders": [
@@ -1752,7 +1780,7 @@
       "stripe": true
     },
     "shipping": {
-      "freeshipThreshold": 300000,
+      "freeshipThreshold": 20000,
       "wrapRequired": true,
       "bubbleWrap": true,
       "freeBookmark": true
@@ -1834,6 +1862,15 @@
       "highlightId": "SWOO-16886",
       "isRead": false,
       "createdAt": "2026-09-13T09:42:29.027Z"
+    },
+    {
+      "id": "NOTIF-16663",
+      "role": "all",
+      "title": "🔥 Truyện Mới Về Kho",
+      "message": "Truyện vừa lên kệ. Mua ngay kẻo lỡ!",
+      "link": "/products",
+      "isRead": false,
+      "createdAt": "2026-09-13T12:59:31.130Z"
     }
   ]
 }
