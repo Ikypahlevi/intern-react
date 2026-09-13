@@ -1,37 +1,26 @@
-﻿# Kế hoạch Thêm Hệ Thống Thông Báo (Notifications) & Tối Ưu UX
+﻿# Kế hoạch Tăng Kích Thước Chữ (Font Size) Toàn Cục
 
-## Mục tiêu
-1. Xây dựng hệ thống thông báo realtime cho cả Admin và User khi dữ liệu thay đổi.
-2. Tối ưu giao diện Header User: Rút gọn nút Giỏ hàng và thêm Chuông thông báo.
-3. Đồng bộ hóa con trỏ chuột (cursor: pointer) cho tất cả các phần tử có chức năng tương tác trên toàn hệ thống.
+## 1. Phân tích vấn đề
+- Cỡ chữ hiện tại trên website (được kiểm soát bởi Tailwind CSS với base mặc định là 16px) đang khá nhỏ so với giao diện truyện tranh, khiến việc đọc dữ liệu (User xem truyện, Admin duyệt đơn) hơi mỏi mắt.
+- Yêu cầu: Làm to chữ lên một chút và áp dụng đồng bộ 100% trên cả 2 giao diện Admin & User.
 
-## Chi tiết các bước thực hiện
+## 2. Giải pháp kỹ thuật (Tối ưu nhất)
+Thay vì phải đi tìm và sửa từng class 	ext-sm, 	ext-base, 	ext-xs ở hàng chục file Component khác nhau (rất mất thời gian, dễ gây lỗi vỡ layout hoặc sót file), em sẽ sử dụng phương pháp **Scale Root Font-size**.
 
-### 1. Cấu hình Dữ Liệu & API (Services)
-- Hệ thống cơ sở dữ liệu (db.json) sẽ được thêm collection "notifications": [].
-- Tạo mới file src/Services/queries/useNotifications.js chứa các custom hooks (useGetNotifications, useCreateNotification, useMarkNotificationRead).
-- Lọc thông báo: 
-  + User thường sẽ nhận thông báo có userId của họ hoặc ole: 'all' (khi có sản phẩm mới).
-  + Admin sẽ nhận thông báo có ole: 'admin'.
+- **Hành động:** Em sẽ can thiệp vào file CSS gốc (src/index.css), cấu hình cho thẻ <html> có ont-size: 17.5px; (Mặc định đang là 16px).
+- **Cơ chế hoạt động:** Tailwind CSS sử dụng đơn vị em cho toàn bộ các thông số (font chữ, padding, margin, kích thước hộp). 1rem = font-size của thẻ html. 
+- Khi ta tăng base font-size từ 16px lên 17.5px (tăng ~10%), **tất cả mọi thứ** sử dụng class Tailwind trên toàn bộ dự án sẽ tự động tỷ lệ thuận to lên 10%. 
+- **Ưu điểm tuyệt đối:** Chữ sẽ to ra, đồng thời các nút bấm (button), khoảng cách (margin/padding) cũng to ra tương ứng. Đảm bảo chữ KHÔNG BỊ TRÀN (overflow) ra khỏi khung/nút bấm, giữ nguyên vẹn 100% thiết kế đẹp mắt hiện tại nhưng ở một phiên bản "rõ nét, to tát" hơn.
 
-### 2. Bắt Sự Kiện Thay Đổi Dữ Liệu (Triggers)
-Hệ thống sẽ tự động tạo thông báo (POST notification) trong các trường hợp sau:
-- **User đặt hàng thành công (Checkout.jsx):** Bắn thông báo cho Admin "Có đơn hàng mới" -> Kèm link nhảy đến bảng Quản lý Đơn hàng (highlight đơn đó lên).
-- **Admin duyệt/cập nhật đơn hàng (OrdersList.jsx):** Bắn thông báo cho User mua hàng "Đơn hàng của bạn đã được cập nhật..." -> Kèm link nhảy đến trang Profile/Đơn hàng.
-- **Admin thêm sản phẩm mới (ProductsList.jsx):** Bắn thông báo cho tất cả User "Vừa có truyện mới về kho..." -> Kèm link nhảy đến trang danh sách Sản phẩm.
+## 3. Các bước triển khai
+- Mở file src/index.css.
+- Bổ sung quy tắc CSS vào block @layer base:
+  `css
+  html {
+    font-size: 17.5px; /* Tăng 10% so với mặc định 16px */
+  }
+  `
+- Rebuild dự án để áp dụng.
 
-### 3. Tối ưu Header Giao Diện User (Header.jsx)
-- Rút gọn nút Giỏ hàng (xóa phần text thừa, chỉ giữ lại icon asket-shopping và số lượng).
-- Thêm Icon Chuông Thông Báo (Notification Bell) ngay cạnh Giỏ hàng.
-- Khi bấm vào chuông sẽ xổ xuống danh sách thông báo. Bấm vào thông báo nào sẽ điều hướng (
-avigate) đến trang chứa dữ liệu đó.
-
-### 4. Nâng cấp Thông Báo cho Admin (AdminHeader.jsx)
-- Tích hợp thêm các thông báo sự kiện (như có người vừa đặt hàng) vào chung với danh sách cảnh báo tồn kho và chờ duyệt hiện tại.
-- Hỗ trợ click để điều hướng thẳng đến bảng tương ứng (và highlight như yêu cầu).
-
-### 5. Chuẩn hóa UX (Cursor Pointer)
-- Thêm luật CSS toàn cục (Global CSS) vào index.css: Bắt buộc tất cả các thẻ utton,  (link), hoặc các thẻ đóng vai trò nút bấm (ole="button") đều phải có hiệu ứng trỏ chuột bàn tay (cursor: pointer !important).
-
-## Xác nhận
-Kế hoạch này sẽ thêm một lớp giao tiếp hai chiều hoàn hảo giữa Admin và User. Mọi thay đổi quan trọng đều được báo cáo kịp thời và điều hướng đúng chỗ. Anh/chị hãy đọc qua kế hoạch, nếu đồng ý thì nhấn "Proceed" để em triển khai từ A-Z nhé!
+## 4. Xác nhận
+Cách làm này cực kỳ nhanh, an toàn tuyệt đối và đạt đúng mục đích "chỉnh to hơn tí" một cách vô cùng đồng bộ. Anh/chị xem qua kế hoạch, nếu đồng ý thì nhấn "Proceed" để em gõ dòng code phép thuật này nhé!

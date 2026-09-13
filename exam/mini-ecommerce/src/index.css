@@ -2,6 +2,10 @@
 @config "../tailwind.config.js";
 
 @layer base {
+  html {
+    font-size: 17.5px;
+  }
+  
   body {
     background-color: #FFFCEB;
     background-image: radial-gradient(#d1c7a7 12%, transparent 12%);
