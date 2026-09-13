@@ -6,12 +6,12 @@ export default function ProductsHeroBanner() {
   return (
     <>
       {/* Top Hero Banner */}
-      <section className="relative comic-border-thick bg-gradient-to-r from-zinc-800 via-zinc-900 to-black text-white p-6 md:p-8 mb-8 shadow-comic-lg">
+      <section className="relative comic-border-thick bg-gradient-to-r from-zinc-800 via-zinc-900 to-black text-white px-6 md:px-8 pt-16 pb-16 mb-8 shadow-comic-lg overflow-hidden">
         <div className="absolute inset-0 halftone-dots-white pointer-events-none"></div>
-        <div className="absolute -top-4 left-4 md:left-8 z-20 bg-comic-yellow text-black font-comic text-sm tracking-wider px-3 py-1 comic-border shadow-comic -rotate-3">
+        <div className="absolute top-5 left-4 md:left-8 z-20 bg-comic-yellow text-black font-comic text-sm tracking-wider px-3 py-1 comic-border shadow-comic -rotate-3">
           💥 ĐẠI HỘI MANGA SHONEN & SEINEN
         </div>
-        <div className="absolute -bottom-5 right-12 z-20 bg-comic-red text-white font-comic text-xl tracking-wider px-5 py-2 comic-border shadow-comic rotate-3 hidden sm:block">
+        <div className="absolute bottom-5 right-12 z-20 bg-comic-red text-white font-comic text-xl tracking-wider px-5 py-2 comic-border shadow-comic rotate-3 hidden sm:block">
           GIẢM TỚI 50% TẤT CẢ!
         </div>
 
@@ -88,4 +88,5 @@ export default function ProductsHeroBanner() {
     </>
   );
 }
+
 
