@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCartStore } from "../../../Stores/cartStore";
 import CartItem from "./_components/CartItem";
 import CartSummary from "./_components/CartSummary";
 import CartSuggestions from "./_components/CartSuggestions";
+import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 
 export default function Cart() {
   const { items, updateQuantity, removeItem } = useCartStore();
@@ -66,16 +67,13 @@ export default function Cart() {
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 py-4 w-full text-xs">
-        <nav className="inline-flex items-center space-x-2 bg-white comic-border shadow-comic-sm px-4 py-1.5 rounded-lg font-bubble font-bold text-sm">
-          <Link to="/" className="hover:text-comic-red text-stone-800">TRANG CHỦ</Link>
-          <span className="text-comic-red font-black">&gt;</span>
-          <Link to="/products" className="hover:text-comic-red text-stone-800">KHO TRUYỆN</Link>
-          <span className="text-comic-red font-black">&gt;</span>
-          <span className="text-comic-red uppercase bg-yellow-200 px-1.5 py-0.5 rounded border border-black">GIỎ HÀNG OTAKU 💥</span>
-        </nav>
-      </div>
+            <Breadcrumb 
+        items={[
+          { label: 'TRANG CHỦ', link: '/' },
+          { label: 'KHO TRUYỆN', link: '/products' },
+          { label: 'GIỎ HÀNG OTAKU', icon: '🛒' }
+        ]} 
+      />
 
       <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
         <div className="bg-white rounded-2xl comic-border shadow-comic-lg p-6 lg:p-8 relative">
@@ -141,3 +139,4 @@ export default function Cart() {
     </>
   );
 }
+

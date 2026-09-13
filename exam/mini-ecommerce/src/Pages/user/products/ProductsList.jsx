@@ -1,5 +1,5 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+﻿import React, { useMemo, useState, useEffect } from "react";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { useGetProducts } from "../../../Services/queries/useProducts";
 import ProductCard from "../../../Components/user/ProductCard/ProductCard";
 import ProductsHeroBanner from "./_components/ProductsHeroBanner";
@@ -7,6 +7,8 @@ import ProductsFilterSidebar from "./_components/ProductsFilterSidebar";
 import Pagination from "./_components/Pagination";
 
 export default function ProductsList() {
+  const location = useLocation();
+  const highlightProductId = location.state?.highlightProductId;
   const [searchParams] = useSearchParams();
   const categoryQuery = searchParams.get("category");
   const searchQuery = searchParams.get("search");
@@ -148,7 +150,7 @@ export default function ProductsList() {
           ) : currentProducts.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
               {currentProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} isHighlighted={highlightProductId === product.id} />
               ))}
             </div>
           ) : (
@@ -172,3 +174,4 @@ export default function ProductsList() {
     </main>
   );
 }
+

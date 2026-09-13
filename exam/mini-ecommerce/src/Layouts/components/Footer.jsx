@@ -72,10 +72,9 @@ export default function Footer() {
                 bản hàng đầu Nhật Bản.
               </p>
               <div className="text-xs font-bold space-y-1 font-bubble">
-                <p>
-                  <span className="font-black">TRỤ SỞ CHÍNH:</span> 88 Phố
-                  Manga, Quận 1, TP. Hồ Chí Minh
-                </p>
+                  <p>
+                    <span className="font-black">TRỤ SỞ CHÍNH:</span> 79 Thanh Đàm, Hoàng Mai, Hà Nội
+                  </p>
                 <p>
                   <span className="font-black">HOTLINE HỖ TRỢ:</span>{" "}
                   <span className="bg-black text-comic-yellow px-1 py-0.5 rounded font-black">

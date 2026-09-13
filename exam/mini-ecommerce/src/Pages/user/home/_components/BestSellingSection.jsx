@@ -5,8 +5,10 @@ import { useGetProducts } from "../../../../Services/queries/useProducts";
 export default function BestSellingSection() {
   const { data: products = [], isLoading } = useGetProducts();
 
-  // Giả lập lấy 5 sản phẩm random hoặc từ index 5 đến 10
-  const bestSellers = products.slice(5, 10);
+  // Lấy 5 sản phẩm có số lượng bán ra nhiều nhất
+  const bestSellers = [...products]
+    .sort((a, b) => (b.sold || 0) - (a.sold || 0))
+    .slice(0, 5);
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,7 @@ import { useCreateOrder } from "../../../Services/queries/useOrders";
 import { useCreateNotification } from "../../../Services/queries/useNotifications";
 import CheckoutForm from "./_components/CheckoutForm";
 import CheckoutSummary from "./_components/CheckoutSummary";
+import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 import { toast } from "sonner";
 
 export default function Checkout() {
@@ -126,15 +127,13 @@ export default function Checkout() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 py-4 w-full text-xs">
-        <nav className="inline-flex items-center space-x-2 bg-white comic-border shadow-comic-sm px-4 py-1.5 rounded-lg font-bubble font-bold text-sm">
-          <Link to="/" className="hover:text-comic-red text-stone-800">TRANG CHỦ</Link>
-          <span className="text-comic-red font-black">&gt;</span>
-          <Link to="/cart" className="hover:text-comic-red text-stone-800">GIỎ HÀNG</Link>
-          <span className="text-comic-red font-black">&gt;</span>
-          <span className="text-comic-red uppercase bg-yellow-200 px-1.5 py-0.5 rounded border border-black">CHECKOUT / THANH TOÁN</span>
-        </nav>
-      </div>
+            <Breadcrumb 
+        items={[
+          { label: 'TRANG CHỦ', link: '/' },
+          { label: 'GIỎ HÀNG', link: '/cart' },
+          { label: 'CHECKOUT / THANH TOÁN', icon: '💳' }
+        ]} 
+      />
 
       <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -157,3 +156,4 @@ export default function Checkout() {
     </>
   );
 }
+

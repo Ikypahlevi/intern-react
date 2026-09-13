@@ -1,11 +1,20 @@
-import React from "react";
+﻿import React, { useEffect, useRef } from "react";
 import { useCartStore } from "../../../Stores/cartStore";
 import { formatCurrency } from "../../../Utils/format";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, isHighlighted }) {
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    if (isHighlighted && cardRef.current) {
+      setTimeout(() => {
+        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
+  }, [isHighlighted]);
   const addItem = useCartStore((state) => state.addItem);
 
   const handleAddToCart = (e) => {
@@ -78,3 +87,4 @@ export default function ProductCard({ product }) {
     </div>
   );
 }
+

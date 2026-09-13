@@ -1,22 +1,20 @@
-import React from "react";
+﻿import React from "react";
 import { Link } from "react-router-dom";
 import ContactForm from "./_components/ContactForm";
 import ContactInfo from "./_components/ContactInfo";
 import ContactMap from "./_components/ContactMap";
+import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 
 export default function Contact() {
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 py-4 w-full text-xs">
-        <nav className="inline-flex items-center space-x-2 bg-white comic-border shadow-comic-sm px-4 py-1.5 rounded-lg font-bubble font-bold text-sm">
-          <Link to="/" className="hover:text-comic-red text-stone-800">TRANG CHỦ</Link>
-          <span className="text-comic-red font-black">&gt;</span>
-          <span className="hover:text-comic-red text-stone-800 cursor-pointer">HỖ TRỢ & HỎI ĐÁP</span>
-          <span className="text-comic-red font-black">&gt;</span>
-          <span className="text-comic-red uppercase bg-yellow-200 px-1.5 py-0.5 rounded border border-black">LIÊN HỆ TỔNG BỘ (TRANSMIT SIGNAL ⚡)</span>
-        </nav>
-      </div>
+            <Breadcrumb 
+        items={[
+          { label: 'TRANG CHỦ', link: '/' },
+          { label: 'HỖ TRỢ & HỎI ĐÁP', link: '/contact' },
+          { label: 'LIÊN HỆ TỔNG BỘ', icon: '⚡' }
+        ]} 
+      />
 
       <main className="max-w-7xl mx-auto px-4 pb-16 space-y-6 flex-grow w-full">
         {/* Section 1: Contact Form & Info */}
@@ -53,3 +51,4 @@ export default function Contact() {
     </>
   );
 }
+

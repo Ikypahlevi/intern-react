@@ -7,6 +7,7 @@ import { useAuthStore } from "../../Stores/authStore";
 import { useDebounce } from "../../Utils/useDebounce";
 import { ROLES } from "../../Constants";
 import { useGetCategories } from "../../Services/queries/useCategories";
+import { useGetProducts } from "../../Services/queries/useProducts";
 
 export default function Header() {
   const items = useCartStore((state) => state.items);
@@ -36,8 +37,13 @@ export default function Header() {
     };
   }, [isMobileMenuOpen]);
 
-  // Fetch real categories from DB
+    // Fetch real categories from DB
   const { data: categories = [] } = useGetCategories();
+  const { data: allProducts = [] } = useGetProducts();
+
+  const searchResults = debouncedSearchTerm.trim() 
+    ? allProducts.filter(p => p.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())).slice(0, 5)
+    : [];
 
   useEffect(() => {
     // Only navigate if we are already on products page and typing
@@ -111,8 +117,8 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Search Bar - Realtime */}
-          <div className="flex flex-1 max-w-2xl mx-1 sm:mx-4 relative group/search">
+                    {/* Search Bar - Realtime */}
+          <div className="flex flex-1 max-w-2xl mx-1 sm:mx-4 relative group/search z-50">
             <div className="flex w-full rounded-xl comic-border bg-white shadow-comic overflow-hidden">
               <input
                 name="search"
@@ -125,16 +131,45 @@ export default function Header() {
                   if (e.key === "Enter") {
                     e.preventDefault();
                     navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+                    setSearchTerm("");
                   }
                 }}
               />
               <button
                 className="bg-comic-red hover:bg-comic-ink text-white px-3 sm:px-5 font-comic transition flex items-center justify-center shrink-0"
-                onClick={() => navigate(`/products?search=${encodeURIComponent(searchTerm)}`)}
+                onClick={() => {
+                  navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+                  setSearchTerm("");
+                }}
               >
                 <i className="fa-solid fa-search"></i>
               </button>
             </div>
+
+            {/* Suggestions Dropdown */}
+            {searchTerm && searchResults.length > 0 && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white comic-border rounded-xl shadow-comic-lg overflow-hidden">
+                <ul className="max-h-80 overflow-y-auto">
+                  {searchResults.map((prod) => (
+                    <li key={prod.id} className="border-b border-gray-200 last:border-0">
+                      <button 
+                        onClick={() => {
+                          setSearchTerm("");
+                          navigate('/products', { state: { highlightProductId: prod.id } });
+                        }}
+                        className="w-full text-left px-4 py-3 hover:bg-yellow-50 flex items-center gap-3 transition-colors"
+                      >
+                        <img src={prod.image} alt={prod.name} className="w-10 h-14 object-cover rounded comic-border-sm shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-bubble font-bold text-sm text-stone-900 truncate">{prod.name}</h4>
+                          <span className="text-xs font-bold text-comic-red">{formatCurrency(prod.price)}</span>
+                        </div>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 sm:gap-6 flex-shrink-0">
@@ -237,14 +272,46 @@ export default function Header() {
                 </div>
               </div>
 
-              {/* Main Nav Links */}
-              <ul className="flex items-center gap-4 font-comic text-base tracking-wider text-stone-800 whitespace-nowrap">
-                <li><Link className="text-comic-red underline decoration-2 underline-offset-4 font-comic hover:text-stone-900 transition" to="/">TRANG CHỦ</Link></li>
-                <li><Link className="hover:text-comic-red transition" to="/products">KHO TRUYỆN</Link></li>
-                <li><Link className="hover:text-comic-red transition" to="/about">VỀ CHÚNG TÔI</Link></li>
-                <li><Link className="hover:text-comic-red transition" to="/contact">LIÊN HỆ</Link></li>
-                <li><Link className="bg-comic-red text-white comic-border-sm px-2 py-0.5 rounded shadow-comic-sm hover:bg-black transition animate-bounce inline-block" to="#">SPECIAL DEALS!</Link></li>
-              </ul>
+                              {/* Main Nav Links */}
+                <ul className="flex items-center gap-2 font-comic text-base tracking-wider text-stone-800 whitespace-nowrap">
+                  <li>
+                    <Link 
+                      className={`px-3 py-1.5 rounded-lg border-2 transition-all duration-200 block ${location.pathname === '/' ? '-translate-y-1 shadow-[2px_2px_0px_#101010] border-[#101010] text-comic-red bg-white' : 'border-transparent hover:-translate-y-1 hover:shadow-[2px_2px_0px_#101010] hover:border-[#101010] hover:text-comic-red'}`} 
+                      to="/"
+                    >
+                      TRANG CHỦ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      className={`px-3 py-1.5 rounded-lg border-2 transition-all duration-200 block ${location.pathname.startsWith('/product') ? '-translate-y-1 shadow-[2px_2px_0px_#101010] border-[#101010] text-comic-red bg-white' : 'border-transparent hover:-translate-y-1 hover:shadow-[2px_2px_0px_#101010] hover:border-[#101010] hover:text-comic-red'}`} 
+                      to="/products"
+                    >
+                      KHO TRUYỆN
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      className={`px-3 py-1.5 rounded-lg border-2 transition-all duration-200 block ${location.pathname === '/about' ? '-translate-y-1 shadow-[2px_2px_0px_#101010] border-[#101010] text-comic-red bg-white' : 'border-transparent hover:-translate-y-1 hover:shadow-[2px_2px_0px_#101010] hover:border-[#101010] hover:text-comic-red'}`} 
+                      to="/about"
+                    >
+                      VỀ CHÚNG TÔI
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      className={`px-3 py-1.5 rounded-lg border-2 transition-all duration-200 block ${location.pathname === '/contact' ? '-translate-y-1 shadow-[2px_2px_0px_#101010] border-[#101010] text-comic-red bg-white' : 'border-transparent hover:-translate-y-1 hover:shadow-[2px_2px_0px_#101010] hover:border-[#101010] hover:text-comic-red'}`} 
+                      to="/contact"
+                    >
+                      LIÊN HỆ
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="bg-comic-red text-white comic-border-sm px-2 py-0.5 rounded shadow-comic-sm hover:bg-black transition animate-bounce inline-block ml-2" to="#">
+                      SPECIAL DEALS!
+                    </Link>
+                  </li>
+                </ul>
             </div>
             
             {user?.role === "admin" && (
@@ -316,5 +383,8 @@ export default function Header() {
     </>
   );
 }
+
+
+
 
 

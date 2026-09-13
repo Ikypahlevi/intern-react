@@ -59,16 +59,14 @@ export default function ProductDetail() {
         </div>
       </aside>
 
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 py-4 text-xs font-bold text-stone-600 flex flex-wrap items-center gap-2 font-bubble">
-        <Link to="/" className="hover:underline hover:text-stone-900">Trang Chủ</Link>
-        <span>/</span>
-        <Link to="/products" className="hover:underline hover:text-stone-900">Kho Truyện</Link>
-        <span>/</span>
-        <Link to={`/products?category=${product.category}`} className="hover:underline hover:text-stone-900">{product.category}</Link>
-        <span>/</span>
-        <span className="text-black bg-yellow-300 px-2 py-0.5 rounded comic-border-sm font-black truncate max-w-[200px] sm:max-w-xs">{product.name}</span>
-      </div>
+            <Breadcrumb 
+        items={[
+          { label: 'TRANG CHỦ', link: '/' },
+          { label: 'KHO TRUYỆN', link: '/products' },
+          { label: product.category, link: `/products?category=${encodeURIComponent(product.category)}` },
+          { label: product.name, icon: '📖' }
+        ]} 
+      />
 
       <main className="max-w-7xl mx-auto px-4 py-2">
         {/* Khối Thông Tin Chính */}
@@ -89,3 +87,4 @@ export default function ProductDetail() {
     </div>
   );
 }
+

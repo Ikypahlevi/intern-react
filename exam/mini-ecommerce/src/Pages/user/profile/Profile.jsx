@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../../Stores/authStore";
 import api from "../../../Services/api";
 import { useGetOrders } from "../../../Services/queries/useOrders";
 import ProfileSidebar from "./_components/ProfileSidebar";
+import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 import ProfileDetails from "./_components/ProfileDetails";
 import OrderHistory from "./_components/OrderHistory";
 
@@ -42,14 +43,12 @@ export default function Profile() {
 
   return (
     <>
-      {/* Breadcrumbs */}
-      <div className="max-w-7xl mx-auto px-4 py-4 w-full text-xs">
-        <nav className="inline-flex items-center space-x-2 bg-white comic-border shadow-comic-sm px-4 py-1.5 rounded-lg font-bubble font-bold text-sm">
-          <Link to="/" className="hover:text-comic-red text-stone-800">TRANG CHỦ</Link>
-          <span className="text-comic-red font-black">&gt;</span>
-          <span className="text-comic-red uppercase bg-yellow-200 px-1.5 py-0.5 rounded border border-black">HỒ SƠ HIỆP SĨ MANGA</span>
-        </nav>
-      </div>
+            <Breadcrumb 
+        items={[
+          { label: 'TRANG CHỦ', link: '/' },
+          { label: 'HỒ SƠ HIỆP SĨ MANGA', icon: '👤' }
+        ]} 
+      />
 
       <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -66,3 +65,4 @@ export default function Profile() {
     </>
   );
 }
+
