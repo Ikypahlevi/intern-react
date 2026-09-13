@@ -13,6 +13,17 @@ export default function AdminLayout() {
     setIsSidebarOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isSidebarOpen]);
+
   if (!user || user.role !== "admin") {
     return <Navigate to="/auth/login" replace />;
   }
@@ -39,3 +50,4 @@ export default function AdminLayout() {
     </div>
   );
 }
+

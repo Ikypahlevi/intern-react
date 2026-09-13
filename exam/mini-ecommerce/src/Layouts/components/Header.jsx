@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import NotificationDropdown from "../../Components/NotificationDropdown";
 import { useCartStore } from "../../Stores/cartStore";
@@ -21,7 +21,20 @@ export default function Header() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileCategoryOpen, setIsMobileCategoryOpen] = useState(false);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   // Fetch real categories from DB
   const { data: categories = [] } = useGetCategories();
@@ -264,16 +277,31 @@ export default function Header() {
                 <li><Link to="/" className="block p-4 border-b border-gray-200 hover:bg-yellow-50"><i className="fa-solid fa-house w-6 text-center mr-2"></i> Trang Chủ</Link></li>
                 <li><Link to="/products" className="block p-4 border-b border-gray-200 hover:bg-yellow-50"><i className="fa-solid fa-book w-6 text-center mr-2"></i> Kho Truyện</Link></li>
                 
-                {/* Mobile Categories */}
-                <li className="p-4 border-b border-gray-200">
-                  <div className="flex items-center text-comic-red font-comic tracking-widest text-sm mb-2"><i className="fa-solid fa-bars-staggered w-6 text-center mr-2"></i> THỂ LOẠI</div>
-                  <div className="pl-8 flex flex-col gap-2 mt-2">
-                    {categories.map((cat) => (
-                      <Link key={cat.id} to={`/products?category=${encodeURIComponent(cat.name)}`} className="text-gray-700 text-sm hover:text-comic-red">
-                        - {cat.name}
-                      </Link>
-                    ))}
+                                {/* Mobile Categories */}
+                <li className="border-b border-gray-200">
+                  <div 
+                    className="flex items-center justify-between p-4 cursor-pointer hover:bg-yellow-50 transition-colors"
+                    onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
+                  >
+                    <div className="flex items-center text-stone-900 font-comic tracking-widest text-lg">
+                      <i className="fa-solid fa-bars-staggered w-6 text-center mr-2"></i> THỂ LOẠI
+                    </div>
+                    <i className={`fa-solid fa-chevron-down transition-transform ${isMobileCategoryOpen ? 'rotate-180' : ''}`}></i>
                   </div>
+                  {isMobileCategoryOpen && (
+                    <div className="pl-12 pr-4 pb-4 flex flex-col gap-3">
+                      {categories.map((cat) => (
+                        <Link 
+                          key={cat.id} 
+                          to={`/products?category=${encodeURIComponent(cat.name)}`} 
+                          className="text-gray-700 text-base hover:text-comic-red hover:underline block py-1"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          - {cat.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </li>
 
                 <li><Link to="/about" className="block p-4 border-b border-gray-200 hover:bg-yellow-50"><i className="fa-solid fa-circle-info w-6 text-center mr-2"></i> Về Chúng Tôi</Link></li>
@@ -288,4 +316,5 @@ export default function Header() {
     </>
   );
 }
+
 

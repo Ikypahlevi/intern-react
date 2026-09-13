@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React, { useEffect } from "react";
 
 export default function AdminDrawer({ 
   isOpen, 
@@ -9,6 +9,17 @@ export default function AdminDrawer({
   children,
   footerActions
 }) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -53,3 +64,4 @@ export default function AdminDrawer({
     </>
   );
 }
+
