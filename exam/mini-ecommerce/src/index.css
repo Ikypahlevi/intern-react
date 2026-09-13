@@ -2,21 +2,17 @@
 @config "../tailwind.config.js";
 
 @layer base {
-  html {
-    font-size: 17.5px;
-  }
-  
   body {
-    background-color: #FFFCEB;
+    background-color: #fffceb;
     background-image: radial-gradient(#d1c7a7 12%, transparent 12%);
     background-size: 16px 16px;
-    font-family: 'Patrick Hand', cursive, sans-serif;
+    font-family: "Patrick Hand", cursive, sans-serif;
   }
 }
 
 @layer utilities {
   .font-comic {
-    font-family: 'Bangers', cursive, impact, sans-serif;
+    font-family: "Bangers", cursive, impact, sans-serif;
     letter-spacing: 0.05em;
   }
 
@@ -32,8 +28,8 @@
 
   /* Comic halftone patterns */
   .halftone-yellow {
-    background-color: #FFE01B;
-    background-image: radial-gradient(#F59E0B 20%, transparent 20%);
+    background-color: #ffe01b;
+    background-image: radial-gradient(#f59e0b 20%, transparent 20%);
     background-size: 10px 10px;
   }
 
@@ -44,14 +40,14 @@
   }
 
   .halftone-orange {
-    background-color: #FF6B00;
-    background-image: radial-gradient(#E05300 20%, transparent 20%);
+    background-color: #ff6b00;
+    background-image: radial-gradient(#e05300 20%, transparent 20%);
     background-size: 10px 10px;
   }
 
   .halftone-cyan {
-    background-color: #00B4D8;
-    background-image: radial-gradient(#0077B6 20%, transparent 20%);
+    background-color: #00b4d8;
+    background-image: radial-gradient(#0077b6 20%, transparent 20%);
     background-size: 8px 8px;
   }
 
@@ -76,13 +72,13 @@
   }
 }
 @layer base {
-  button, 
-  [role="button"], 
-  a, 
-  input[type="submit"], 
-  input[type="button"], 
-  input[type="radio"], 
-  input[type="checkbox"], 
+  button,
+  [role="button"],
+  a,
+  input[type="submit"],
+  input[type="button"],
+  input[type="radio"],
+  input[type="checkbox"],
   select {
     cursor: pointer !important;
   }
