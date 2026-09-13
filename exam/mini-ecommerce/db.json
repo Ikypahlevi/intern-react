@@ -1783,7 +1783,8 @@
       "freeshipThreshold": 20000,
       "wrapRequired": true,
       "bubbleWrap": true,
-      "freeBookmark": true
+      "freeBookmark": true,
+      "baseFee": 30000
     },
     "security": {
       "require2FA": true,

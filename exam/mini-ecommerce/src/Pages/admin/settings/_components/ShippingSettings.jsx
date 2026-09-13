@@ -67,6 +67,31 @@ export default function ShippingSettings({ shipping, handleChangeShipping, handl
           </div>
         </div>
 
+        {/* Phí giao hàng tiêu chuẩn */}
+        <div className="p-4 bg-white border-[2px] border-black shadow-[2px_2px_0px_#000] flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+          <div className="flex flex-col">
+            <span className="font-comic text-[14px] font-bold uppercase text-black flex items-center gap-2">
+              <i className="fa-solid fa-truck-fast text-blue-600"></i>
+              <span>Phí Giao Hàng Tiêu Chuẩn (Base Shipping Fee)</span>
+            </span>
+            <span className="font-bubble font-bold text-[12px] text-gray-600">
+              Mức phí giao hàng mặc định áp dụng cho mọi đơn hàng (nếu chưa đạt ngưỡng Freeship).
+            </span>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <input
+              className="w-36 bg-white border-[2px] border-black px-4 py-3 font-comic tracking-wider text-[16px] font-bold text-right text-black shadow-[2px_2px_0px_#000] focus:outline-none focus:border-[3px]"
+              type="number"
+              name="baseFee"
+              value={shipping?.baseFee || 0}
+              onChange={handleChangeShipping}
+            />
+            <span className="font-comic text-[16px] font-bold text-black bg-comic-yellow px-3 py-3 border-[2px] border-black shadow-[2px_2px_0px_#000]">
+              VNĐ
+            </span>
+          </div>
+        </div>
+
         {/* Cấu hình ngưỡng Freeship */}
         <div className="p-4 bg-yellow-50 border-[2px] border-black shadow-[2px_2px_0px_#000] flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex flex-col">
@@ -160,3 +185,4 @@ export default function ShippingSettings({ shipping, handleChangeShipping, handl
     </div>
   );
 }
+

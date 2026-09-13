@@ -1,8 +1,8 @@
-import React from "react";
+﻿import React from "react";
 import Button from "../../../../Components/user/Button/Button";
 import { formatCurrency } from "../../../../Utils/format";
 
-export default function CheckoutSummary({ items, totalAmount, shippingFee, paymentMethod, setPaymentMethod, isSubmitting }) {
+export default function CheckoutSummary({ items, totalAmount, shippingFee, paymentMethod, setPaymentMethod, isSubmitting, payments }) {
   const grandTotal = totalAmount + shippingFee;
 
   return (
@@ -50,12 +50,16 @@ export default function CheckoutSummary({ items, totalAmount, shippingFee, payme
         </div>
       </div>
 
-      {/* Shipping Fee */}
+            {/* Shipping Fee */}
       <div className="py-3 border-b-2 border-gray-200 mb-4">
         <span className="block text-xs font-black uppercase text-gray-700 mb-2">Phí Vận Chuyển:</span>
         <div className="flex items-center justify-between p-2 rounded comic-border-2 bg-yellow-50">
           <span className="font-bold text-xs">Giao Hàng Tiêu Chuẩn (2-3 ngày)</span>
-          <span className="font-extrabold text-comic-red">+{formatCurrency(shippingFee)}</span>
+          {shippingFee === 0 ? (
+            <span className="font-extrabold text-green-600 bg-green-100 px-2 py-0.5 rounded border border-green-600">FREESHIP</span>
+          ) : (
+            <span className="font-extrabold text-comic-red">+{formatCurrency(shippingFee)}</span>
+          )}
         </div>
       </div>
 
@@ -65,43 +69,101 @@ export default function CheckoutSummary({ items, totalAmount, shippingFee, payme
           <span>💳</span> HÌNH THỨC THANH TOÁN
         </h3>
         <div className="space-y-2.5 text-xs font-bubble">
-          {/* COD */}
-          <div className="comic-border-2 bg-white p-3 rounded">
-            <label className="flex items-center justify-between font-black cursor-pointer text-black">
-              <div className="flex items-center gap-2">
-                <input 
-                  type="radio" 
-                  name="paymentMethod" 
-                  value="COD" 
-                  checked={paymentMethod === "COD"} 
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-4 h-4 text-black border-2 border-black accent-black" 
-                />
-                <span>COD - Thanh toán khi nhận hàng</span>
-              </div>
-              <span className="bg-gray-200 text-[10px] px-1.5 py-0.5 rounded font-bold">Tiền mặt</span>
-            </label>
-          </div>
-          {/* VNPAY / Momo */}
-          <div className="comic-border-2 bg-white p-3 rounded">
-            <label className="flex items-center justify-between font-black cursor-pointer text-black">
-              <div className="flex items-center gap-2">
-                <input 
-                  type="radio" 
-                  name="paymentMethod" 
-                  value="ONLINE" 
-                  checked={paymentMethod === "ONLINE"} 
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                  className="w-4 h-4 text-black border-2 border-black accent-black" 
-                />
-                <span>Ví Điện Tử Momo / VNPAY</span>
-              </div>
-              <div className="flex items-center gap-1 font-bold text-[10px]">
-                <span className="bg-pink-100 text-pink-700 px-1 rounded">MoMo</span>
-                <span className="bg-blue-100 text-blue-700 px-1 rounded">VNPAY</span>
-              </div>
-            </label>
-          </div>
+          {payments?.cod && (
+            <div className="comic-border-2 bg-white p-3 rounded hover:bg-yellow-50 transition-colors">
+              <label className="flex items-center justify-between font-black cursor-pointer text-black w-full h-full">
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="radio" 
+                    name="paymentMethod" 
+                    value="COD" 
+                    checked={paymentMethod === "COD"} 
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-4 h-4 text-black border-2 border-black accent-black cursor-pointer" 
+                  />
+                  <span>COD - Thanh toán khi nhận hàng</span>
+                </div>
+                <span className="bg-gray-200 text-[10px] px-1.5 py-0.5 rounded font-bold border border-gray-300">Tiền mặt</span>
+              </label>
+            </div>
+          )}
+          {payments?.vnpay && (
+            <div className="comic-border-2 bg-white p-3 rounded hover:bg-yellow-50 transition-colors">
+              <label className="flex items-center justify-between font-black cursor-pointer text-black w-full h-full">
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="radio" 
+                    name="paymentMethod" 
+                    value="VNPAY" 
+                    checked={paymentMethod === "VNPAY"} 
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-4 h-4 text-black border-2 border-black accent-black cursor-pointer" 
+                  />
+                  <span>VNPAY QR & SmartBanking</span>
+                </div>
+                <span className="bg-blue-100 text-blue-700 border border-blue-200 text-[10px] px-1.5 py-0.5 rounded font-bold">VNPAY</span>
+              </label>
+            </div>
+          )}
+          {payments?.momo && (
+            <div className="comic-border-2 bg-white p-3 rounded hover:bg-yellow-50 transition-colors">
+              <label className="flex items-center justify-between font-black cursor-pointer text-black w-full h-full">
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="radio" 
+                    name="paymentMethod" 
+                    value="MOMO" 
+                    checked={paymentMethod === "MOMO"} 
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-4 h-4 text-black border-2 border-black accent-black cursor-pointer" 
+                  />
+                  <span>Ví Điện Tử MoMo</span>
+                </div>
+                <span className="bg-pink-100 text-pink-700 border border-pink-200 text-[10px] px-1.5 py-0.5 rounded font-bold">MoMo</span>
+              </label>
+            </div>
+          )}
+          {payments?.zalo && (
+            <div className="comic-border-2 bg-white p-3 rounded hover:bg-yellow-50 transition-colors">
+              <label className="flex items-center justify-between font-black cursor-pointer text-black w-full h-full">
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="radio" 
+                    name="paymentMethod" 
+                    value="ZALO" 
+                    checked={paymentMethod === "ZALO"} 
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-4 h-4 text-black border-2 border-black accent-black cursor-pointer" 
+                  />
+                  <span>ZaloPay & VietQR</span>
+                </div>
+                <span className="bg-green-100 text-green-700 border border-green-200 text-[10px] px-1.5 py-0.5 rounded font-bold">ZaloPay</span>
+              </label>
+            </div>
+          )}
+          {payments?.stripe && (
+            <div className="comic-border-2 bg-white p-3 rounded hover:bg-yellow-50 transition-colors">
+              <label className="flex items-center justify-between font-black cursor-pointer text-black w-full h-full">
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="radio" 
+                    name="paymentMethod" 
+                    value="STRIPE" 
+                    checked={paymentMethod === "STRIPE"} 
+                    onChange={(e) => setPaymentMethod(e.target.value)}
+                    className="w-4 h-4 text-black border-2 border-black accent-black cursor-pointer" 
+                  />
+                  <span>Thẻ tín dụng quốc tế (Stripe)</span>
+                </div>
+                <span className="bg-purple-100 text-purple-700 border border-purple-200 text-[10px] px-1.5 py-0.5 rounded font-bold">VISA/Master</span>
+              </label>
+            </div>
+          )}
+          {(!payments || Object.values(payments).every(v => !v)) && (
+            <div className="text-center text-red-500 font-bold p-2 bg-red-50 border-2 border-red-200 rounded">
+              Hệ thống đang bảo trì kênh thanh toán!
+            </div>
+          )}
         </div>
       </div>
 
@@ -146,3 +208,5 @@ export default function CheckoutSummary({ items, totalAmount, shippingFee, payme
     </div>
   );
 }
+
+

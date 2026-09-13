@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import { useAuthStore } from "../../../Stores/authStore";
 import api from "../../../Services/api";
 import { useCreateOrder } from "../../../Services/queries/useOrders";
 import { useCreateNotification } from "../../../Services/queries/useNotifications";
+import { useGetSettings } from "../../../Services/queries/useSettings";
 import CheckoutForm from "./_components/CheckoutForm";
 import CheckoutSummary from "./_components/CheckoutSummary";
 import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
@@ -25,11 +26,30 @@ export default function Checkout() {
   const selectedIds = location.state?.selectedIds || items.map(item => item.id);
   const checkoutItems = useMemo(() => items.filter(item => selectedIds.includes(item.id)), [items, selectedIds]);
 
+  const { data: dbSettings, isLoading: isSettingsLoading } = useGetSettings();
+
   const totalAmount = useMemo(() => 
     checkoutItems.reduce((total, item) => total + (item.price * item.quantity), 0),
   [checkoutItems]);
 
-  const shippingFee = 30000; 
+  const freeshipThreshold = dbSettings?.shipping?.freeshipThreshold || 0;
+  const baseShippingFee = dbSettings?.shipping?.baseFee !== undefined ? dbSettings.shipping.baseFee : 30000;
+  const shippingFee = (freeshipThreshold > 0 && totalAmount >= freeshipThreshold) ? 0 : baseShippingFee;
+
+  const [paymentMethod, setPaymentMethod] = useState("COD");
+
+  // Sync initial payment method with settings
+  React.useEffect(() => {
+    if (dbSettings?.payments) {
+       const p = paymentMethod.toLowerCase();
+       if (!dbSettings.payments[p]) {
+         const activeMethod = Object.entries(dbSettings.payments).find(([_, val]) => val)?.[0];
+         if (activeMethod) {
+            setPaymentMethod(activeMethod.toUpperCase());
+         }
+       }
+    }
+  }, [dbSettings, paymentMethod]);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(checkoutSchema),
@@ -46,8 +66,7 @@ export default function Checkout() {
     }
   });
 
-    const [paymentMethod, setPaymentMethod] = useState("COD");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [pendingData, setPendingData] = useState(null);
 
@@ -181,6 +200,8 @@ export default function Checkout() {
     </>
   );
 }
+
+
 
 
 

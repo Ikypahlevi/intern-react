@@ -5,12 +5,16 @@ import { useDeleteProduct } from "../../../../Services/queries/useProducts";
 import { toast } from "sonner";
 import ConfirmModal from "../../../../Components/admin/ConfirmModal";
 
-export default function ProductsTable({ products, allCategories = [], allPublishers = [], columnFilters, 
-  setColumnFilters, 
-  isLoading, 
-  onEditProduct, 
+export default function ProductsTable({
+  products,
+  allCategories = [],
+  allPublishers = [],
+  columnFilters,
+  setColumnFilters,
+  isLoading,
+  onEditProduct,
   highlightProductId,
-  onClearHighlight
+  onClearHighlight,
 }) {
   const deleteMutation = useDeleteProduct();
   const [productToDelete, setProductToDelete] = useState(null);
@@ -19,8 +23,8 @@ export default function ProductsTable({ products, allCategories = [], allPublish
   useEffect(() => {
     if (highlightProductId && rowRefs.current[highlightProductId]) {
       rowRefs.current[highlightProductId].scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
+        behavior: "smooth",
+        block: "center",
       });
       const timer = setTimeout(() => {
         if (onClearHighlight) onClearHighlight();
@@ -30,7 +34,7 @@ export default function ProductsTable({ products, allCategories = [], allPublish
   }, [highlightProductId, onClearHighlight]);
 
   const handleFilterChange = (col, value) => {
-    setColumnFilters(prev => ({ ...prev, [col]: value }));
+    setColumnFilters((prev) => ({ ...prev, [col]: value }));
   };
 
   const handleDeleteClick = (product) => {
@@ -41,20 +45,42 @@ export default function ProductsTable({ products, allCategories = [], allPublish
     if (!productToDelete) return;
     deleteMutation.mutate(productToDelete.id, {
       onSuccess: () => {
-        toast.success(`Đã xóa SKU ${productToDelete.sku || productToDelete.id} thành công!`);
+        toast.success(
+          `Đã xóa SKU ${productToDelete.sku || productToDelete.id} thành công!`,
+        );
         setProductToDelete(null);
-      }
+      },
     });
   };
 
   const getStatusBadge = (status) => {
     switch (status) {
-      case 'active': return <AdminBadge variant="success" text="Đang bán" />;
-      case 'new': return <AdminBadge variant="info" text="Hàng mới" icon="fa-solid fa-bolt" />;
-      case 'preorder': return <AdminBadge variant="primary" text="Pre-order" icon="fa-regular fa-clock" />;
-      case 'paused': return <AdminBadge variant="secondary" text="Tạm dừng" icon="fa-solid fa-pause" />;
-      case 'out_of_stock': return <AdminBadge variant="danger" text="Hết hàng" />;
-      default: return <AdminBadge variant="success" text="Đang bán" />;
+      case "active":
+        return <AdminBadge variant="success" text="Đang bán" />;
+      case "new":
+        return (
+          <AdminBadge variant="info" text="Hàng mới" icon="fa-solid fa-bolt" />
+        );
+      case "preorder":
+        return (
+          <AdminBadge
+            variant="primary"
+            text="Pre-order"
+            icon="fa-regular fa-clock"
+          />
+        );
+      case "paused":
+        return (
+          <AdminBadge
+            variant="secondary"
+            text="Tạm dừng"
+            icon="fa-solid fa-pause"
+          />
+        );
+      case "out_of_stock":
+        return <AdminBadge variant="danger" text="Hết hàng" />;
+      default:
+        return <AdminBadge variant="success" text="Đang bán" />;
     }
   };
 
@@ -64,7 +90,7 @@ export default function ProductsTable({ products, allCategories = [], allPublish
         <div className="w-full overflow-x-auto">
           <table className="w-full text-left whitespace-nowrap">
             {/* THEAD */}
-                        <thead className="bg-blue-200 border-b-[3px] border-black font-comic text-sm uppercase select-none">
+            <thead className="bg-blue-200 border-b-[3px] border-black font-comic text-sm uppercase select-none">
               {/* Header Titles */}
               <tr>
                 <th className="p-3 align-top border-r-[2px] border-black w-24">
@@ -89,28 +115,36 @@ export default function ProductsTable({ products, allCategories = [], allPublish
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-36">
                   <div className="mb-1 font-black">THỂ LOẠI</div>
-                                    <select 
+                  <select
                     value={columnFilters.genre}
-                    onChange={(e) => handleFilterChange('genre', e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("genre", e.target.value)
+                    }
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000] cursor-pointer"
                   >
                     <option value="">Tất cả</option>
-                    {allCategories.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
+                    {allCategories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
                     ))}
                   </select>
                 </th>
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-36">
                   <div className="mb-1 font-black">NXB / ĐỐI TÁC</div>
-                                    <select 
+                  <select
                     value={columnFilters.publisher}
-                    onChange={(e) => handleFilterChange('publisher', e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("publisher", e.target.value)
+                    }
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000] cursor-pointer"
                   >
                     <option value="">Tất cả NXB</option>
-                    {allPublishers.map(pub => (
-                      <option key={pub} value={pub}>{pub}</option>
+                    {allPublishers.map((pub) => (
+                      <option key={pub} value={pub}>
+                        {pub}
+                      </option>
                     ))}
                   </select>
                 </th>
@@ -123,14 +157,18 @@ export default function ProductsTable({ products, allCategories = [], allPublish
                     <input
                       type="number"
                       value={columnFilters.priceMin}
-                      onChange={(e) => handleFilterChange('priceMin', e.target.value)}
+                      onChange={(e) =>
+                        handleFilterChange("priceMin", e.target.value)
+                      }
                       className="w-1/2 bg-white border-[2px] border-black px-1 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000]"
                       placeholder="Min"
                     />
                     <input
                       type="number"
                       value={columnFilters.priceMax}
-                      onChange={(e) => handleFilterChange('priceMax', e.target.value)}
+                      onChange={(e) =>
+                        handleFilterChange("priceMax", e.target.value)
+                      }
                       className="w-1/2 bg-white border-[2px] border-black px-1 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000]"
                       placeholder="Max"
                     />
@@ -139,9 +177,11 @@ export default function ProductsTable({ products, allCategories = [], allPublish
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-32 text-center">
                   <div className="mb-1 font-black">TỒN KHO</div>
-                  <select 
+                  <select
                     value={columnFilters.stock}
-                    onChange={(e) => handleFilterChange('stock', e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("stock", e.target.value)
+                    }
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000] cursor-pointer"
                   >
                     <option value="">Tất cả tồn</option>
@@ -153,9 +193,11 @@ export default function ProductsTable({ products, allCategories = [], allPublish
 
                 <th className="p-3 align-top border-r-[2px] border-black min-w-32 text-center">
                   <div className="mb-1 font-black">TRẠNG THÁI</div>
-                  <select 
+                  <select
                     value={columnFilters.status}
-                    onChange={(e) => handleFilterChange('status', e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("status", e.target.value)
+                    }
                     className="w-full bg-white border-[2px] border-black px-2 py-0.5 text-black font-bubble text-xs font-bold outline-none shadow-[1px_1px_0px_#000] cursor-pointer"
                   >
                     <option value="">Tất cả</option>
@@ -175,103 +217,113 @@ export default function ProductsTable({ products, allCategories = [], allPublish
 
             {/* TBODY */}
             <tbody className="divide-y-[2px] divide-black font-bubble text-sm">
-              {products.length > 0 ? products.map((product) => {
-                const isHighlighted = String(product.id) === String(highlightProductId);
-                return (
-                  <tr 
-                    key={product.id} 
-                    ref={(el) => rowRefs.current[product.id] = el}
-                    className={`transition-colors duration-1000 group ${isHighlighted ? 'bg-yellow-200' : 'bg-white hover:bg-yellow-50'}`}
-                  >
-                  <td className="p-3 border-r-[2px] border-black">
-                    <span className="font-comic font-black bg-gray-200 px-2 py-1 shadow-[1px_1px_0px_#000] border-[2px] border-black">
-                      {product.sku || product.id}
-                    </span>
-                  </td>
-                  
-                  <td className="p-3 border-r-[2px] border-black">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-16 border-[2px] border-black bg-white shadow-[2px_2px_0px_#000] overflow-hidden shrink-0 group-hover:rotate-2 transition-transform">
-                        <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="font-bold text-black text-sm truncate max-w-[250px] group-hover:text-blue-600 transition-colors">
-                          {product.name}
+              {products.length > 0 ? (
+                products.map((product) => {
+                  const isHighlighted =
+                    String(product.id) === String(highlightProductId);
+                  return (
+                    <tr
+                      key={product.id}
+                      ref={(el) => (rowRefs.current[product.id] = el)}
+                      className={`transition-colors duration-1000 group ${isHighlighted ? "bg-yellow-200" : "bg-white hover:bg-yellow-50"}`}
+                    >
+                      <td className="p-3 border-r-[2px] border-black">
+                        <span className="font-comic font-black bg-gray-200 px-2 py-1 shadow-[1px_1px_0px_#000] border-[2px] border-black">
+                          {product.sku || product.id}
                         </span>
-                        <span className="font-bold text-gray-500 text-xs">
-                          Tác giả: {product.author || 'Đang cập nhật'} • {product.format || 'Bản Tiêu Chuẩn'}
+                      </td>
+
+                      <td className="p-3 border-r-[2px] border-black">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-16 border-[2px] border-black bg-white shadow-[2px_2px_0px_#000] overflow-hidden shrink-0 group-hover:rotate-2 transition-transform">
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-bold text-black text-sm truncate max-w-[250px] group-hover:text-blue-600 transition-colors">
+                              {product.name}
+                            </span>
+                            <span className="font-bold text-gray-500 text-xs">
+                              Tác giả: {product.author || "Đang cập nhật"} •{" "}
+                              {product.format || "Bản Tiêu Chuẩn"}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td className="p-3 border-r-[2px] border-black">
+                        <span className="inline-block bg-gray-100 text-black px-2 py-1 font-comic text-[10px] font-black uppercase shadow-[1px_1px_0px_#000] border-[2px] border-black">
+                          {product.category}
                         </span>
-                      </div>
-                    </div>
-                  </td>
+                      </td>
 
-                  <td className="p-3 border-r-[2px] border-black">
-                    <span className="inline-block bg-gray-100 text-black px-2 py-1 font-comic text-[10px] font-black uppercase shadow-[1px_1px_0px_#000] border-[2px] border-black">
-                      {product.category}
-                    </span>
-                  </td>
+                      <td className="p-3 border-r-[2px] border-black">
+                        <span className="font-bold text-gray-700 flex items-center gap-1">
+                          <i className="fa-solid fa-bookmark text-blue-600"></i>
+                          {product.publisher}
+                        </span>
+                      </td>
 
-                  <td className="p-3 border-r-[2px] border-black">
-                    <span className="font-bold text-gray-700 flex items-center gap-1">
-                      <i className="fa-solid fa-bookmark text-blue-600"></i>
-                      {product.publisher}
-                    </span>
-                  </td>
+                      <td className="p-3 border-r-[2px] border-black text-right">
+                        <span className="font-black text-black block">
+                          {formatCurrency(product.price || 0)}
+                        </span>
+                        {product.originalPrice &&
+                          product.originalPrice > product.price && (
+                            <span className="font-bold text-gray-400 text-xs line-through">
+                              {formatCurrency(product.originalPrice)}
+                            </span>
+                          )}
+                      </td>
 
-                  <td className="p-3 border-r-[2px] border-black text-right">
-                    <span className="font-black text-black block">{formatCurrency(product.price || 0)}</span>
-                    {product.originalPrice && product.originalPrice > product.price && (
-                      <span className="font-bold text-gray-400 text-xs line-through">
-                        {formatCurrency(product.originalPrice)}
-                      </span>
-                    )}
-                  </td>
+                      <td className="p-3 border-r-[2px] border-black text-center">
+                        <span
+                          className={`inline-block px-2 py-1 font-comic text-[11px] font-black shadow-[1px_1px_0px_#000] border-[2px] border-black ${
+                            product.stock === 0
+                              ? "bg-red-200 text-red-800"
+                              : "bg-green-100 text-green-800"
+                          }`}
+                        >
+                          {product.stock} cuốn
+                        </span>
+                      </td>
 
-                  <td className="p-3 border-r-[2px] border-black text-center">
-                    <span className={`inline-block px-2 py-1 font-comic text-[11px] font-black shadow-[1px_1px_0px_#000] border-[2px] border-black ${
-                      product.stock === 0 ? 'bg-red-200 text-red-800' : 'bg-green-100 text-green-800'
-                    }`}>
-                      {product.stock} cuốn
-                    </span>
-                  </td>
+                      <td className="p-3 border-r-[2px] border-black text-center">
+                        {getStatusBadge(product.status)}
+                      </td>
 
-                  <td className="p-3 border-r-[2px] border-black text-center">
-                    {getStatusBadge(product.status)}
-                  </td>
-
-                  <td className="p-3 text-center">
-                    <div className="flex items-center justify-center gap-2 opacity-100 lg:opacity-50 group-hover:opacity-100 transition-opacity">
-                      <button 
-                        onClick={() => onViewProduct(product.id)}
-                        className="w-8 h-8 bg-yellow-400 text-black border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-yellow-500 transition-colors"
-                        title="Xem Chi Tiết"
-                      >
-                        <i className="fa-solid fa-eye"></i>
-                      </button>
-                      <button 
-                        onClick={() => onEditProduct(product)}
-                        className="w-8 h-8 bg-blue-400 text-black border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-blue-500 transition-colors"
-                        title="Sửa"
-                      >
-                        <i className="fa-solid fa-pen"></i>
-                      </button>
-                      <button 
-                        onClick={() => handleDeleteClick(product)}
-                        className="w-8 h-8 bg-black text-white border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-gray-800 transition-colors"
-                        title="Xóa"
-                      >
-                        <i className="fa-solid fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                  </tr>
-                );
-              }) : (
+                      <td className="p-3 text-center">
+                        <div className="flex items-center justify-center gap-2 opacity-100 lg:opacity-50 group-hover:opacity-100 transition-opacity">
+                          <button
+                            onClick={() => onEditProduct(product)}
+                            className="w-8 h-8 bg-blue-400 text-black border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-blue-500 transition-colors"
+                            title="Sửa"
+                          >
+                            <i className="fa-solid fa-pen"></i>
+                          </button>
+                          <button
+                            onClick={() => handleDeleteClick(product)}
+                            className="w-8 h-8 bg-black text-white border-[2px] border-black flex items-center justify-center shadow-[2px_2px_0px_#000] hover:bg-gray-800 transition-colors"
+                            title="Xóa"
+                          >
+                            <i className="fa-solid fa-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
                 <tr>
                   <td colSpan="8" className="p-10 text-center">
                     <div className="flex flex-col items-center justify-center gap-2">
                       <i className="fa-solid fa-box-open text-4xl text-gray-400"></i>
-                      <span className="font-comic text-xl uppercase font-black text-gray-500">Không tìm thấy sản phẩm nào!</span>
+                      <span className="font-comic text-xl uppercase font-black text-gray-500">
+                        Không tìm thấy sản phẩm nào!
+                      </span>
                     </div>
                   </td>
                 </tr>
@@ -281,7 +333,7 @@ export default function ProductsTable({ products, allCategories = [], allPublish
         </div>
       </div>
 
-      <ConfirmModal 
+      <ConfirmModal
         isOpen={!!productToDelete}
         onClose={() => setProductToDelete(null)}
         onConfirm={handleConfirmDelete}
@@ -294,8 +346,3 @@ export default function ProductsTable({ products, allCategories = [], allPublish
     </>
   );
 }
-
-
-
-
-
