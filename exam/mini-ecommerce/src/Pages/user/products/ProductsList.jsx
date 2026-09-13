@@ -11,7 +11,7 @@ import ProductSkeleton from "../../../Components/user/ProductSkeleton";
 export default function ProductsList() {
   const location = useLocation();
   const highlightProductId = location.state?.highlightProductId;
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const categoryQuery = searchParams.get("category");
   const searchQuery = searchParams.get("search");
 
@@ -30,6 +30,18 @@ export default function ProductsList() {
   const [sortBy, setSortBy] = useState("hot");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12;
+
+  const handleClearAllFilters = () => {
+    setSearchParams({}); // Xóa sạch URL params
+    setFilters({
+      categories: [],
+      publishers: [],
+      statuses: [],
+      priceRange: [0, 2500000],
+      minRating: 0,
+    });
+    setSortBy("hot");
+  };
 
   useEffect(() => {
     if (categoryQuery) {
@@ -93,6 +105,7 @@ export default function ProductsList() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
         <ProductsFilterSidebar 
           isOpen={isFilterOpen}
+          onClearAll={handleClearAllFilters}
           onClose={() => setIsFilterOpen(false)}
           filters={filters} 
           setFilters={setFilters}
@@ -181,3 +194,4 @@ export default function ProductsList() {
     </>
   );
 }
+

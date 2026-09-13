@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,7 @@ import CheckoutForm from "./_components/CheckoutForm";
 import CheckoutSummary from "./_components/CheckoutSummary";
 import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 import { toast } from "sonner";
+import ConfirmModal from "../../../Components/admin/ConfirmModal";
 
 export default function Checkout() {
   const location = useLocation();
@@ -45,8 +46,10 @@ export default function Checkout() {
     }
   });
 
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+    const [paymentMethod, setPaymentMethod] = useState("COD");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [pendingData, setPendingData] = useState(null);
 
   if (checkoutItems.length === 0) {
     return (
@@ -65,7 +68,18 @@ export default function Checkout() {
     );
   }
 
-  const onSubmit = async (data) => {
+    const onSubmit = async (data) => {
+    if (!user) {
+      toast.error("Vui lòng đăng nhập để tiếp tục!");
+      return;
+    }
+    setPendingData(data);
+    setIsConfirmOpen(true);
+  };
+
+  const handleConfirmOrder = async () => {
+    if (!pendingData) return;
+    const data = pendingData;
     if (!user) {
       toast.error("Vui lòng đăng nhập để tiếp tục!");
       return;
@@ -136,6 +150,17 @@ export default function Checkout() {
       />
 
       <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
+              <ConfirmModal 
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={handleConfirmOrder}
+        title="XÁC NHẬN ĐẶT HÀNG"
+        message={`Bạn đang chuẩn bị đặt ${checkoutItems.length} sản phẩm với tổng thanh toán là ${(totalAmount + shippingFee).toLocaleString()}đ. Bạn có chắc chắn muốn tiến hành đặt hàng?`}
+        confirmText="XÁC NHẬN ĐẶT HÀNG"
+        cancelText="KIỂM TRA LẠI"
+        isDanger={false}
+      />
+
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-7">
             <CheckoutForm register={register} errors={errors} />
@@ -156,4 +181,6 @@ export default function Checkout() {
     </>
   );
 }
+
+
 

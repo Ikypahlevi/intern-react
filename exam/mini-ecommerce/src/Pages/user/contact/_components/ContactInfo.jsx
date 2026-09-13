@@ -10,7 +10,7 @@ export default function ContactInfo() {
             🏢 TRỤ SỞ TỔNG BỘ MANGA (HQ)
           </div>
           <p className="text-gray-900 font-extrabold leading-relaxed">
-            88 Phố Manga, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh
+            79 Thanh Đàm, Hoàng Mai, Hà Nội
           </p>
           <p className="text-red-600 font-black text-sm mt-1">Hotline Otaku: 1900-888-MANGA</p>
           <p className="text-blue-700 font-black underline cursor-pointer hover:text-blue-500">support@swoomanga.vn</p>
@@ -65,4 +65,5 @@ export default function ContactInfo() {
     </div>
   );
 }
+
 

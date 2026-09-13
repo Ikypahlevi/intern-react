@@ -8,6 +8,7 @@ export default function ProductsFilterSidebar({
   availableCategories,
   availablePublishers,
   availableStatuses,
+  onClearAll,
 }) {
   const handleCheckboxChange = (filterGroup, value) => {
     setFilters((prev) => {
@@ -18,7 +19,10 @@ export default function ProductsFilterSidebar({
         ? currentArr.filter((item) => item !== value)
         : [...currentArr, value];
 
-      return { ...prev, [filterGroup]: newArr };
+      return {
+        ...prev,
+        [filterGroup]: newArr,
+      };
     });
   };
 
@@ -34,15 +38,7 @@ export default function ProductsFilterSidebar({
     }));
   };
 
-  const clearAllFilters = () => {
-    setFilters({
-      categories: [],
-      publishers: [],
-      statuses: [],
-      priceRange: [30000, 2500000],
-      minRating: 0,
-    });
-  };
+  const clearAllFilters = onClearAll;
 
   return (
     <>
@@ -253,3 +249,4 @@ export default function ProductsFilterSidebar({
     </>
   );
 }
+
