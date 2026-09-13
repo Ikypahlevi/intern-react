@@ -1,14 +1,13 @@
-﻿import React from "react";
+import React from "react";
 import Button from "../../../../Components/user/Button/Button";
-import Input from "../../../../Components/user/Input/Input";
 import { formatCurrency } from "../../../../Utils/format";
 
 export default function CartSummary({ 
   totalAmount, 
-  totalItems, 
+  totalItems,
+  shippingFee = 0,
   onCheckout 
 }) {
-  const shippingFee = totalItems > 0 ? 30000 : 0;
   const grandTotal = totalAmount + shippingFee;
 
   return (
@@ -35,8 +34,14 @@ export default function CartSummary({
             </span>
           </div>
           <div className="flex justify-between items-center text-black font-bold">
-            <span>Giao hoả tốc 2H (Nội thành)</span>
-            <span className="font-black text-black text-base">{formatCurrency(shippingFee)}</span>
+            <span>Phí Giao Hàng Tiêu Chuẩn</span>
+            {shippingFee === 0 && totalItems > 0 ? (
+              <span className="font-black text-green-700 text-xs uppercase bg-green-100 px-1.5 py-0.5 rounded border border-black">
+                FREESHIP
+              </span>
+            ) : (
+              <span className="font-black text-black text-base">+{formatCurrency(shippingFee)}</span>
+            )}
           </div>
         </div>
         
@@ -52,11 +57,11 @@ export default function CartSummary({
         
         <Button 
           variant="danger" 
-          className="w-full !rounded-xl py-4 text-lg"
+          className="w-full !rounded-xl py-4 text-lg font-comic uppercase"
           onClick={onCheckout}
           disabled={totalItems === 0}
         >
-          <span>⚡ TIẾN HÀNH ĐẶT HÀNG</span>
+          <span>👉 TIẾN HÀNH ĐẶT HÀNG</span>
         </Button>
         
         <div className="text-center text-[11px] font-black font-bubble uppercase text-stone-800 pt-1">

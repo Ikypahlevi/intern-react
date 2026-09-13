@@ -1777,14 +1777,14 @@
       "momo": true,
       "zalo": true,
       "cod": true,
-      "stripe": true
+      "stripe": false
     },
     "shipping": {
-      "freeshipThreshold": 20000,
+      "freeshipThreshold": 1000000,
       "wrapRequired": true,
       "bubbleWrap": true,
       "freeBookmark": true,
-      "baseFee": 30000
+      "baseFee": 20000
     },
     "security": {
       "require2FA": true,

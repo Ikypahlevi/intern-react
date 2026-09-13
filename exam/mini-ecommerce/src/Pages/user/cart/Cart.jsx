@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCartStore } from "../../../Stores/cartStore";
 import CartItem from "./_components/CartItem";
 import CartSummary from "./_components/CartSummary";
 import CartSuggestions from "./_components/CartSuggestions";
 import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
+import { useGetSettings } from "../../../Services/queries/useSettings";
 
 export default function Cart() {
   const { items, updateQuantity, removeItem } = useCartStore();
@@ -42,6 +43,11 @@ export default function Cart() {
       totalItems: selectedItems.reduce((total, item) => total + item.quantity, 0)
     };
   }, [items, selectedIds]);
+
+    const { data: dbSettings } = useGetSettings();
+  const freeshipThreshold = dbSettings?.shipping?.freeshipThreshold || 0;
+  const baseShippingFee = dbSettings?.shipping?.baseFee !== undefined ? dbSettings.shipping.baseFee : 30000;
+  const shippingFee = totalItems === 0 ? 0 : (freeshipThreshold > 0 && totalAmount >= freeshipThreshold) ? 0 : baseShippingFee;
 
   const handleCheckout = () => {
     if (selectedIds.length === 0) return;
@@ -125,7 +131,7 @@ export default function Cart() {
             </div>
 
             {/* Cột phải: Summary */}
-            <CartSummary 
+            <CartSummary shippingFee={shippingFee} 
               totalAmount={totalAmount} 
               totalItems={totalItems} 
               onCheckout={handleCheckout} 
@@ -139,4 +145,5 @@ export default function Cart() {
     </>
   );
 }
+
 
