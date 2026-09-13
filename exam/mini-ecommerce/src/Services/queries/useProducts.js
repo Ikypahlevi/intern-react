@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+﻿import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { productService } from "../productService";
 
 // Hook lấy danh sách sản phẩm
@@ -55,5 +55,13 @@ export const useDeleteProduct = () => {
         return old ? old.filter((p) => p.id !== deletedId) : old;
       });
     },
+  });
+};
+
+export const useGetProductsPaginated = (params) => {
+  return useQuery({
+    queryKey: ["products", "paginated", params],
+    queryFn: () => productService.getPaginated(params),
+    keepPreviousData: true,
   });
 };

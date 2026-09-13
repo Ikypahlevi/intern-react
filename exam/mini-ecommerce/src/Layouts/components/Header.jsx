@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import NotificationDropdown from "../../Components/NotificationDropdown";
 import { useCartStore } from "../../Stores/cartStore";
+import { useWishlistStore } from "../../Stores/wishlistStore";
 import { formatCurrency } from "../../Utils/format";
 import { useAuthStore } from "../../Stores/authStore";
 import { useDebounce } from "../../Utils/useDebounce";
@@ -159,7 +160,7 @@ export default function Header() {
                         }}
                         className="w-full text-left px-4 py-3 hover:bg-yellow-50 flex items-center gap-3 transition-colors"
                       >
-                        <img src={prod.image} alt={prod.name} className="w-10 h-14 object-cover rounded comic-border-sm shrink-0" />
+                        <img loading="lazy" src={prod.image} alt={prod.name} className="w-10 h-14 object-cover rounded comic-border-sm shrink-0" />
                         <div className="flex-1 min-w-0">
                           <h4 className="font-bubble font-bold text-sm text-stone-900 truncate">{prod.name}</h4>
                           <span className="text-xs font-bold text-comic-red">{formatCurrency(prod.price)}</span>
@@ -220,6 +221,18 @@ export default function Header() {
               {isAuthenticated && <NotificationDropdown />}
 
               {/* Cart */}
+                            <Link 
+                to="/profile?tab=wishlist" 
+                className="relative flex items-center justify-center w-10 h-10 bg-white hover:bg-red-50 rounded-xl comic-border shadow-comic transition"
+                title="Sản phẩm yêu thích"
+              >
+                <i className="fa-solid fa-heart text-comic-red text-lg"></i>
+                {wishlistItems.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-comic-red text-white text-[10px] font-comic w-5 h-5 flex items-center justify-center rounded-full comic-border-sm shadow-comic-sm">
+                    {wishlistItems.length}
+                  </span>
+                )}
+              </Link>
               <Link
                 to="/cart"
                 className="relative flex items-center justify-center w-10 h-10 bg-comic-yellow hover:bg-comic-gold rounded-xl comic-border shadow-comic transition"
@@ -383,6 +396,8 @@ export default function Header() {
     </>
   );
 }
+
+
 
 
 

@@ -1,5 +1,6 @@
-﻿import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useCartStore } from "../../../Stores/cartStore";
+import { useWishlistStore } from "../../../Stores/wishlistStore";
 import { formatCurrency } from "../../../Utils/format";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
@@ -16,6 +17,8 @@ export default function ProductCard({ product, isHighlighted }) {
     }
   }, [isHighlighted]);
   const addItem = useCartStore((state) => state.addItem);
+  const { isInWishlist, toggleWishlist } = useWishlistStore();
+  const isFav = isInWishlist(product.id);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -35,12 +38,20 @@ export default function ProductCard({ product, isHighlighted }) {
       <div className="absolute top-2 left-2 z-10 bg-comic-red text-white font-comic text-xs px-2 py-0.5 comic-border-sm shadow-comic-sm">
         {product.status ? product.status.split(' ')[0].toUpperCase() : 'HOT! 🔥'}
       </div>
+      <div className="absolute top-2 right-2 z-10">
+        <button 
+          onClick={(e) => { e.preventDefault(); toggleWishlist(product); }}
+          className={`w-8 h-8 flex items-center justify-center rounded-full comic-border-sm shadow-comic-sm transition-all hover:scale-110 ` + (isFav ? 'bg-comic-red text-white' : 'bg-white text-gray-400 hover:text-comic-red')}
+          title="Thêm vào Yêu thích"
+        >
+          <i className="fa-solid fa-heart"></i>
+        </button>
+      </div>
       
       <Link to={`/product/${product.id}`} className="block">
         <div className="w-full h-48 bg-zinc-100 comic-border-sm mb-3 relative overflow-hidden group-hover:bg-comic-yellow/30 transition-colors">
           {product.image ? (
-            <img 
-              src={product.image} 
+            <img loading="lazy" src={product.image} 
               alt={product.name} 
               className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" 
             />
@@ -87,4 +98,7 @@ export default function ProductCard({ product, isHighlighted }) {
     </div>
   );
 }
+
+
+
 

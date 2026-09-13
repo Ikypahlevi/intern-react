@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 export default function ProductGallery({ product }) {
   return (
@@ -32,7 +32,7 @@ export default function ProductGallery({ product }) {
 
           <div className="relative w-64 h-80 bg-white rounded-2xl comic-border shadow-comic-lg p-2 flex flex-col justify-center z-10 transform group-hover:scale-105 transition duration-300">
             {product.image ? (
-              <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+              <img loading="lazy" src={product.image} alt={product.name} className="w-full h-full object-contain" />
             ) : (
               <div className="w-full h-full bg-stone-100 flex items-center justify-center">
                 <i className="fa-solid fa-image text-5xl text-stone-300"></i>
@@ -48,3 +48,4 @@ export default function ProductGallery({ product }) {
     </div>
   );
 }
+

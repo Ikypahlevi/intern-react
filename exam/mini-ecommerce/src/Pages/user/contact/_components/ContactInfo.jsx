@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 export default function ContactInfo() {
   return (
@@ -54,8 +54,7 @@ export default function ContactInfo() {
       
       {/* Studio Image Placeholder */}
       <div className="border-[3.5px] border-black shadow-comic rounded-xl overflow-hidden h-[180px] relative">
-        <img 
-          alt="HQ Manga Studio Workspace" 
+        <img loading="lazy" alt="HQ Manga Studio Workspace" 
           className="w-full h-full object-cover" 
           src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80" 
         />
@@ -66,3 +65,4 @@ export default function ContactInfo() {
     </div>
   );
 }
+

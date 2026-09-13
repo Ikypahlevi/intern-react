@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useAuthStore } from "../../../../Stores/authStore";
 
 export default function ProfileSidebar({ activeTab, setActiveTab }) {
@@ -19,7 +19,7 @@ export default function ProfileSidebar({ activeTab, setActiveTab }) {
         <div className="w-28 h-28 rounded-xl bg-comic-yellow border-[3px] border-black p-1 shadow-comic mb-3 relative">
           <div className="w-full h-full overflow-hidden rounded-lg border-2 border-black bg-white relative flex items-center justify-center">
             {user?.avatar ? (
-              <img alt="Avatar" className="w-full h-full object-cover" src={user.avatar} />
+              <img loading="lazy" alt="Avatar" className="w-full h-full object-cover" src={user.avatar} />
             ) : (
               <i className="fa-solid fa-user text-4xl text-gray-400"></i>
             )}
@@ -68,6 +68,18 @@ export default function ProfileSidebar({ activeTab, setActiveTab }) {
           </button>
 
           <button 
+            onClick={() => setActiveTab('wishlist')}
+            className={`w-full flex items-center justify-between px-3 py-2 border-2 border-black shadow-comic-sm transition-colors ${
+              activeTab === 'wishlist' ? "bg-comic-red text-white" : "bg-white text-black hover:bg-comic-yellow"
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <i className={`fa-solid fa-heart ${activeTab === 'wishlist' ? "text-white" : "text-comic-red"}`}></i> Sản Phẩm Yêu Thích
+            </span>
+            <i className="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+
+          <button 
             onClick={handleLogout}
             className="w-full flex items-center justify-between px-3 py-2 bg-red-100 text-comic-red hover:bg-comic-red hover:text-white border-2 border-black shadow-comic-sm transition-colors mt-4"
           >
@@ -80,3 +92,4 @@ export default function ProfileSidebar({ activeTab, setActiveTab }) {
     </aside>
   );
 }
+

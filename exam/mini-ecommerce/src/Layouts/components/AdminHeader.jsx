@@ -105,8 +105,7 @@ export default function AdminHeader({ onMenuClick }) {
                         setShowResults(false);
                       }}
                     >
-                      <img
-                        src={p.image}
+                      <img loading="lazy" src={p.image}
                         className="w-8 h-8 object-cover border border-black"
                       />
                       <div className="flex-1 min-w-0">
@@ -255,5 +254,6 @@ export default function AdminHeader({ onMenuClick }) {
     </header>
   );
 }
+
 
 

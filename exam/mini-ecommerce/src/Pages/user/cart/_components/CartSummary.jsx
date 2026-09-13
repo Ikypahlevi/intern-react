@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Button from "../../../../Components/user/Button/Button";
 import Input from "../../../../Components/user/Input/Input";
 import { formatCurrency } from "../../../../Utils/format";
@@ -13,25 +13,6 @@ export default function CartSummary({
 
   return (
     <div className="lg:col-span-4 space-y-6">
-      {/* Khối nhập Voucher (Giả lập UI theo design) */}
-      <div className="bg-yellow-50 comic-border shadow-comic-sm rounded-2xl p-5 space-y-3">
-        <div className="flex items-center justify-between">
-          <h4 className="font-comic text-base text-stone-900 flex items-center gap-2">
-            <i className="fa-solid fa-ticket text-comic-red"></i> MÃ KHUYẾN MÃI / VOUCHER
-          </h4>
-        </div>
-        <div className="flex gap-2">
-          <input 
-            type="text" 
-            placeholder="NHẬP MÃ: FREESHIP..." 
-            className="flex-1 text-xs px-3 py-2.5 comic-border-sm rounded-xl font-bold uppercase font-bubble bg-white outline-none focus:ring-0 placeholder-gray-400"
-          />
-          <Button variant="danger" size="sm" className="!rounded-xl px-5">
-            ÁP DỤNG
-          </Button>
-        </div>
-      </div>
-
       {/* Khối Tóm tắt đơn hàng */}
       <div className="comic-border shadow-comic-lg rounded-2xl p-6 bg-comic-yellow space-y-5 relative">
         <div className="absolute -top-3.5 right-4 bg-comic-red text-white comic-border-sm px-2.5 py-0.5 font-comic text-xs shadow-comic-sm rotate-[3deg]">
@@ -85,3 +66,4 @@ export default function CartSummary({
     </div>
   );
 }
+

@@ -40,8 +40,7 @@ export default function ProductsHeroBanner() {
 
           <div className="relative flex items-center justify-center">
             <div className="w-56 h-56 sm:w-64 sm:h-64 rounded-xl bg-comic-yellow/20 comic-border-thick border-white/40 flex items-center justify-center relative overflow-hidden shadow-comic-lg">
-              <img
-                className="w-full h-full object-cover"
+              <img loading="lazy" className="w-full h-full object-cover"
                 src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80"
                 alt="Manga Festival Covers"
               />
@@ -88,5 +87,6 @@ export default function ProductsHeroBanner() {
     </>
   );
 }
+
 
 

@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+﻿import React, { useMemo } from "react";
 import ProductCard from "../../../../Components/user/ProductCard/ProductCard";
 import { useGetProducts } from "../../../../Services/queries/useProducts";
 import { Link } from "react-router-dom";
+import ProductSkeleton from "../../../../Components/user/ProductSkeleton";
 
 export default function CartSuggestions({ cartItems }) {
-  const { data: allProducts = [] } = useGetProducts();
+  const { data: allProducts = [], isLoading, isError } = useGetProducts();
 
   const suggestedProducts = useMemo(() => {
     if (allProducts.length === 0) return [];
@@ -55,11 +56,24 @@ export default function CartSuggestions({ cartItems }) {
         </Link>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {suggestedProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+            {isError ? (
+        <div className="text-center font-bubble font-bold text-stone-500 py-4">
+          Lỗi kết nối radar, không thể lấy gợi ý! 📡
+        </div>
+      ) : isLoading ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[...Array(5)].map((_, i) => (
+            <ProductSkeleton key={i} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {suggestedProducts.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
+

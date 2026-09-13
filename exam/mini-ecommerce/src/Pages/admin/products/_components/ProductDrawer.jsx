@@ -306,8 +306,7 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
             <label className="font-bold text-xs uppercase text-gray-500 mb-1 block">Xem TrÆ°á»›c</label>
             {imagePreview ? (
               <div className="relative w-full aspect-[3/4] max-w-[140px] border-[3px] border-black shadow-[4px_4px_0px_#000] overflow-hidden bg-gray-100">
-                <img
-                  src={imagePreview}
+                <img loading="lazy" src={imagePreview}
                   alt="Preview"
                   className="w-full h-full object-cover"
                   onError={() => {
@@ -452,4 +451,5 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
     </AdminDrawer>
   );
 }
+
 

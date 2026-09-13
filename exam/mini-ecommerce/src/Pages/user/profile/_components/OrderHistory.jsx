@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { formatCurrency } from "../../../../Utils/format";
 import { useUpdateOrderStatus } from "../../../../Services/queries/useOrders";
 import { useCreateNotification } from "../../../../Services/queries/useNotifications";
@@ -88,7 +88,7 @@ export default function OrderHistory({ orders = [] }) {
                   {order.items?.map((item, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <div className="w-12 h-16 bg-white border-2 border-black overflow-hidden shrink-0 flex items-center justify-center">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        <img loading="lazy" src={item.image} alt={item.name} className="w-full h-full object-cover" />
                       </div>
                       <div>
                         <h4 className="font-comic font-black text-xs uppercase text-black line-clamp-1">{item.name}</h4>
@@ -125,3 +125,4 @@ export default function OrderHistory({ orders = [] }) {
     </div>
   );
 }
+
