@@ -8,6 +8,7 @@ export const useGetNotifications = () => {
       const { data } = await api.get("/notifications?_sort=createdAt&_order=desc");
       return data;
     },
+    refetchInterval: 3000, // Tự động gọi lại mỗi 3 giây để mô phỏng Real-time
   });
 };
 
