@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { formatCurrency } from "../../../../Utils/format";
 
 export default function CartItem({ 
@@ -45,7 +45,7 @@ export default function CartItem({
             </span>
           )}
           {item.image ? (
-            <img loading="lazy" src={item.image} alt={item.name} className="w-full h-full object-contain" />
+            <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
           ) : (
             <div className="flex flex-col items-center justify-center text-center">
               <i className="fa-solid fa-book-open text-3xl text-comic-red mb-1"></i>
@@ -121,4 +121,3 @@ export default function CartItem({
     </div>
   );
 }
-

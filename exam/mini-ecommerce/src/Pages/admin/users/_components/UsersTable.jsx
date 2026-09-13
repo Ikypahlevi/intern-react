@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { formatCurrency } from "../../../../Utils/format";
 import AdminBadge from "../../../../Components/admin/AdminBadge";
 import { useUpdateUser, useDeleteUser } from "../../../../Services/queries/useUsers";
@@ -166,7 +166,7 @@ export default function UsersTable({ users, columnFilters, setColumnFilters, onE
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 border-[2px] border-black bg-white flex items-center justify-center font-comic font-black text-lg shadow-[2px_2px_0px_#000] overflow-hidden">
                         {user.avatar ? (
-                          <img loading="lazy" src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+                          <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
                         ) : (
                           user.name.charAt(0).toUpperCase()
                         )}
@@ -255,4 +255,3 @@ export default function UsersTable({ users, columnFilters, setColumnFilters, onE
     </>
   );
 }
-

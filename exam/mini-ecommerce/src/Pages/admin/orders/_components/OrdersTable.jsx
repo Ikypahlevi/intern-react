@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function OrdersTable({ 
   orders, 
@@ -80,7 +80,7 @@ export default function OrdersTable({
                     <div className="flex flex-col gap-2">
                       {order.items.map((item, idx) => (
                         <div key={idx} className="flex items-center gap-2">
-                          <img loading="lazy" src={item.image} alt={item.name} className="w-8 h-12 object-cover border-[2px] border-black shadow-[1px_1px_0px_#000]" />
+                          <img src={item.image} alt={item.name} className="w-8 h-12 object-cover border-[2px] border-black shadow-[1px_1px_0px_#000]" />
                           <div className="min-w-0 flex-1">
                             <p className="font-bold text-xs text-black truncate">{item.name}</p>
                             <p className="font-bubble text-xs text-gray-600">SL: x{item.quantity} • {item.price.toLocaleString()}₫</p>
@@ -136,4 +136,3 @@ export default function OrdersTable({
     </div>
   );
 }
-

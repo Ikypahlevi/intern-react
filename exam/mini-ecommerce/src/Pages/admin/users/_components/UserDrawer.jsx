@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -197,7 +197,8 @@ export default function UserDrawer({ user, onClose }) {
                 title="Click hoặc kéo thả ảnh vào đây"
               >
                 {avatarPreview ? (
-                  <img loading="lazy" src={avatarPreview}
+                  <img
+                    src={avatarPreview}
                     alt="Avatar"
                     className="w-full h-full object-cover"
                     onError={() => {
@@ -402,4 +403,3 @@ export default function UserDrawer({ user, onClose }) {
     </AdminDrawer>
   );
 }
-

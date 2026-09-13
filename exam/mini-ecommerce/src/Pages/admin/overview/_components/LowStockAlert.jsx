@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { formatCurrency } from "../../../../Utils/format";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,8 @@ export default function LowStockAlert({ products }) {
               <tr key={product.id} className="hover:bg-red-50 transition-colors bg-white group">
                 <td className="p-3 border-r-[2px] border-black">
                   <div className="w-12 h-16 border-[2px] border-black shadow-[2px_2px_0px_#000] overflow-hidden bg-gray-100">
-                    <img loading="lazy" src={product.image} 
+                    <img 
+                      src={product.image} 
                       alt={product.name}
                       className="w-full h-full object-cover"
                       onError={(e) => { e.target.src = "https://placehold.co/100x150?text=No+Img"; }}
@@ -75,4 +76,3 @@ export default function LowStockAlert({ products }) {
     </div>
   );
 }
-

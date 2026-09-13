@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function GeneralSettings({ settings, handleChange }) {
   return (
@@ -21,7 +21,8 @@ export default function GeneralSettings({ settings, handleChange }) {
         {/* Logo & Branding Image uploader */}
         <div className="flex flex-col sm:flex-row items-center gap-6 p-4 bg-yellow-50 border-[2px] border-black shadow-[2px_2px_0px_#000]">
           <div className="relative w-28 h-28 shrink-0 bg-comic-yellow border-[2px] border-black shadow-[3px_3px_0px_#000] flex flex-col items-center justify-center p-2 text-center overflow-hidden">
-            <img loading="lazy" className="w-full h-full object-contain"
+            <img
+              className="w-full h-full object-contain"
               alt="Logo"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3nIKC3-T3mFrJ760LSJbtKom6rM2_M_jGtZGRYqqOGEBZvZBHMHlZHNh8LCUUhOutbqswFUGyA9V9Hc7d8EkKya9oXmrz1J-VFO8cfjy3r5DtgbAmgOPR-wAHnyWIozVdDgbpOnNpEATfOZv88mXpc-qxgaQ0-XlnKuSHcDBIjEpYW1NIIVtRq42xCrNitkkIbIAlAe_BuaUC5_EhyJEIzbn7k-LFhqjy69WmK61Up9QASxUp_3HP_g"
             />
@@ -159,4 +160,3 @@ export default function GeneralSettings({ settings, handleChange }) {
     </div>
   );
 }
-
