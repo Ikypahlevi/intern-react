@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import NotificationDropdown from "../../Components/NotificationDropdown";
 import { useCartStore } from "../../Stores/cartStore";
@@ -12,6 +12,7 @@ import { useGetProducts } from "../../Services/queries/useProducts";
 
 export default function Header() {
   const items = useCartStore((state) => state.items);
+  const { items: wishlistItems } = useWishlistStore();
   const { isAuthenticated, user, logout } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();

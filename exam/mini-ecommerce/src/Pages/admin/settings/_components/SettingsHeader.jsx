@@ -3,7 +3,7 @@ import React from "react";
 export default function SettingsHeader() {
   return (
     <>
-      <div className="py-6 flex flex-wrap items-center justify-between gap-4 border-b-[3px] border-black bg-yellow-50 px-6 mb-8 shadow-[0_3px_0px_#000]">
+      {/* <div className="py-6 flex flex-wrap items-center justify-between gap-4 border-b-[3px] border-black bg-yellow-50 px-6 mb-8 shadow-[0_3px_0px_#000]">
         <div className="flex items-center gap-3 font-comic uppercase text-[12px] uppercase tracking-wider text-gray-800">
           <span className="font-bold text-red-600">KHO TỔNG HQ</span>
           <i className="fa-solid fa-chevron-right text-[12px]"></i>
@@ -31,7 +31,7 @@ export default function SettingsHeader() {
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
         <div className="flex flex-col gap-2">
