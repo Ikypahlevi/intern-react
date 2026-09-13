@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useGetCategories } from "../../Services/queries/useCategories";
 
 export default function Footer() {
+  const { data: categories = [] } = useGetCategories();
   return (
     <>
       {/* BEGIN: Newsletter Section */}
@@ -113,166 +116,55 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Col 2: Categories */}
+                        {/* Col 2: Categories */}
             <div>
               <h4 className="font-comic text-lg uppercase mb-3 border-b-2 border-black pb-1 inline-block">
                 DANH MỤC MANGA
               </h4>
               <ul className="space-y-1.5 text-xs font-bold text-gray-800 font-bubble">
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Manga Shonen
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Manga Seinen
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Shojo & Romance
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Isekai & Fantasy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Light Novel Bản Quyền
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Artbook & Boxset
-                  </a>
-                </li>
+                {categories.length > 0 ? (
+                  categories.map((cat) => (
+                    <li key={cat.id}>
+                      <Link
+                        className="hover:underline hover:text-comic-red transition-colors"
+                        to={`/products?category=${encodeURIComponent(cat.name)}`}
+                      >
+                        {cat.name}
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>Đang tải...</li>
+                )}
               </ul>
             </div>
 
-            {/* Col 3: Customer Care */}
+                        {/* Col 3: Customer Care */}
             <div>
               <h4 className="font-comic text-lg uppercase mb-3 border-b-2 border-black pb-1 inline-block">
                 CHĂM SÓC KHÁCH HÀNG
               </h4>
               <ul className="space-y-1.5 text-xs font-bold text-gray-800 font-bubble">
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Trung Tâm Hỗ Trợ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Tra Cứu Vận Chuyển
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Chính Sách Đổi Trả
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Vận Chuyển Hỏa Tốc
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Hội Viên Manga Club
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Liên Hệ & Góp Ý
-                  </a>
-                </li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/contact">Trung Tâm Hỗ Trợ</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/contact">Tra Cứu Vận Chuyển</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/contact">Chính Sách Đổi Trả</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/contact">Vận Chuyển Hỏa Tốc</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/contact">Hội Viên Manga Club</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/contact">Liên Hệ & Góp Ý</Link></li>
               </ul>
             </div>
 
-            {/* Col 4: About Us */}
+                        {/* Col 4: About Us */}
             <div>
               <h4 className="font-comic text-lg uppercase mb-3 border-b-2 border-black pb-1 inline-block">
                 VỀ SWOO MANGA
               </h4>
               <ul className="space-y-1.5 text-xs font-bold text-gray-800 font-bubble">
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Về Chúng Tôi
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Cam Kết Bản Quyền
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Cơ Hội Nghề Nghiệp
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Điều Khoản Dịch Vụ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="hover:underline hover:text-comic-red transition-colors"
-                    href="#"
-                  >
-                    Chính Sách Bảo Mật
-                  </a>
-                </li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/about">Về Chúng Tôi</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/about">Cam Kết Bản Quyền</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/about">Cơ Hội Nghề Nghiệp</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/about">Điều Khoản Dịch Vụ</Link></li>
+                <li><Link className="hover:underline hover:text-comic-red transition-colors" to="/about">Chính Sách Bảo Mật</Link></li>
               </ul>
             </div>
           </div>
@@ -298,3 +190,5 @@ export default function Footer() {
     </>
   );
 }
+
+
