@@ -13,8 +13,12 @@ export default function NotificationDropdown() {
   const markReadMutation = useMarkNotificationRead();
   const markAllReadMutation = useMarkAllNotificationsRead();
 
-  // Lọc thông báo cho User hiện tại
-  const myNotifications = notifications.filter(n => n.role === "all" || n.userId === String(user?.id));
+  // Lọc thông báo cho User hiện tại (và Admin nếu đang ở giao diện ngoài)
+  const myNotifications = notifications.filter(n => 
+    n.role === "all" || 
+    n.userId === String(user?.id) ||
+    (user?.role === "admin" && n.role === "admin")
+  );
   const unreadCount = myNotifications.filter(n => !n.isRead).length;
 
   useEffect(() => {

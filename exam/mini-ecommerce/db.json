@@ -1636,6 +1636,33 @@
       "paymentMethod": "ONLINE",
       "status": "completed",
       "createdAt": "2026-09-13T03:59:50.856Z"
+    },
+    {
+      "id": "SWOO-83544",
+      "userId": "2",
+      "customerName": "Nguyễn Dương",
+      "phone": "0939857638",
+      "address": "79 Thanh Đàm, Hoàng Mai, HN",
+      "items": [
+        {
+          "productId": "41",
+          "name": "Chainsaw Man (Người Cưa)",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/anime_41.jpg"
+        },
+        {
+          "productId": "43",
+          "name": "My Hero Academia (Học Viện Siêu Anh Hùng)",
+          "price": 25000,
+          "quantity": 1,
+          "image": "/img/anime_43.jpg"
+        }
+      ],
+      "totalAmount": 80000,
+      "paymentMethod": "ONLINE",
+      "status": "completed",
+      "createdAt": "2026-09-13T04:07:58.185Z"
     }
   ],
   "categories": [
@@ -1739,6 +1766,37 @@
       "highlightId": "SWOO-56942",
       "isRead": false,
       "createdAt": "2026-09-13T04:00:56.851Z"
+    },
+    {
+      "id": "NOTIF-49832",
+      "role": "admin",
+      "title": "📦 Đơn Hàng Mới",
+      "message": "Đơn hàng SWOO-83544 vừa được đặt thành công.",
+      "link": "/admin/orders",
+      "highlightId": "SWOO-83544",
+      "isRead": false,
+      "createdAt": "2026-09-13T04:07:58.221Z"
+    },
+    {
+      "id": "NOTIF-56671",
+      "userId": "2",
+      "role": "customer",
+      "title": "🚚 Cập Nhật Đơn Hàng",
+      "message": "Đơn hàng SWOO-83544 của bạn đã được chuyển sang trạng thái: shipping.",
+      "link": "/profile",
+      "highlightId": "SWOO-83544",
+      "isRead": false,
+      "createdAt": "2026-09-13T04:08:20.524Z"
+    },
+    {
+      "id": "NOTIF-42019",
+      "role": "admin",
+      "title": "✅ Đơn Hàng Hoàn Tất",
+      "message": "Khách hàng vừa xác nhận đã nhận đơn hàng SWOO-83544.",
+      "link": "/admin/orders",
+      "highlightId": "SWOO-83544",
+      "isRead": false,
+      "createdAt": "2026-09-13T04:09:43.228Z"
     }
   ]
 }
