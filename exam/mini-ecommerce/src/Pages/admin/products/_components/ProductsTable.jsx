@@ -5,9 +5,7 @@ import { useDeleteProduct } from "../../../../Services/queries/useProducts";
 import { toast } from "sonner";
 import ConfirmModal from "../../../../Components/admin/ConfirmModal";
 
-export default function ProductsTable({ 
-  products, 
-  columnFilters, 
+export default function ProductsTable({ products, allCategories = [], allPublishers = [], columnFilters, 
   setColumnFilters, 
   isLoading, 
   onEditProduct, 
@@ -296,6 +294,7 @@ export default function ProductsTable({
     </>
   );
 }
+
 
 
 
