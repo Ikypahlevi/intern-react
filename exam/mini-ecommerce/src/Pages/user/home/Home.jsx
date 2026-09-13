@@ -2,6 +2,7 @@
 import HeroSection from "./_components/HeroSection";
 import FeaturedProducts from "./_components/FeaturedProducts";
 import BestSellingSection from "./_components/BestSellingSection";
+import NewsSection from "./_components/NewsSection";
 
 export default function Home() {
   return (
@@ -45,8 +46,10 @@ export default function Home() {
       </section>
 
       <BestSellingSection />
+      <NewsSection />
       
     </div>
   );
 }
+
 

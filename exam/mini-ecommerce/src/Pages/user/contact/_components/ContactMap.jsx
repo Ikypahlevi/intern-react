@@ -16,19 +16,19 @@ export default function ContactMap() {
           Mở cửa từ: 08:00 - 22:00 Tất cả các ngày
         </span>
       </div>
-      
+
       <div className="border-[3px] border-black shadow-comic rounded-xl h-[320px] relative overflow-hidden bg-[#e5e3df]">
-        <iframe 
-          className="absolute inset-0 w-full h-full border-0" 
-          src="https://www.google.com/maps?q=79+Thanh+Đàm,+Hoàng+Mai,+Hà+Nội&output=embed" 
-          allowFullScreen="" 
-          loading="lazy" 
+        <iframe
+          className="absolute inset-0 w-full h-full border-0"
+          src="https://www.google.com/maps?q=79+Thanh+Đàm,+Hoàng+Mai,+Hà+Nội&output=embed"
+          allowFullScreen=""
+          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="Google Map"
         ></iframe>
-        
+
         {/* Map Card */}
-        <div className="bg-white border-[2.5px] border-black shadow-comic rounded-lg w-[280px] absolute top-4 left-4 p-3 text-xs z-10 font-bubble">
+        {/* <div className="bg-white border-[2.5px] border-black shadow-comic rounded-lg w-[280px] absolute top-4 left-4 p-3 text-xs z-10 font-bubble">
           <div className="flex items-start justify-between">
             <div>
               <div className="flex items-center space-x-1.5">
@@ -54,7 +54,7 @@ export default function ContactMap() {
               <span className="text-[9px] font-black mt-0.5 font-comic">RADAR</span>
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

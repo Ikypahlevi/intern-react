@@ -2,8 +2,13 @@ import React from "react";
 
 export default function PartnerNewsletter() {
   const partners = [
-    "SHUEISHA", "KODANSHA", "KADOKAWA", "SQUARE ENIX", 
-    "VIZ MEDIA", "NXB KIM ĐỒNG", "NXB TRẺ"
+    "SHUEISHA",
+    "KODANSHA",
+    "KADOKAWA",
+    "SQUARE ENIX",
+    "VIZ MEDIA",
+    "NXB KIM ĐỒNG",
+    "NXB TRẺ",
   ];
 
   return (
@@ -11,18 +16,21 @@ export default function PartnerNewsletter() {
       {/* Partner CTA Banner */}
       <section className="bg-green-600 border-4 border-black p-4 sm:p-6 shadow-comic-lg text-white flex flex-col md:flex-row items-center justify-between gap-4 font-bubble">
         <div className="flex items-center gap-3 text-left">
-          <span className="text-3xl bg-black p-2 border-2 border-black">🤝</span>
+          <span className="text-3xl bg-black p-2 border-2 border-black">
+            🤝
+          </span>
           <div>
             <h3 className="font-comic text-2xl sm:text-3xl uppercase tracking-wide font-black">
               TRỞ THÀNH ĐỐI TÁC PHÂN PHỐI CÙNG SWOO! MANGA
             </h3>
             <p className="text-xs sm:text-sm font-bold text-green-100">
-              Chiết khấu đại lý hấp dẫn lên đến 35%, bảo trợ truyền thông và hỗ trợ ấn phẩm trưng bày.
+              Chiết khấu đại lý hấp dẫn lên đến 35%, bảo trợ truyền thông và hỗ
+              trợ ấn phẩm trưng bày.
             </p>
           </div>
         </div>
-        <a 
-          className="bg-comic-yellow hover:bg-yellow-400 text-black font-black text-xs uppercase px-6 py-3 border-2 border-black shadow-comic flex-shrink-0 tracking-wider font-comic transition" 
+        <a
+          className="bg-comic-yellow hover:bg-yellow-400 text-black font-black text-xs uppercase px-6 py-3 border-2 border-black shadow-comic flex-shrink-0 tracking-wider font-comic transition"
           href="#"
         >
           ĐĂNG KÝ HỢP TÁC NGAY →
@@ -32,15 +40,22 @@ export default function PartnerNewsletter() {
       {/* Partner Publishers Marquee */}
       <section className="border-2 border-black bg-white p-3 shadow-comic font-bubble overflow-hidden whitespace-nowrap">
         <div className="flex items-center justify-around gap-4 text-xs font-black uppercase text-gray-700 animate-[marquee_20s_linear_infinite] sm:animate-none sm:flex-wrap">
-          <span className="bg-comic-yellow px-2 py-1 border-2 border-black text-black">★ ĐỐI TÁC NXB:</span>
+          <span className="bg-comic-yellow px-2 py-1 border-2 border-black text-black">
+            ★ ĐỐI TÁC NXB:
+          </span>
           {partners.map((partner, idx) => (
-            <span key={idx} className="hover:text-red-600 cursor-pointer transition">★ {partner}</span>
+            <span
+              key={idx}
+              className="hover:text-red-600 cursor-pointer transition"
+            >
+              ★ {partner}
+            </span>
           ))}
         </div>
       </section>
 
       {/* Newsletter Subscribe */}
-      <section className="bg-comic-yellow border-4 border-black p-6 sm:p-8 shadow-comic-lg font-bubble">
+      {/* <section className="bg-comic-yellow border-4 border-black p-6 sm:p-8 shadow-comic-lg font-bubble">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div className="lg:col-span-6 space-y-2">
             <span className="bg-black text-white text-[10px] font-black px-2 py-0.5 uppercase border-2 border-black font-comic tracking-wider">ƯU ĐÃI ĐỘC QUYỀN</span>
@@ -72,7 +87,7 @@ export default function PartnerNewsletter() {
             </form>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }
