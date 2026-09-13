@@ -28,7 +28,7 @@ export default function Footer() {
             </p>
           </div>
           <form
-            className="flex w-full md:w-auto max-w-md comic-border rounded-lg overflow-hidden shadow-comic bg-white"
+            className="flex w-full md:w-[400px] lg:w-[550px] max-w-full comic-border rounded-lg overflow-hidden shadow-comic bg-white"
             onSubmit={(e) => e.preventDefault()}
           >
             <input
