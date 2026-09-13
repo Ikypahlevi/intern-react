@@ -5,6 +5,7 @@ import ProductCard from "../../../Components/user/ProductCard/ProductCard";
 import ProductsHeroBanner from "./_components/ProductsHeroBanner";
 import ProductsFilterSidebar from "./_components/ProductsFilterSidebar";
 import Pagination from "./_components/Pagination";
+import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 
 export default function ProductsList() {
   const location = useLocation();
@@ -93,7 +94,14 @@ export default function ProductsList() {
   const currentProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8 min-h-screen">
+    <>
+      <Breadcrumb 
+        items={[
+          { label: 'TRANG CHỦ', link: '/' },
+          { label: 'KHO TRUYỆN', icon: '📚' }
+        ]} 
+      />
+      <main className="max-w-7xl mx-auto px-4 pb-8 pt-2 min-h-screen">
       <ProductsHeroBanner />
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
@@ -172,6 +180,9 @@ export default function ProductsList() {
         </section>
       </div>
     </main>
+    </>
   );
 }
+
+
 

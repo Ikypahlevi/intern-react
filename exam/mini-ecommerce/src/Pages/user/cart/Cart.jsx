@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCartStore } from "../../../Stores/cartStore";
 import CartItem from "./_components/CartItem";
@@ -75,7 +75,7 @@ export default function Cart() {
         ]} 
       />
 
-      <main className="max-w-7xl mx-auto px-4 mb-16 w-full flex-grow">
+      <main className="max-w-7xl mx-auto px-4 mt-6 mb-16 w-full flex-grow">
         <div className="bg-white rounded-2xl comic-border shadow-comic-lg p-6 lg:p-8 relative">
           <div className="absolute -top-5 left-8 bg-black text-comic-yellow px-4 py-1 font-comic text-xl comic-border shadow-comic-sm rotate-[-2deg]">
             ⚡ KHO MANGA ({items.length} TỰA TRUYỆN TRONG GIỎ)

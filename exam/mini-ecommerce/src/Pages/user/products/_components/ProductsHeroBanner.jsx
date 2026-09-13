@@ -8,7 +8,7 @@ export default function ProductsHeroBanner() {
       {/* Top Hero Banner */}
       <section className="relative comic-border-thick bg-gradient-to-r from-zinc-800 via-zinc-900 to-black text-white p-6 md:p-8 mb-8 shadow-comic-lg overflow-hidden">
         <div className="absolute inset-0 halftone-dots-white pointer-events-none"></div>
-        <div className="absolute top-4 left-4 z-10 bg-comic-yellow text-black font-comic text-sm tracking-wider px-3 py-1 comic-border shadow-comic -rotate-3">
+        <div className="absolute top-8 md:top-6 left-4 md:left-6 z-10 bg-comic-yellow text-black font-comic text-sm tracking-wider px-3 py-1 comic-border shadow-comic -rotate-3">
           💥 ĐẠI HỘI MANGA SHONEN & SEINEN
         </div>
         <div className="absolute -bottom-4 right-12 z-10 bg-comic-red text-white font-comic text-xl tracking-wider px-5 py-2 comic-border shadow-comic rotate-3 hidden sm:block">
@@ -16,7 +16,7 @@ export default function ProductsHeroBanner() {
         </div>
         
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="max-w-xl space-y-3">
+          <div className="max-w-xl space-y-3 mt-8 md:mt-4">
             <span className="text-comic-cyan font-bubble font-black tracking-widest text-xs uppercase bg-black/60 px-2 py-1 comic-border-sm">
               Bản Quyền Chính Hãng 100% Kim Đồng - Trẻ - IPM
             </span>
