@@ -8,6 +8,7 @@ import { useCreateProduct, useUpdateProduct } from "../../../../Services/queries
 import { useCreateNotification } from "../../../../Services/queries/useNotifications";
 import { toast } from "sonner";
 import { STATUS } from "../../../../Constants";
+import { useGetCategories } from "../../../../Services/queries/useCategories";
 
 
 
@@ -17,6 +18,7 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
   const createNotificationMutation = useCreateNotification();
   const fileInputRef = useRef(null);
 
+  const { data: categories = [] } = useGetCategories();
   const isEdit = !!product;
 
   // Trạng thái riêng cho ảnh (không đưa vào react-hook-form vì là base64/url)
@@ -361,15 +363,16 @@ export default function ProductDrawer({ isOpen, onClose, product }) {
             <div className="flex flex-col gap-1">
               <label className="font-bold text-sm uppercase">Thể Loại</label>
               <select
-                {...register("category")}
-                className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold cursor-pointer"
-              >
-                <option value="Hành động">Hành động (Shonen)</option>
-                <option value="Hài hước">Hài hước</option>
-                <option value="Tình cảm">Tình cảm (Shojo)</option>
-                <option value="Light Novel">Light Novel</option>
-                <option value="Boxset">Boxset</option>
-              </select>
+  {...register("category")}
+  className="p-2 border-[2px] border-black outline-none focus:bg-yellow-50 font-bold cursor-pointer"
+>
+  <option value="">-- Chọn Thể Loại --</option>
+  {categories && categories.length > 0 ? categories.map((c) => (
+    <option key={c.id} value={c.name}>{c.name}</option>
+  )) : (
+    <option value="">Đang tải...</option>
+  )}
+</select>
             </div>
             <div className="flex flex-col gap-1 col-span-2">
               <label className="font-bold text-sm uppercase">Nhà Xuất Bản</label>
