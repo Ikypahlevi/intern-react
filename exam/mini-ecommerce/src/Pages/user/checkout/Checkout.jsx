@@ -2,7 +2,7 @@
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { checkoutSchema } from "./_schema/checkoutSchema";
+import { checkoutSchema } from "../../../Validations/checkoutSchema";
 import { useCartStore } from "../../../Stores/cartStore";
 import { useAuthStore } from "../../../Stores/authStore";
 import api from "../../../Services/api";

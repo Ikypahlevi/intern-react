@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { profileSchema } from "../_schema/profileSchema";
+import { profileSchema } from "../../../../Validations/profileSchema";
 import { useAuthStore } from "../../../../Stores/authStore";
 import { toast } from "sonner";
 import Input from "../../../../Components/user/Input/Input";

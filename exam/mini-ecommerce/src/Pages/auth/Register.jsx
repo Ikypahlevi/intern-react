@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema } from "./_schema/authSchema";
+import { registerSchema } from "../../Validations/authSchema";
 import { useAuth } from "./_hooks/useAuth";
 import Input from "../../Components/user/Input/Input";
 import Button from "../../Components/user/Button/Button";
