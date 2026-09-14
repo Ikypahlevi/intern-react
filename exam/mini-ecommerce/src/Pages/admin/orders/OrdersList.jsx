@@ -10,6 +10,7 @@ import OrdersKpi from "./_components/OrdersKpi";
 import OrdersActionBar from "./_components/OrdersActionBar";
 import OrdersTable from "./_components/OrdersTable";
 import OrdersBottomWidgets from "./_components/OrdersBottomWidgets";
+import OrderDrawer from "./_components/OrderDrawer";
 
 export default function OrdersList() {
   const { data: ordersData, isLoading, isError } = useGetOrders();
@@ -28,6 +29,7 @@ export default function OrdersList() {
   });
   
   const [highlightId, setHighlightId] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   useEffect(() => {
     if (location.state?.highlightOrderId) {
@@ -136,11 +138,12 @@ export default function OrdersList() {
       />
       
       <OrdersTable 
+        onViewDetails={setSelectedOrder} 
         orders={currentOrders}
         filters={filters}
         handleFilterChange={handleFilterChange}
         handleResetFilters={handleResetFilters}
-        onUpdateStatus={handleUpdateStatus}
+        
         highlightId={highlightId}
       />
 
@@ -155,6 +158,13 @@ export default function OrdersList() {
       )}
 
       <OrdersBottomWidgets />
+      <OrderDrawer
+        isOpen={!!selectedOrder}
+        onClose={() => setSelectedOrder(null)}
+        order={selectedOrder ? orders.find(o => o.id === selectedOrder.id) : null}
+        onUpdateStatus={handleUpdateStatus}
+      />
+
     </div>
   );
 }
