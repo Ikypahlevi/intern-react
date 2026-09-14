@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../../../Components/user/Button/Button";
+import Button from "../../../../Components/common/Button";
 import { useCartStore } from "../../../../Stores/cartStore";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";

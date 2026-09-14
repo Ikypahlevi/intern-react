@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../Stores/authStore";
 import { toast } from "sonner";
-import api from "../../../Services/api";
+import { userService } from '../../../Services/userService';
 import { ROLES } from "../../../Constants";
 
 export const useAuth = () => {
@@ -96,7 +96,7 @@ export const useAuth = () => {
         nickname: "",
       };
 
-      const createdUser = await api.post("/users", newUser);
+      const createdUser = await userService.create(newUser);
 
       toast.success("Đăng ký thành công! Đang tự động đăng nhập... 🎉");
 

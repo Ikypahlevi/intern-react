@@ -5,8 +5,9 @@ import { profileSchema } from "../../../../Validations/profileSchema";
 import { useAuthStore } from "../../../../Stores/authStore";
 import { toast } from "sonner";
 import Input from "../../../../Components/user/Input/Input";
-import Button from "../../../../Components/user/Button/Button";
-import api from "../../../../Services/api";
+import Button from "../../../../Components/common/Button";
+import { userService } from '../../../../Services/userService';
+import { useUpdateUser } from '../../../../Services/queries/useUsers';
 
 export default function ProfileDetails({ user }) {
   const { login } = useAuthStore();
@@ -22,26 +23,18 @@ export default function ProfileDetails({ user }) {
     }
   });
 
+  const updateUserMutation = useUpdateUser();
   const onSubmit = async (data) => {
     try {
       setIsSubmitting(true);
-
-      const users = await api.get(`/users?email=${user.email}`);
-      const currentUser = users[0];
-
+      const currentUser = await userService.getById(user.id);
       if (!currentUser) {
         toast.error("Không tìm thấy tài khoản để cập nhật!");
         return;
       }
-
-      const updatedUser = {
-        ...currentUser,
-        ...data
-      };
-
-      await api.put(`/users/${user.id}`, updatedUser);
-      toast.success("Cập nhật thông tin thành công! 🥳");
-
+      const updatedUser = { ...currentUser, ...data };
+      await updateUserMutation.mutateAsync({ id: user.id, ...data });
+      toast.success("Cập nhật thông tin thành công! 🎉");
       login({
         id: updatedUser.id,
         email: updatedUser.email,

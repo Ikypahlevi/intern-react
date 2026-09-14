@@ -236,7 +236,7 @@ export default function ProductsTable({
                       <td className="p-3 border-r-[2px] border-black">
                         <div className="flex items-center gap-3">
                           <div className="w-12 h-16 border-[2px] border-black bg-white shadow-[2px_2px_0px_#000] overflow-hidden shrink-0 group-hover:rotate-2 transition-transform">
-                            <img
+                            <img loading="lazy" decoding="async"
                               src={product.image}
                               alt={product.name}
                               className="w-full h-full object-cover"

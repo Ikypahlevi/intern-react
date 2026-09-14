@@ -44,7 +44,7 @@ export default function TopBestsellers({ products, orders }) {
             }`}>
               #{index + 1}
             </div>
-            <img src={product.image} alt={product.name} className="w-10 h-14 object-cover border-[2px] border-black" />
+            <img loading="lazy" decoding="async" src={product.image} alt={product.name} className="w-10 h-14 object-cover border-[2px] border-black" />
             <div className="flex-1 min-w-0">
               <h3 className="font-bold text-sm truncate" title={product.name}>{product.name}</h3>
               <p className="font-comic text-xs text-red-600 font-bold">{product.price.toLocaleString()}₫</p>

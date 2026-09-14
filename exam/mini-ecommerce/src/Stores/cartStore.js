@@ -100,8 +100,8 @@ export const useCartStore = create(
         });
       },
       clearCart: () => set({ items: [] }),
-      getTotalItems: () => get().items.reduce((total, item) => total + item.quantity, 0),
-      getTotalPrice: () => get().items.reduce((total, item) => total + (item.price * item.quantity), 0),
+      getTotalItems: () => calculateTotalQuantity(get().items),
+      getTotalPrice: () => calculateSubtotal(get().items),
     }),
     {
       name: "ecommerce-cart", // Tên key trong LocalStorage

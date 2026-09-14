@@ -34,7 +34,7 @@ export default function LowStockAlert({ products }) {
               <tr key={product.id} className="hover:bg-red-50 transition-colors bg-white group">
                 <td className="p-3 border-r-[2px] border-black">
                   <div className="w-12 h-16 border-[2px] border-black shadow-[2px_2px_0px_#000] overflow-hidden bg-gray-100">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src={product.image} 
                       alt={product.name}
                       className="w-full h-full object-cover"

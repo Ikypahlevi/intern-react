@@ -1,14 +1,17 @@
-import api from "./api";
+import api from './api';
 
 export const userService = {
   getAll: async () => {
-    return await api.get("/users");
+    return await api.get('/users');
+  },
+  getByEmail: async (email) => {
+    return await api.get(`/users?email=${encodeURIComponent(email)}`);
   },
   getById: async (id) => {
     return await api.get(`/users/${id}`);
   },
   create: async (data) => {
-    return await api.post("/users", data);
+    return await api.post('/users', data);
   },
   update: async (id, data) => {
     return await api.patch(`/users/${id}`, data);

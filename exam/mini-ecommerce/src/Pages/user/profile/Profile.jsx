@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { useAuthStore } from "../../../Stores/authStore";
-import api from "../../../Services/api";
+import { userService } from '../../../Services/userService';
 import { useGetOrders } from "../../../Services/queries/useOrders";
 import ProfileSidebar from "./_components/ProfileSidebar";
 import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
@@ -25,7 +25,7 @@ export default function Profile() {
     const fetchLatestData = async () => {
       try {
         if (user?.id) {
-          const latestUser = await api.get(`/users/${user.id}`);
+          const latestUser = await userService.getById(user.id);
           login(latestUser); // Cập nhật lại store
         }
       } catch (error) {

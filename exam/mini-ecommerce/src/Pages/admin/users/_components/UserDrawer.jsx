@@ -189,7 +189,7 @@ export default function UserDrawer({ user, onClose }) {
                 title="Click hoặc kéo thả ảnh vào đây"
               >
                 {avatarPreview ? (
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={avatarPreview}
                     alt="Avatar"
                     className="w-full h-full object-cover"

@@ -93,7 +93,7 @@ export default function OrderDrawer({ isOpen, onClose, order, onUpdateStatus }) 
           <div className="space-y-4">
             {order.items.map((item, idx) => (
               <div key={idx} className="flex gap-3 items-center border-b border-dashed border-gray-300 pb-3 last:border-0 last:pb-0">
-                <img src={item.image} alt={item.name} className="w-12 h-16 object-cover border-[2px] border-black shadow-[2px_2px_0_#000]" />
+                <img loading="lazy" decoding="async" src={item.image} alt={item.name} className="w-12 h-16 object-cover border-[2px] border-black shadow-[2px_2px_0_#000]" />
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-sm truncate">{item.name}</p>
                   <p className="text-xs text-gray-500">SL: {item.quantity} x {formatCurrency(item.price)}</p>

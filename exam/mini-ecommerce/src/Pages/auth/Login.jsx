@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../Validations/authSchema";
 import { useAuth } from "./_hooks/useAuth";
 import Input from "../../Components/user/Input/Input";
-import Button from "../../Components/user/Button/Button";
+import Button from "../../Components/common/Button";
 
 export default function Login() {
   const { handleLogin } = useAuth();

@@ -45,7 +45,7 @@ export default function CartItem({
             </span>
           )}
           {item.image ? (
-            <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+            <img loading="lazy" decoding="async" src={item.image} alt={item.name} className="w-full h-full object-contain" />
           ) : (
             <div className="flex flex-col items-center justify-center text-center">
               <i className="fa-solid fa-book-open text-3xl text-comic-red mb-1"></i>

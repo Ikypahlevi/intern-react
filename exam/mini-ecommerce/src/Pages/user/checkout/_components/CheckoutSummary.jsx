@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import Button from "../../../../Components/user/Button/Button";
+import Button from "../../../../Components/common/Button";
 import { formatCurrency } from "../../../../Utils/format";
 
 export default function CheckoutSummary({ items, totalAmount, shippingFee, paymentMethod, setPaymentMethod, isSubmitting, payments }) {

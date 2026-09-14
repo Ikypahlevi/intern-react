@@ -34,7 +34,7 @@ export default function Checkout() {
 
   const freeshipThreshold = dbSettings?.shipping?.freeshipThreshold || 0;
   const baseShippingFee = dbSettings?.shipping?.baseFee !== undefined ? dbSettings.shipping.baseFee : 30000;
-  const shippingFee = (freeshipThreshold > 0 && totalAmount >= freeshipThreshold) ? 0 : baseShippingFee;
+  const shippingFee = calculateShippingFee(totalAmount, baseShippingFee, freeshipThreshold);
 
   const [paymentMethod, setPaymentMethod] = useState("COD");
 
@@ -129,7 +129,7 @@ export default function Checkout() {
           quantity: item.quantity,
           image: item.image
         })),
-        totalAmount: totalAmount + shippingFee,
+        totalAmount: calculateTotal(totalAmount, shippingFee),
         paymentMethod: paymentMethod,
         status: "pending",
         createdAt: new Date().toISOString()

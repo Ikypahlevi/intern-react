@@ -44,3 +44,11 @@ export const useDeleteUser = () => {
     },
   });
 };
+
+export const useGetUserById = (id) => {
+  return useQuery({
+    queryKey: ['users', id],
+    queryFn: () => userService.getById(id),
+    enabled: !!id,
+  });
+};

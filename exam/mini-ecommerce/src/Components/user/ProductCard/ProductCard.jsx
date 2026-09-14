@@ -4,7 +4,7 @@ import { useWishlistStore } from "../../../Stores/wishlistStore";
 import { formatCurrency } from "../../../Utils/format";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
+import Button from "../../common/Button";
 
 export default function ProductCard({ product, isHighlighted }) {
   const cardRef = useRef(null);

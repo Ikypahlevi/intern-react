@@ -39,8 +39,8 @@ export default function Cart() {
   const { totalAmount, totalItems } = useMemo(() => {
     const selectedItems = items.filter(item => selectedIds.includes(item.id));
     return {
-      totalAmount: selectedItems.reduce((total, item) => total + (item.price * item.quantity), 0),
-      totalItems: selectedItems.reduce((total, item) => total + item.quantity, 0)
+      totalAmount: calculateSubtotal(selectedItems),
+      totalItems: calculateTotalQuantity(selectedItems)
     };
   }, [items, selectedIds]);
 
