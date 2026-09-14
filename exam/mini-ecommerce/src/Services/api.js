@@ -5,7 +5,7 @@ const api = axios.create({
   // Chuyển sang dùng JSON-Server local
   baseURL:
     import.meta.env.VITE_API_URL || "https://mini-ecommerce-oo3t.onrender.com",
-  timeout: 10000,
+  timeout: 60000,
   headers: {
     "Content-Type": "application/json",
   },
