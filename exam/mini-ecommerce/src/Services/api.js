@@ -2,9 +2,8 @@ import axios from "axios";
 
 // Khởi tạo instance của Axios
 const api = axios.create({
-  // Chuyển sang dùng JSON-Server local
-  baseURL:
-    import.meta.env.VITE_API_URL || "https://mini-ecommerce-oo3t.onrender.com",
+  // Chuyển sang dùng JSON-Server local hoặc Render production
+  baseURL: import.meta.env.VITE_API_URL || "https://mini-ecommerce-oo3t.onrender.com",
   timeout: 60000,
   headers: {
     "Content-Type": "application/json",

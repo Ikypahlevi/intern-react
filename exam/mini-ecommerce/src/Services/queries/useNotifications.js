@@ -5,8 +5,8 @@ export const useGetNotifications = () => {
   return useQuery({
     queryKey: ["notifications"],
     queryFn: async () => {
-      const { data } = await api.get("/notifications?_sort=createdAt&_order=desc");
-      return data;
+      const response = await api.get("/notifications?_sort=createdAt&_order=desc");
+      return Array.isArray(response) ? response : (response?.data || []);
     },
     refetchInterval: 3000, // Tự động gọi lại mỗi 3 giây để mô phỏng Real-time
   });
@@ -16,12 +16,12 @@ export const useCreateNotification = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (newNotif) => {
-      const { data } = await api.post("/notifications", {
+      const response = await api.post("/notifications", {
         ...newNotif,
         isRead: false,
         createdAt: new Date().toISOString()
       });
-      return data;
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
@@ -33,8 +33,8 @@ export const useMarkNotificationRead = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id) => {
-      const { data } = await api.patch(`/notifications/${id}`, { isRead: true });
-      return data;
+      const response = await api.patch(`/notifications/${id}`, { isRead: true });
+      return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
