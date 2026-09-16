@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { calculateSubtotal, calculateTotalQuantity } from "../Utils/calculations";
 
 export const useCartStore = create(
   persist(

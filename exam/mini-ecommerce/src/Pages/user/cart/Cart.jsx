@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCartStore } from "../../../Stores/cartStore";
 import CartItem from "./_components/CartItem";
@@ -6,6 +6,7 @@ import CartSummary from "./_components/CartSummary";
 import CartSuggestions from "./_components/CartSuggestions";
 import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 import { useGetSettings } from "../../../Services/queries/useSettings";
+import { calculateSubtotal, calculateTotalQuantity } from "../../../Utils/calculations";
 
 export default function Cart() {
   const { items, updateQuantity, removeItem } = useCartStore();
