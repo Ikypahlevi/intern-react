@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCard from "../../../../Components/user/ProductCard/ProductCard";
+import ProductSkeleton from "../../../../Components/user/ProductSkeleton";
 import { useGetProducts } from "../../../../Services/queries/useProducts";
 
 export default function BestSellingSection() {
@@ -28,8 +29,10 @@ export default function BestSellingSection() {
       </div>
 
       {isLoading ? (
-        <div className="font-comic text-2xl text-center py-10">
-          ĐANG TẢI TRUYỆN TRANH... 💥
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {[...Array(5)].map((_, i) => (
+            <ProductSkeleton key={i} />
+          ))}
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">

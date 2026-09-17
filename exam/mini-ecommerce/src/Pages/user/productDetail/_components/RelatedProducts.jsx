@@ -1,10 +1,11 @@
 import React, { useMemo } from "react";
 import ProductCard from "../../../../Components/user/ProductCard/ProductCard";
+import ProductSkeleton from "../../../../Components/user/ProductSkeleton";
 import { useGetProducts } from "../../../../Services/queries/useProducts";
 import { Link } from "react-router-dom";
 
 export default function RelatedProducts({ currentProductId, category }) {
-  const { data: allProducts = [] } = useGetProducts();
+  const { data: allProducts = [], isLoading } = useGetProducts();
 
   const related = useMemo(() => {
     return allProducts
@@ -12,7 +13,7 @@ export default function RelatedProducts({ currentProductId, category }) {
       .slice(0, 5); // Lấy 5 cuốn cùng loại
   }, [allProducts, category, currentProductId]);
 
-  if (related.length === 0) return null;
+  if (!isLoading && related.length === 0) return null;
 
   return (
     <section className="bg-white rounded-xl comic-border shadow-comic-lg p-5 mb-8">
@@ -31,11 +32,19 @@ export default function RelatedProducts({ currentProductId, category }) {
         </Link>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {related.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[...Array(5)].map((_, i) => (
+            <ProductSkeleton key={i} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {related.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
