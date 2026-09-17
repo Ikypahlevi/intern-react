@@ -31,7 +31,7 @@ npm run dev
 ## Tài Khoản Truy Cập Test
 - **Tài khoản Admin:** 
   - Email: `admin@gmail.com`
-  - Mật khẩu: `password123`
+  - Mật khẩu: `admin123`
 - **Tài khoản Khách hàng (User):**
   - Đăng ký một tài khoản mới hoặc dùng tài khoản có sẵn.
   - Ví dụ: `duongss123@gmail.com` / `123456`
