@@ -29,7 +29,7 @@ export const useAuth = () => {
 
     // 2. Kiểm tra tài khoản trong db.json (json-server)
     try {
-      const users = await api.get(`/users?email=${encodeURIComponent(email)}`);
+      const users = await userService.getByEmail(email);
 
       if (!users || users.length === 0) {
         toast.error("Tài khoản không tồn tại!");
@@ -78,7 +78,7 @@ export const useAuth = () => {
 
     try {
       // Kiểm tra email đã tồn tại trong db.json chưa
-      const existing = await api.get(`/users?email=${encodeURIComponent(email)}`);
+      const existing = await userService.getByEmail(email);
 
       if (existing && existing.length > 0) {
         toast.error("Email này đã được sử dụng!");
