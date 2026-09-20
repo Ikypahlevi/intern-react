@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { useGetProducts, useGetProductsPaginated } from "../../../Services/queries/useProducts";
 import ProductCard from "../../../Components/user/ProductCard/ProductCard";
@@ -89,7 +89,12 @@ export default function ProductsList() {
 
   useEffect(() => {
     setCurrentPage(1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [filters, sortBy, searchQuery]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   return (
     <>
