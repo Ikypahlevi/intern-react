@@ -7,6 +7,8 @@ import ProductInfo from "./_components/ProductInfo";
 import ProductCartAction from "./_components/ProductCartAction";
 import ProductTabs from "./_components/ProductTabs";
 import RelatedProducts from "./_components/RelatedProducts";
+import FadeIn from "../../../Components/animations/FadeIn";
+import { motion } from "framer-motion";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -41,7 +43,7 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="min-h-screen pb-16">
+    <div className="min-h-screen pb-16 overflow-hidden">
       {/* Announcement Bar giả lập cho đẹp giống HTML */}
       <aside className="bg-comic-red text-white comic-border-sm border-t-0 border-x-0 py-1.5 px-4 font-bold text-xs uppercase tracking-wider font-bubble">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
@@ -60,7 +62,7 @@ export default function ProductDetail() {
         </div>
       </aside>
 
-            <Breadcrumb 
+      <Breadcrumb 
         items={[
           { label: 'TRANG CHỦ', link: '/' },
           { label: 'KHO TRUYỆN', link: '/products' },
@@ -71,19 +73,46 @@ export default function ProductDetail() {
 
       <main className="max-w-7xl mx-auto px-4 py-2">
         {/* Khối Thông Tin Chính */}
-        <section className="bg-white rounded-xl comic-border shadow-comic-lg p-4 lg:p-6 mb-8">
+        <section className="bg-white rounded-xl comic-border shadow-comic-lg p-4 lg:p-6 mb-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <ProductGallery product={product} />
-            <ProductInfo product={product} />
-            <ProductCartAction product={product} />
+            <motion.div 
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              className="lg:col-span-5"
+            >
+              <ProductGallery product={product} />
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="lg:col-span-4"
+            >
+              <ProductInfo product={product} />
+            </motion.div>
+            
+            <motion.div 
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
+              className="lg:col-span-3"
+            >
+              <ProductCartAction product={product} />
+            </motion.div>
           </div>
         </section>
 
         {/* Khối Tabs (Mô tả & Thông số) */}
-        <ProductTabs product={product} />
+        <FadeIn delay={0.3}>
+          <ProductTabs product={product} />
+        </FadeIn>
 
         {/* Khối Sản phẩm liên quan */}
-        <RelatedProducts currentProductId={product.id} category={product.category} />
+        <FadeIn delay={0.4}>
+          <RelatedProducts currentProductId={product.id} category={product.category} />
+        </FadeIn>
       </main>
     </div>
   );
