@@ -1,0 +1,2 @@
+#!/bin/sh
+cd exam/mini-ecommerce && npx lint-staged
