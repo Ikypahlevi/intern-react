@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +14,7 @@ import CheckoutSummary from "./_components/CheckoutSummary";
 import Breadcrumb from "../../../Components/user/Breadcrumb/Breadcrumb";
 import { toast } from "sonner";
 import ConfirmModal from "../../../Components/admin/ConfirmModal";
+import { calculateShippingFee, calculateTotal } from "../../../Utils/calculations";
 
 export default function Checkout() {
   const location = useLocation();
