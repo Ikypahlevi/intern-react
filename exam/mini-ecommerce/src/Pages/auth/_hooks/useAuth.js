@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../Stores/authStore";
 import { toast } from "sonner";
-import { userService } from '../../../Services/userService';
+import { userService } from "../../../Services/userService";
 import { ROLES } from "../../../Constants";
 
 export const useAuth = () => {
@@ -21,7 +21,7 @@ export const useAuth = () => {
 
     // 1. Kiểm tra tài khoản Admin mặc định trước
     if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
-      loginToStore({ email, role: ROLES.ADMIN, name: DEFAULT_ADMIN.name });
+      loginToStore({ id: "admin", email, role: ROLES.ADMIN, name: DEFAULT_ADMIN.name });
       toast.success("Đăng nhập Admin thành công!");
       navigate("/admin");
       return;
@@ -44,7 +44,9 @@ export const useAuth = () => {
       }
 
       if (user.status === "locked") {
-        toast.error("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên!");
+        toast.error(
+          "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên!",
+        );
         return;
       }
 
@@ -56,13 +58,14 @@ export const useAuth = () => {
         name: user.name || "Khách",
       });
       toast.success(`Chào mừng trở lại, ${user.name || "Anh/Chị"}! 🎉`);
-      
+
       if (user.role === ROLES.ADMIN) {
         navigate("/admin");
       } else {
         navigate("/");
       }
     } catch (error) {
+      console.error("Login Error Details:", error);
       toast.error("Lỗi kết nối máy chủ. Vui lòng thử lại!");
     }
   };

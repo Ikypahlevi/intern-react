@@ -108,13 +108,15 @@ export default function Checkout() {
     try {
       setIsSubmitting(true);
       
-      // SECURITY CHECK: Verify user is not locked
-      const userData = await api.get(`/users/${user.id}`);
-      if (userData.status === "locked") {
-        toast.error("Tài khoản của bạn đã bị khóa! Không thể đặt hàng.");
-        logout();
-        navigate("/login");
-        return;
+      // SECURITY CHECK: Verify user is not locked (skip for hardcoded admin)
+      if (user.id !== "admin") {
+        const userData = await api.get(`/users/${user.id}`);
+        if (userData.status === "locked") {
+          toast.error("Tài khoản của bạn đã bị khóa! Không thể đặt hàng.");
+          logout();
+          navigate("/login");
+          return;
+        }
       }
 
       const newOrder = {
