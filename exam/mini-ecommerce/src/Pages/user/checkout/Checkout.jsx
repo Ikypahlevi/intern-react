@@ -194,6 +194,7 @@ export default function Checkout() {
               paymentMethod={paymentMethod}
               setPaymentMethod={setPaymentMethod}
               isSubmitting={isSubmitting}
+              payments={dbSettings?.payments}
             />
           </div>
         </form>
